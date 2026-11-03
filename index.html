@@ -198,6 +198,11 @@ body::before{background:var(--fundo)}
 .voltar{font-size:14px;padding-top:0}
 .divisor{margin:2px 0}
 /* Gostei + lista */
+.item{position:relative}
+.gostei{position:absolute;top:10px;left:10px;z-index:3;display:flex;align-items:center;gap:8px;font:inherit;font-weight:900;font-size:16px;background:rgba(255,255,255,.95);color:#1B1720;border:0;border-radius:999px;padding:6px 14px 6px 6px;box-shadow:0 2px 10px rgba(0,0,0,.3);cursor:pointer}
+.gostei b{width:30px;height:30px;border-radius:50%;border:3px solid #1B1720;display:grid;place-items:center;color:transparent;font-size:18px}
+.gostei[aria-pressed="true"]{background:var(--rosa);color:#fff}
+.gostei[aria-pressed="true"] b{background:#fff;border-color:#fff;color:var(--rosa)}
 .btn.gostei{background:#fff;color:var(--rosa);border:2px solid var(--rosa)}
 .btn.gostei svg{width:24px;height:24px}
 .btn.gostei[aria-pressed="true"]{background:var(--rosa);color:#fff}
@@ -241,7 +246,7 @@ body::before{background:var(--fundo)}
 </div></header>
 <div class="g" id="corpo"><div class="miolo">
   <div class="folha">
-    <div class="revende"><b>Enviar:</b> abre o WhatsApp da Gabela com a peça escolhida.<br><b>Compartilhar:</b> foto sem preço, pra mandar às suas clientes ou postar nas redes.</div>
+    <div class="revende"><b>Enviar pra Gabela:</b> manda a foto da peça direto pro nosso WhatsApp.<br><b>✓ Escolher:</b> toque na bolinha das fotos que quiser e mande todas de uma vez no botão verde lá embaixo.<br><b>Compartilhar sem valor:</b> foto sem preço, pra mandar às suas clientes ou postar nas redes.</div>
   </div>
 
   <nav id="chips" aria-label="Categorias"></nav>
@@ -316,10 +321,12 @@ function linkEnviar(c, tipo, src){
   return `https://wa.me/${ZAP}?text=${encodeURIComponent(txt)}`;
 }
 function botoes(c, tipo, src){
-  return `<div class="acoes"><a class="btn enviar" href="${linkEnviar(c, tipo, src)}" target="_blank" rel="noopener" data-cat="${esc(c.id)}" data-foto="${esc(src)}" data-tipo="${tipo}">${ICON_WA}Enviar</a>
-    <button type="button" class="btn share" data-foto="${esc(src)}" data-tipo="${tipo}">${ICON_SHARE}Compartilhar</button>
+  return `<div class="acoes"><a class="btn enviar" href="${linkEnviar(c, tipo, src)}" target="_blank" rel="noopener" data-cat="${esc(c.id)}" data-foto="${esc(src)}" data-tipo="${tipo}">${ICON_WA}Enviar pra Gabela</a>
+    <button type="button" class="btn share" data-foto="${esc(src)}" data-tipo="${tipo}">${ICON_SHARE}Compartilhar sem valor</button>
     <div class="msg" role="status"></div></div>`;
 }
+// Bolinha em cima da foto: a cliente toca nas peças que quer e no fim manda todas de uma vez.
+const marca = (c, tipo) => `<button type="button" class="gostei" aria-pressed="false" data-cat="${esc(c.id)}" data-tipo="${tipo}"><b>✓</b><span>Escolher</span></button>`;
 function legenda(c){
   const preco = c.preco == null ? `<div class="preco"><b>Consulte o valor</b></div>`
     : `<div class="preco"><b>${real(c.preco)}</b><span>💵 ${real(off(c.preco))} <i>no dinheiro</i></span></div>`;
@@ -336,14 +343,14 @@ function blocoFotos(c, leg = ""){
       <span class="cont">1 de ${fotos.length}</span></div>
       <div class="pontos">${fotos.map((f, i) => `<i class="${i ? "" : "on"}"></i>`).join("")}</div>
       <div class="dica">Toque na setinha para ver mais ${fotos.length - 1 > 1 ? fotos.length - 1 + " fotos" : "1 foto"}</div>`;
-  return `<div class="item"><div class="rotulo" aria-label="Foto">📷</div>${imagem}${leg}${botoes(c, "foto", fotos[0])}</div>`;
+  return `<div class="item"><div class="rotulo" aria-label="Foto">📷</div>${marca(c, "foto")}${imagem}${leg}${botoes(c, "foto", fotos[0])}</div>`;
 }
 
 function blocoVideo(c){
   if (!c.video) return "";
   // Vídeo em tamanho médio; abre grande só quando a pessoa toca.
   const capa = c.capa ? `<img src="${esc(c.capa)}" alt="">` : `<video src="${esc(c.video)}#t=0.5" preload="metadata" muted playsinline></video>`;
-  return `<div class="item vid"><div class="rotulo" aria-label="Vídeo">🎬</div>
+  return `<div class="item vid"><div class="rotulo" aria-label="Vídeo">🎬</div>${marca(c, "video")}
     <button type="button" class="mini" data-video="${esc(c.video)}" aria-label="Assistir vídeo de ${esc(c.nome)}">${capa}<span class="play">▶</span><span class="selo-v">Toque para assistir</span></button>
     ${botoes(c, "video", c.video)}</div>`;
 }
@@ -468,41 +475,58 @@ function chaveDe(bt){
   const src = item.querySelector(".share").dataset.foto;
   const fotos = (c && c.fotos) || [];
   const video = bt.dataset.tipo === "video";
-  return {chave: bt.dataset.cat + "|" + src, id: bt.dataset.cat, nome: c ? c.nome : "",
+  const img = video ? ((c && (c.capa || fotos[0])) || "") : src;
+  return {chave: bt.dataset.cat + "|" + src, id: bt.dataset.cat, nome: c ? c.nome : "", img,
     qual: video ? "vídeo" : fotos.length > 1 ? `foto ${fotos.indexOf(src) + 1} de ${fotos.length}` : "foto"};
 }
 function verGostei(bt){
   if (!bt) return;
   const sim = lista.some(x => x.chave === chaveDe(bt).chave);
   bt.setAttribute("aria-pressed", sim);
-  bt.querySelector("span").textContent = sim ? "Gostei ✓" : "Gostei";
+  bt.querySelector("span").textContent = sim ? "Escolhida" : "Escolher";
 }
+const linkFoto = x => { const id = (String(x.img || "").match(/[0-9a-f]{32}/) || [])[0]; return SITE && id ? SITE + "f/" + id + ".html" : SITE ? SITE + "#" + x.id : ""; };
+const textoLista = () => "Oi! Escolhi estas peças do catálogo:\n" + lista.map((x, k) => `${k + 1}) ${x.nome} (${x.qual})${linkFoto(x) ? "\n" + linkFoto(x) : ""}`).join("\n");
 function verBarra(){
-  const n = 0, a = document.getElementById("mandar");
+  const n = lista.length, a = document.getElementById("mandar");
   document.getElementById("lista-info").hidden = !n;
-  document.getElementById("lista-n").textContent = n === 1 ? "♥ Peças que gostei (1)" : `♥ Peças que gostei (${n})`;
-  const txt = n ? "Oi! Gostei destas peças do catálogo:\n" + lista.map((x, k) => `${k + 1}) ${x.nome}, ${x.qual}${SITE ? "\n" + SITE + "#" + x.id : ""}`).join("\n") + "\nQuero saber as cores e os tamanhos."
-    : "Oi! Vi o catálogo e quero fazer um pedido.";
-  a.href = "https://wa.me/" + ZAP + "?text=" + encodeURIComponent(txt);
-  a.textContent = "💬 Fazer meu pedido";
+  document.getElementById("lista-n").textContent = n === 1 ? "✓ 1 foto escolhida" : `✓ ${n} fotos escolhidas`;
+  a.href = "https://wa.me/" + ZAP + "?text=" + encodeURIComponent(n ? textoLista() : "Oi! Vi o catálogo e quero fazer um pedido.");
+  a.textContent = n ? (n === 1 ? "📸 Enviar 1 foto pra Gabela" : `📸 Enviar as ${n} fotos pra Gabela`) : "💬 Fazer meu pedido";
   a.classList.toggle("cheio", !!n);
 }
 const verTudo = () => { document.querySelectorAll(".gostei").forEach(verGostei); verBarra(); };
 vitrine.addEventListener("click", e => {
   const bt = e.target.closest(".gostei"); if (!bt) return;
   const x = chaveDe(bt), k = lista.findIndex(y => y.chave === x.chave);
-  const msg = bt.parentElement.querySelector(".msg");
-  if (k >= 0) { lista.splice(k, 1); msg.textContent = ""; }
-  else { lista.push(x); msg.textContent = "Guardei! Continue olhando. No fim, toque em “Enviar o que gostei” lá embaixo."; }
+  if (k >= 0) lista.splice(k, 1);
+  else { lista.push(x); if (x.img) pegar(x.img).catch(() => {}); }
   guardar(); verTudo();
 });
 document.getElementById("lista-limpar").addEventListener("click", () => {
   lista = []; guardar(); verTudo(); document.querySelectorAll(".acoes .msg").forEach(m => m.textContent = "");
 });
+// Enviar as separadas: abre o menu do celular com as FOTOS de todas as peças separadas (escolhe WhatsApp e a Gabela),
+// igual a mandar várias fotos do grupo. Onde o menu não abre, vai a lista com o link de cada foto.
+document.getElementById("mandar").addEventListener("click", async e => {
+  if (!lista.length || !navigator.canShare) return;
+  e.preventDefault();
+  const a = e.currentTarget;
+  try {
+    const blobs = await Promise.all(lista.filter(x => x.img).map(x => pegar(x.img)));
+    const files = blobs.map((b, k) => new File([b], `gabela-${k + 1}.jpg`, {type: b.type || "image/jpeg"}));
+    if (!files.length || !navigator.canShare({files})) throw new Error("sem-share");
+    await navigator.share({files, text: textoLista()});
+  } catch (err) {
+    if (err && err.name === "AbortError") return;
+    open(a.href, "_blank");
+  }
+});
 addEventListener("storage", e => { if (e.key === "gostei-gabela") { try { lista = JSON.parse(e.newValue || "[]"); } catch (err) {} verTudo(); } });
 
 desenhar();
 verTudo();
+lista.forEach(x => x.img && pegar(x.img).catch(() => {}));
 
 // Setinha para voltar às categorias: aparece depois que a pessoa desce a tela.
 const subir = document.getElementById("subir");
