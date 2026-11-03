@@ -235,7 +235,8 @@ body::before{background:var(--fundo)}
 .post .acoes{padding:0 3px 3px;gap:6px}
 .post .btn{min-height:52px;font-size:18px;border-radius:10px}
 .btn.enviar{background:var(--zap);color:#fff}
-.post .btn.share{background:#F0F2F5;color:#1B1720}
+.post .btn.share{background:var(--zap);color:#fff;grid-column:1/-1}
+.btn.share svg+svg{margin-left:-2px}
 .revende{border:0;background:var(--bolha);font-size:16px;line-height:1.5;padding:12px 14px;box-shadow:0 1px 1.5px rgba(0,0,0,.14)}
 </style>
 <header class="topo g" id="topo"><div class="miolo">
@@ -246,7 +247,7 @@ body::before{background:var(--fundo)}
 </div></header>
 <div class="g" id="corpo"><div class="miolo">
   <div class="folha">
-    <div class="revende"><b>Enviar pra Gabela:</b> manda a foto da peça direto pro nosso WhatsApp.<br><b>◯ Escolher:</b> toque na bolinha no cantinho das fotos que quiser e mande todas de uma vez no botão verde lá embaixo.<br><b>Compartilhar sem valor:</b> foto sem preço, pra mandar às suas clientes ou postar nas redes.</div>
+    <div class="revende"><b>◯ Consultar:</b> toque na bolinha no cantinho das fotos que quiser e mande todas de uma vez pra Gabela no botão lá embaixo.<br><b>Compartilhar:</b> manda a foto sem preço pras suas clientes, no WhatsApp ou no Instagram.</div>
   </div>
 
   <nav id="chips" aria-label="Categorias"></nav>
@@ -287,6 +288,7 @@ const MOLDE = {
 const ZAP = "5551984509505";
 const ICON_WA = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.2-.2-.4-.3z"/></svg>';
 const ICON_CORACAO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.3 7.8 3.6 4 7.2 4c2.1 0 3.6 1.2 4.8 2.8C13.2 5.2 14.7 4 16.8 4c3.6 0 5.9 3.8 4.5 7.3-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg>';
+const ICON_IG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor" stroke="none"/></svg>';
 const ICON_SHARE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>';
 const real = v => "R$ " + v.toFixed(2).replace(".", ",");
 const off = v => Math.round(v * 95) / 100;
@@ -321,12 +323,11 @@ function linkEnviar(c, tipo, src){
   return `https://wa.me/${ZAP}?text=${encodeURIComponent(txt)}`;
 }
 function botoes(c, tipo, src){
-  return `<div class="acoes"><a class="btn enviar" href="${linkEnviar(c, tipo, src)}" target="_blank" rel="noopener" data-cat="${esc(c.id)}" data-foto="${esc(src)}" data-tipo="${tipo}">${ICON_WA}Enviar pra Gabela</a>
-    <button type="button" class="btn share" data-foto="${esc(src)}" data-tipo="${tipo}">${ICON_SHARE}Compartilhar sem valor</button>
+  return `<div class="acoes"><button type="button" class="btn share" data-foto="${esc(src)}" data-tipo="${tipo}">${ICON_WA}${ICON_IG}Compartilhar</button>
     <div class="msg" role="status"></div></div>`;
 }
 // Bolinha em cima da foto: a cliente toca nas peças que quer e no fim manda todas de uma vez.
-const marca = (c, tipo) => `<button type="button" class="gostei" aria-pressed="false" data-cat="${esc(c.id)}" data-tipo="${tipo}"><b>✓</b><span>Escolher</span></button>`;
+const marca = (c, tipo) => `<button type="button" class="gostei" aria-pressed="false" data-cat="${esc(c.id)}" data-tipo="${tipo}"><b>✓</b><span>Consultar</span></button>`;
 function legenda(c){
   const preco = c.preco == null ? `<div class="preco"><b>Consulte o valor</b></div>`
     : `<div class="preco"><b>${real(c.preco)}</b><span>💵 ${real(off(c.preco))} <i>no dinheiro</i></span></div>`;
@@ -483,16 +484,16 @@ function verGostei(bt){
   if (!bt) return;
   const sim = lista.some(x => x.chave === chaveDe(bt).chave);
   bt.setAttribute("aria-pressed", sim);
-  bt.querySelector("span").textContent = sim ? "Escolhida" : "Escolher";
+  bt.querySelector("span").textContent = sim ? "Marcada para consultar" : "Consultar";
 }
 const linkFoto = x => { const id = (String(x.img || "").match(/[0-9a-f]{32}/) || [])[0]; return SITE && id ? SITE + "f/" + id + ".html" : SITE ? SITE + "#" + x.id : ""; };
-const textoLista = () => "Oi! Escolhi estas peças do catálogo:\n" + lista.map((x, k) => `${k + 1}) ${x.nome} (${x.qual})${linkFoto(x) ? "\n" + linkFoto(x) : ""}`).join("\n");
+const textoLista = () => "Oi! Quero consultar estas peças do catálogo:\n" + lista.map((x, k) => `${k + 1}) ${x.nome} (${x.qual})${linkFoto(x) ? "\n" + linkFoto(x) : ""}`).join("\n");
 function verBarra(){
   const n = lista.length, a = document.getElementById("mandar");
   document.getElementById("lista-info").hidden = !n;
-  document.getElementById("lista-n").textContent = n === 1 ? "✓ 1 foto escolhida" : `✓ ${n} fotos escolhidas`;
+  document.getElementById("lista-n").textContent = n === 1 ? "✓ 1 foto marcada" : `✓ ${n} fotos marcadas`;
   a.href = "https://wa.me/" + ZAP + "?text=" + encodeURIComponent(n ? textoLista() : "Oi! Vi o catálogo e quero fazer um pedido.");
-  a.textContent = n ? (n === 1 ? "📸 Enviar 1 foto pra Gabela" : `📸 Enviar as ${n} fotos pra Gabela`) : "💬 Fazer meu pedido";
+  a.textContent = n ? (n === 1 ? "💬 Consultar 1 foto com a Gabela" : `💬 Consultar ${n} fotos com a Gabela`) : "💬 Fazer meu pedido";
   a.classList.toggle("cheio", !!n);
 }
 const verTudo = () => { document.querySelectorAll(".gostei").forEach(verGostei); verBarra(); };
