@@ -199,10 +199,11 @@ body::before{background:var(--fundo)}
 .divisor{margin:2px 0}
 /* Gostei + lista */
 .item{position:relative}
-.gostei{position:absolute;top:6px;left:6px;z-index:3;width:44px;height:44px;display:grid;place-items:center;background:none;border:0;padding:0;cursor:pointer}
-.gostei span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-.gostei b{width:26px;height:26px;border-radius:50%;border:2.5px solid #fff;background:rgba(0,0,0,.25);box-shadow:0 1px 4px rgba(0,0,0,.45);display:grid;place-items:center;color:transparent;font-size:15px;line-height:1}
-.gostei[aria-pressed="true"] b{background:var(--rosa);border-color:#fff;color:#fff}
+.gostei{position:absolute;top:8px;left:8px;z-index:3;display:flex;align-items:center;gap:5px;font:inherit;font-weight:900;font-size:12px;line-height:1;color:#fff;background:rgba(20,17,20,.55);border:0;border-radius:999px;padding:3px 9px 3px 3px;cursor:pointer}
+.gostei::before{content:"";position:absolute;inset:-8px}
+.gostei b{width:20px;height:20px;border-radius:50%;border:2px solid #fff;display:grid;place-items:center;color:transparent;font-size:12px;line-height:1}
+.gostei[aria-pressed="true"]{background:var(--rosa)}
+.gostei[aria-pressed="true"] b{background:#fff;color:var(--rosa)}
 .btn.gostei{background:#fff;color:var(--rosa);border:2px solid var(--rosa)}
 .btn.gostei svg{width:24px;height:24px}
 .btn.gostei[aria-pressed="true"]{background:var(--rosa);color:#fff}
@@ -484,7 +485,7 @@ function verGostei(bt){
   if (!bt) return;
   const sim = lista.some(x => x.chave === chaveDe(bt).chave);
   bt.setAttribute("aria-pressed", sim);
-  bt.querySelector("span").textContent = sim ? "Marcada para consultar" : "Consultar";
+  bt.querySelector("span").textContent = sim ? "Marcada" : "Consultar";
 }
 const linkFoto = x => { const id = (String(x.img || "").match(/[0-9a-f]{32}/) || [])[0]; return SITE && id ? SITE + "f/" + id + ".html" : SITE ? SITE + "#" + x.id : ""; };
 const textoLista = () => "Oi! Quero consultar estas peças do catálogo:\n" + lista.map((x, k) => `${k + 1}) ${x.nome} (${x.qual})${linkFoto(x) ? "\n" + linkFoto(x) : ""}`).join("\n");
