@@ -404,13 +404,17 @@ function filtrar(){
   const q = semAcento(campo.value).trim();
   const palavras = q.split(/\s+/).filter(Boolean).map(raiz);
   let n = 0;
+  // Se a palavra é o nome da peça (ex.: "shorts"), mostra só as peças que SÃO aquilo (não conjunto com short).
+  const todas = DADOS.grupos.flatMap(x => x.cats);
+  const primeira = c => raiz(semAcento(c.nome).split(/[^a-z0-9-]+/).filter(Boolean)[0] || "");
+  const exato = palavras.length === 1 && todas.some(c => primeira(c) === palavras[0]);
   document.querySelectorAll("#vitrine .grupo").forEach(sec => {
     const g = semAcento(sec.querySelector("h2")?.textContent);
     let vis = 0;
     sec.querySelectorAll("article.post").forEach(a => {
       const c = DADOS.grupos.flatMap(x => x.cats).find(x => x.id === a.id);
       const txt = semAcento([c?.nome, c?.tipo, g].join(" ")).replace(/-/g, " ");
-      const ok = !palavras.length || palavras.every(p => txt.includes(p) || txt.includes(p.replace(/-/g, " ")));
+      const ok = !palavras.length || (exato ? c && primeira(c) === palavras[0] : palavras.every(p => txt.includes(p) || txt.includes(p.replace(/-/g, " "))));
       a.classList.toggle("oculto", !ok); if (ok) vis++;
     });
     sec.classList.toggle("oculto", !!palavras.length && !vis);
