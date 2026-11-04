@@ -709,14 +709,14 @@ vitrine.addEventListener("change", async e => {
     if (acao === "add-fotos") {
       for (const [k, f] of arquivos.entries()) {
         aviso(`Enviando foto ${k + 1} de ${arquivos.length}...`);
-        const r = await assets.upload(await reduzir(f), {type: "image/jpeg"});
+        const r = await assets.upload(await reduzir(f));
         c.fotos = (c.fotos || []).concat(r.url);
       }
     } else if (acao === "add-video") {
       const f = arquivos[0];
       if (f.size > 20 * 1024 * 1024) { aviso("Esse vídeo passa de 20 MB. Grave um vídeo mais curto (até uns 15 segundos) ou mande pelo chat que eu ajusto."); return; }
       aviso("Enviando vídeo... pode levar um minutinho.");
-      const r = await assets.upload(f, {type: f.type === "video/webm" ? "video/webm" : "video/mp4"});
+      const r = await assets.upload(f);
       c.video = r.url; c.capa = null;
     }
     mudou = true;
@@ -727,7 +727,7 @@ vitrine.addEventListener("change", async e => {
     aviso(code === "too_large" ? "Arquivo grande demais (máximo 20 MB)."
       : code === "unsupported_type" ? "Esse tipo de arquivo não é aceito. Mande pelo chat que eu ajusto."
       : code === "quota_or_state" ? "Acabou o espaço para arquivos do catálogo. Me avise pelo chat."
-      : "Não deu para enviar agora. Tente de novo.");
+      : "Não deu para enviar agora. Tente de novo." + (code ? " (" + code + ")" : ""));
   }
 });
 
@@ -757,12 +757,22 @@ function novaPeca(cor){
 
 // Foto do celular fica com no máximo 1600 px: carrega rápido e não perde qualidade na tela.
 async function reduzir(f){
-  const img = await createImageBitmap(f);
-  const k = Math.min(1, 1600 / Math.max(img.width, img.height));
-  const cv = document.createElement("canvas");
-  cv.width = Math.round(img.width * k); cv.height = Math.round(img.height * k);
-  cv.getContext("2d").drawImage(img, 0, 0, cv.width, cv.height);
-  return await new Promise(ok => cv.toBlob(ok, "image/jpeg", 0.88));
+  // Diminui a foto pra no máximo 1600 px. Se o celular não deixar, manda a foto original.
+  try {
+    let img;
+    try { img = await createImageBitmap(f); }
+    catch (e) {
+      img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = URL.createObjectURL(f); });
+    }
+    const w = img.width || img.naturalWidth, hh = img.height || img.naturalHeight;
+    const k = Math.min(1, 1600 / Math.max(w, hh));
+    const cv = document.createElement("canvas");
+    cv.width = Math.round(w * k); cv.height = Math.round(hh * k);
+    cv.getContext("2d").drawImage(img, 0, 0, cv.width, cv.height);
+    const b = await new Promise(ok => cv.toBlob(ok, "image/jpeg", 0.88));
+    if (b && b.size > 1000) return b;
+  } catch (e) {}
+  return f;
 }
 
 window.addEventListener("beforeunload", e => { if (mudou && editando) e.preventDefault(); });
