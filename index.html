@@ -36,6 +36,19 @@ nav .passo{grid-column:1/-1;font-size:14px;color:var(--tinta-2);font-weight:900;
 nav::-webkit-scrollbar{display:none}
 nav a{text-decoration:none;color:var(--tinta);background:var(--cartao);border:1px solid var(--linha);border-radius:14px;padding:12px 10px;font-weight:900;font-size:16px;text-align:center;line-height:1.15}
 
+.busca{margin-top:18px;display:grid;gap:10px;position:sticky;top:0;z-index:20;background:var(--fundo);padding:10px 0 12px}
+.busca .campo{display:flex;align-items:center;gap:8px;background:var(--cartao);border:2px solid var(--rosa);border-radius:16px;padding:4px 6px 4px 14px}
+.busca .campo span{font-size:20px}
+.busca input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:18px;font-weight:800;color:var(--tinta);padding:10px 0;outline:none}
+.busca input::placeholder{color:var(--tinta-2);font-weight:700}
+.busca #busca-limpar{border:0;background:var(--rosa);color:#fff;font:inherit;font-weight:900;font-size:15px;border-radius:12px;padding:9px 12px;cursor:pointer}
+.busca .pilulas{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.busca .pilulas::-webkit-scrollbar{display:none}
+.busca .pilulas button{flex:none;border:1px solid var(--linha);background:var(--cartao);color:var(--tinta);font:inherit;font-weight:900;font-size:15px;border-radius:999px;padding:8px 14px;cursor:pointer}
+.busca .pilulas button[aria-pressed="true"]{background:var(--rosa);border-color:var(--rosa);color:#fff}
+.busca .achou{font-size:15px;font-weight:900;color:var(--tinta-2)}
+.busca .achou:empty{display:none}
+.oculto{display:none!important}
 nav a:focus-visible,.btn:focus-visible{outline:3px solid var(--neon);outline-offset:2px}
 .grupo{padding-top:34px;scroll-margin-top:12px;display:grid;gap:22px}
 .grupo>h2{margin:0;font-size:34px;font-weight:900;line-height:1}
@@ -252,6 +265,11 @@ body::before{background:var(--fundo)}
   </div>
 
   <nav id="chips" aria-label="Categorias"></nav>
+  <div class="busca" role="search">
+    <label class="campo"><span aria-hidden="true">🔍</span><input id="busca" type="search" placeholder="Procurar: short, saia, calça..." autocomplete="off" enterkeyhint="search" aria-label="Procurar peça"><button type="button" id="busca-limpar" hidden>Limpar</button></label>
+    <div class="pilulas" id="pilulas"></div>
+    <div class="achou" id="achou" role="status"></div>
+  </div>
   <main id="vitrine"></main>
 
   <div class="final">
@@ -377,6 +395,46 @@ function editor(c){
   </div>`;
 }
 
+// Busca: escreve "short" (ou toca num botãozinho) e só aparecem as peças daquele tipo.
+const PILULAS = ["Calças","Shorts","Bermudas","Saias","Vestidos","Regatas","T-shirts","Conjuntos","Bodies","Pijamas","Plus size","Masculino","Tênis","Bolsas"];
+const semAcento = s => (s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+const raiz = w => w.endsWith("oes") ? w.slice(0, -3) + "ao" : w.endsWith("ies") ? w.slice(0, -3) + "y" : (w.length > 3 && w.endsWith("s")) ? w.slice(0, -1) : w;
+function filtrar(){
+  const campo = document.getElementById("busca");
+  const q = semAcento(campo.value).trim();
+  const palavras = q.split(/\s+/).filter(Boolean).map(raiz);
+  let n = 0;
+  document.querySelectorAll("#vitrine .grupo").forEach(sec => {
+    const g = semAcento(sec.querySelector("h2")?.textContent);
+    let vis = 0;
+    sec.querySelectorAll("article.post").forEach(a => {
+      const c = DADOS.grupos.flatMap(x => x.cats).find(x => x.id === a.id);
+      const txt = semAcento([c?.nome, c?.tipo, g].join(" ")).replace(/-/g, " ");
+      const ok = !palavras.length || palavras.every(p => txt.includes(p) || txt.includes(p.replace(/-/g, " ")));
+      a.classList.toggle("oculto", !ok); if (ok) vis++;
+    });
+    sec.classList.toggle("oculto", !!palavras.length && !vis);
+    n += vis;
+  });
+  document.getElementById("busca-limpar").hidden = !q;
+  document.getElementById("achou").textContent = q ? (n ? `${n} ${n === 1 ? "peça encontrada" : "peças encontradas"}` : "Nada encontrado. Tenta outra palavra ou consulta no privado.") : "";
+  document.querySelectorAll("#pilulas button").forEach(b => b.setAttribute("aria-pressed", semAcento(b.textContent) === q ? "true" : "false"));
+}
+function montarBusca(){
+  const pil = document.getElementById("pilulas");
+  pil.innerHTML = PILULAS.map(t => `<button type="button" aria-pressed="false">${t}</button>`).join("");
+  const campo = document.getElementById("busca");
+  let to; campo.addEventListener("input", () => { clearTimeout(to); to = setTimeout(filtrar, 150); });
+  campo.addEventListener("keydown", e => { if (e.key === "Enter") { campo.blur(); irBusca(); } });
+  const irBusca = () => { const b = document.querySelector(".busca"); scrollTo({top: b.getBoundingClientRect().top + scrollY - 4, behavior: "smooth"}); };
+  pil.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    campo.value = b.getAttribute("aria-pressed") === "true" ? "" : b.textContent;
+    filtrar(); irBusca();
+  });
+  document.getElementById("busca-limpar").addEventListener("click", () => { campo.value = ""; filtrar(); campo.focus(); });
+}
+
 function desenhar(){
   const lista = ordenados();
   setTimeout(() => typeof verTudo === "function" && verTudo());
@@ -405,6 +463,7 @@ function desenhar(){
     fotoAtual(t.parentElement);
     let to; t.addEventListener("scroll", () => { clearTimeout(to); to = setTimeout(() => fotoAtual(t.parentElement), 60); });
   });
+  if (document.getElementById("busca")) filtrar();
   const d = DADOS.atualizado ? new Date(DADOS.atualizado + "T12:00:00") : new Date();
   document.getElementById("data").textContent = "Atualizado " + d.toLocaleDateString("pt-BR", {weekday: "long", day: "2-digit", month: "2-digit"});
 }
@@ -526,6 +585,7 @@ document.getElementById("mandar").addEventListener("click", async e => {
 });
 addEventListener("storage", e => { if (e.key === "gostei-gabela") { try { lista = JSON.parse(e.newValue || "[]"); } catch (err) {} verTudo(); } });
 
+montarBusca();
 desenhar();
 verTudo();
 lista.forEach(x => x.img && pegar(x.img).catch(() => {}));
