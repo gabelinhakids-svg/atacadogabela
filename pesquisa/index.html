@@ -80,9 +80,10 @@ const TELAS = [
   {id:"comprou_menos",tipo:"um",t:"Nos últimos 2 meses, você comprou menos com a gente?",ops:["Não, comprei igual","Sim, minhas vendas caíram","Sim, achei preço melhor em outro lugar","Sim, o frete pesou","Sim, não achei o que procurava"]},
   {id:"comprar_mais",tipo:"varios",max:2,t:"O que te faria comprar mais com a gente?",dica:"Marque até 2.",ops:["Desconto por quantidade","Novidades toda semana","Pagar menos no envio","Mais peças plus size","Promoções no WhatsApp","Outra situação"],outro:"Outra situação"},
   {id:"outros_fornecedores",tipo:"varios",t:"Além da Gabela, onde mais você compra para revender?",dica:"Pode marcar várias.",ops:["Outro atacado de POA ou região","São Paulo","Pela internet","Só na Gabela"]},
-  {id:"satisfacao",tipo:"grade",t:"O que você acha da Gabela?",dica:"Toque numa carinha em cada item.",itens:["Qualidade das peças","Preço","Atendimento no WhatsApp","Novidades e catálogo de peças","Envio (prazo e embalagem)"],notas:NOTAS},
+  {id:"satisfacao",tipo:"grade",t:"O que você acha da Gabela?",dica:"Toque numa carinha em cada item.",itens:["Qualidade das peças","Preço","Atendimento no WhatsApp","Nosso catálogo de peças","Envio (prazo e embalagem)"],notas:NOTAS},
   {id:"colaboradora",tipo:"um",t:"Com qual colaboradora você mais se identifica?",dica:"Pode ser da loja, do caixa ou do WhatsApp.",ops:["Márcia","Carol","Lina","Vanessa","Bia","Não lembro o nome"]},
   {id:"sugestao",tipo:"texto",t:"O que a Gabela pode melhorar?",dica:"Crítica, sugestão ou elogio. Pode falar sem medo 💗"},
+  {id:"gabelinha",tipo:"um",t:"Você já sabe que temos um novo espaço de atacado kids, a Gabelinha Kids?",ops:["Sim","Não"]},
   {tipo:"fim"}
 ];
 
@@ -162,13 +163,13 @@ function atualiza(){
   document.getElementById("passo").textContent=(atual>0&&atual<=nPerg)?("Pergunta "+atual+" de "+nPerg):"";
   voltar.style.display=(atual>0&&q.tipo!=="fim")?"":"none";
   document.getElementById("rodape").style.display=q.tipo==="fim"?"none":"";
-  seguir.textContent=q.tipo==="inicio"?"Começar":(q.tipo==="texto"?"Enviar respostas":"Próxima");
+  seguir.textContent=q.tipo==="inicio"?"Começar":(atual===nPerg?"Enviar respostas":"Próxima");
   seguir.disabled=q.tipo!=="inicio"&&!respondida(q);
 }
 function avanca(){
   const q=TELAS[atual];
   if(q.tipo!=="inicio"&&!respondida(q)) return;
-  if(q.tipo==="texto") return envia();
+  if(atual===nPerg) return envia();
   atual++;window.scrollTo(0,0);atualiza();
 }
 seguir.onclick=avanca;
