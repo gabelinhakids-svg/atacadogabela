@@ -78,8 +78,8 @@ const TELAS = [
   {id:"pecas",tipo:"varios",t:"Quais peças mais vendem pra você?",dica:"Pode marcar várias.",ops:["Femininas em geral","Femininas plus size","Masculinas","Bolsas","Tênis e papetes"]},
   {id:"envio",tipo:"um",t:"Como você prefere receber suas compras?",ops:["Retiro na loja","Uber (eu chamo e retira)","Correios","Queria outra forma"],outro:"Queria outra forma"},
   {id:"comprou_menos",tipo:"um",t:"Nos últimos 2 meses, você comprou menos com a gente?",ops:["Não, comprei igual","Sim, minhas vendas caíram","Sim, achei preço melhor em outro lugar","Sim, o frete pesou","Sim, não achei o que procurava"]},
-  {id:"comprar_mais",tipo:"varios",max:2,t:"O que te faria comprar mais com a gente?",dica:"Marque até 2.",ops:["Desconto por quantidade","Novidades toda semana","Pagar menos no envio","Mais peças plus size","Promoções no WhatsApp"]},
-  {id:"outros_fornecedores",tipo:"varios",t:"Além da Gabela, onde mais você compra para revender?",dica:"Pode marcar várias.",ops:["Outra loja de Porto Alegre","São Paulo (Brás, Bom Retiro)","Pela internet","Só na Gabela"]},
+  {id:"comprar_mais",tipo:"varios",max:2,t:"O que te faria comprar mais com a gente?",dica:"Marque até 2.",ops:["Desconto por quantidade","Novidades toda semana","Pagar menos no envio","Mais peças plus size","Promoções no WhatsApp","Outra situação"],outro:"Outra situação"},
+  {id:"outros_fornecedores",tipo:"varios",t:"Além da Gabela, onde mais você compra para revender?",dica:"Pode marcar várias.",ops:["Outro atacado de POA ou região","São Paulo","Pela internet","Só na Gabela"]},
   {id:"satisfacao",tipo:"grade",t:"O que você acha da Gabela?",dica:"Toque numa carinha em cada item.",itens:["Qualidade das peças","Preço","Atendimento no WhatsApp","Novidades e catálogo de peças","Envio (prazo e embalagem)"],notas:NOTAS},
   {id:"colaboradora",tipo:"um",t:"Com qual colaboradora você mais se identifica?",dica:"Pode ser da loja, do caixa ou do WhatsApp.",ops:["Márcia","Carol","Lina","Vanessa","Bia","Não lembro o nome"]},
   {id:"sugestao",tipo:"texto",t:"O que a Gabela pode melhorar?",dica:"Crítica, sugestão ou elogio. Pode falar sem medo 💗"},
@@ -87,6 +87,8 @@ const TELAS = [
 ];
 
 const R = {};
+function temOutro(q){const v=R[q.id];return !!q.outro&&(Array.isArray(v)?v.includes(q.outro):v===q.outro)}
+function mostraOutro(s,q){const ex=s.querySelector(".outro");if(!ex)return;const on=temOutro(q);const antes=ex.style.display!=="none";ex.style.display=on?"":"none";if(on&&!antes)ex.focus()}
 let atual = 0;
 const f = document.getElementById("f");
 
@@ -114,9 +116,8 @@ TELAS.forEach((q,i)=>{
         const b=el("button","op",o);b.type="button";
         b.onclick=()=>{
           if(q.tipo==="um"){R[q.id]=o;box.querySelectorAll(".op").forEach(x=>x.classList.toggle("sel",x===b));
-            const ex=s.querySelector(".outro");if(ex){ex.style.display=(o===q.outro)?"":"none";if(o===q.outro){ex.focus();atualiza();return}}
-            atualiza();setTimeout(avanca,250)}
-          else{const l=R[q.id]||(R[q.id]=[]);const k=l.indexOf(o);const av=s.querySelector(".aviso");if(k<0&&q.max&&l.length>=q.max){av.textContent="Marque no máximo "+q.max+".";return}av.textContent="";k<0?l.push(o):l.splice(k,1);b.classList.toggle("sel",k<0);atualiza()}
+            mostraOutro(s,q);atualiza()}
+          else{const l=R[q.id]||(R[q.id]=[]);const k=l.indexOf(o);const av=s.querySelector(".aviso");if(k<0&&q.max&&l.length>=q.max){av.textContent="Marque no máximo "+q.max+".";return}av.textContent="";k<0?l.push(o):l.splice(k,1);b.classList.toggle("sel",k<0);mostraOutro(s,q);atualiza()}
         };
         box.append(b);
       });
@@ -182,7 +183,7 @@ async function envia(){
     const v=R[q.id];
     if(q.tipo==="grade"){for(const it of q.itens) dados[n+". "+q.t+" - "+it]=v[it];return}
     let txt=Array.isArray(v)?v.join(", "):(v||"");
-    if(q.outro&&v===q.outro) txt+=": "+((R[q.id+"_qual"]||"").trim()||"(não escreveu)");
+    if(temOutro(q)) txt+=": "+((R[q.id+"_qual"]||"").trim()||"(não escreveu)");
     if(q.tipo==="texto") txt=txt.trim()||"(não escreveu)";
     dados[n+". "+q.t]=txt;
   });
