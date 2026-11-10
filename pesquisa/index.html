@@ -74,10 +74,10 @@ const TELAS = [
   {tipo:"inicio"},
   {id:"revende",tipo:"um",t:"Você revende roupas?",ops:["Sim","Não"]},
   {id:"regiao",tipo:"um",t:"De onde você é?",ops:["Porto Alegre e região","Interior do RS","Outro estado"]},
-  {id:"pecas",tipo:"varios",t:"Quais peças mais vendem pra você?",dica:"Pode marcar várias.",ops:["Calças","Shorts","T-shirts","Blusa plus size","Bolsas","Tênis"]},
-  {id:"envio",tipo:"um",t:"Como você prefere receber suas compras?",ops:["Retiro na loja","Correios","Transportadora","Excursão","Motoboy"]},
+  {id:"pecas",tipo:"varios",t:"Quais peças mais vendem pra você?",dica:"Pode marcar várias.",ops:["Femininas em geral","Femininas plus size","Masculinas","Bolsas","Tênis e papetes"]},
+  {id:"envio",tipo:"um",t:"Como você prefere receber suas compras?",ops:["Retiro na loja","Uber (eu chamo e retira)","Correios","Queria outra forma"],outro:"Queria outra forma"},
   {id:"comprou_menos",tipo:"um",t:"Nos últimos 2 meses, você comprou menos com a gente?",ops:["Não, comprei igual","Sim, minhas vendas caíram","Sim, achei preço melhor em outro lugar","Sim, o frete pesou","Sim, não achei o que procurava"]},
-  {id:"satisfacao",tipo:"grade",t:"O que você acha da Gabela?",dica:"Toque numa carinha em cada item.",itens:["Qualidade das peças","Preço","Atendimento no WhatsApp","Catálogo do site","Envio (prazo e embalagem)"],notas:NOTAS},
+  {id:"satisfacao",tipo:"grade",t:"O que você acha da Gabela?",dica:"Toque numa carinha em cada item.",itens:["Qualidade das peças","Preço","Atendimento no WhatsApp","Novidades e catálogo de peças","Envio (prazo e embalagem)"],notas:NOTAS},
   {id:"colaboradora",tipo:"um",t:"Com qual colaboradora você mais se identifica?",dica:"Pode ser da loja, do caixa ou do WhatsApp.",ops:["Márcia","Carol","Lina","Vanessa","Bia","Não lembro o nome"]},
   {id:"sugestao",tipo:"texto",t:"O que a Gabela pode melhorar?",dica:"Crítica, sugestão ou elogio. Pode falar sem medo 💗"},
   {tipo:"fim"}
@@ -110,12 +110,15 @@ TELAS.forEach((q,i)=>{
       q.ops.forEach(o=>{
         const b=el("button","op",o);b.type="button";
         b.onclick=()=>{
-          if(q.tipo==="um"){R[q.id]=o;box.querySelectorAll(".op").forEach(x=>x.classList.toggle("sel",x===b));atualiza();setTimeout(avanca,250)}
+          if(q.tipo==="um"){R[q.id]=o;box.querySelectorAll(".op").forEach(x=>x.classList.toggle("sel",x===b));
+            const ex=s.querySelector(".outro");if(ex){ex.style.display=(o===q.outro)?"":"none";if(o===q.outro){ex.focus();atualiza();return}}
+            atualiza();setTimeout(avanca,250)}
           else{const l=R[q.id]||(R[q.id]=[]);const k=l.indexOf(o);k<0?l.push(o):l.splice(k,1);b.classList.toggle("sel",k<0);atualiza()}
         };
         box.append(b);
       });
       s.append(box);
+      if(q.outro){const t=el("textarea","outro");t.placeholder="Qual? Escreve aqui";t.style.minHeight="90px";t.style.marginTop="10px";t.style.display="none";t.maxLength=300;t.oninput=()=>{R[q.id+"_qual"]=t.value};s.append(t)}
     } else if(q.tipo==="grade"){
       const g=el("div","grade");R[q.id]={};
       q.itens.forEach(it=>{
@@ -174,7 +177,7 @@ async function envia(){
     "1. Revende roupas?":R.revende,
     "2. De onde é":R.regiao,
     "3. Peças que mais vendem":(R.pecas||[]).join(", "),
-    "4. Como prefere receber":R.envio,
+    "4. Como prefere receber":R.envio+(R.envio==="Queria outra forma"?(": "+((R.envio_qual||"").trim()||"(não escreveu)")):""),
     "5. Comprou menos nos últimos 2 meses?":R.comprou_menos
   };
   for(const[k,v] of Object.entries(R.satisfacao)) dados["6. Satisfação - "+k]=v;
