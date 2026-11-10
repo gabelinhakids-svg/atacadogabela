@@ -66,17 +66,20 @@ textarea:focus{outline:none;border-color:var(--rosa)}
 
 <script>
 // Chave do Web3Forms (as respostas chegam no e-mail da Gabi). Vazio = modo teste.
-const CHAVE = "a949e599-d3ce-45b3-91b2-c45bfde18023";
+const CHAVE = window.TESTE?"":"a949e599-d3ce-45b3-91b2-c45bfde18023";
 
 const NOTAS = [["😍","Ótimo"],["🙂","Bom"],["😐","Regular"],["😕","Ruim"]];
 
 const TELAS = [
   {tipo:"inicio"},
   {id:"revende",tipo:"um",t:"Você revende roupas?",ops:["Sim","Não"]},
+  {id:"ver_pecas",tipo:"um",t:"Qual a melhor forma de você ver nossas peças?",ops:["Grupo do WhatsApp","Catálogo atualizado","Status do WhatsApp","Instagram ou Facebook","Indo na loja"]},
   {id:"regiao",tipo:"um",t:"De onde você é?",ops:["Porto Alegre e região","Interior do RS","Outro estado"]},
   {id:"pecas",tipo:"varios",t:"Quais peças mais vendem pra você?",dica:"Pode marcar várias.",ops:["Femininas em geral","Femininas plus size","Masculinas","Bolsas","Tênis e papetes"]},
   {id:"envio",tipo:"um",t:"Como você prefere receber suas compras?",ops:["Retiro na loja","Uber (eu chamo e retira)","Correios","Queria outra forma"],outro:"Queria outra forma"},
   {id:"comprou_menos",tipo:"um",t:"Nos últimos 2 meses, você comprou menos com a gente?",ops:["Não, comprei igual","Sim, minhas vendas caíram","Sim, achei preço melhor em outro lugar","Sim, o frete pesou","Sim, não achei o que procurava"]},
+  {id:"comprar_mais",tipo:"varios",max:2,t:"O que te faria comprar mais com a gente?",dica:"Marque até 2.",ops:["Desconto por quantidade","Novidades toda semana","Pagar menos no envio","Mais peças plus size","Promoções no WhatsApp"]},
+  {id:"outros_fornecedores",tipo:"varios",t:"Além da Gabela, onde mais você compra para revender?",dica:"Pode marcar várias.",ops:["Outra loja de Porto Alegre","São Paulo (Brás, Bom Retiro)","Pela internet","Só na Gabela"]},
   {id:"satisfacao",tipo:"grade",t:"O que você acha da Gabela?",dica:"Toque numa carinha em cada item.",itens:["Qualidade das peças","Preço","Atendimento no WhatsApp","Novidades e catálogo de peças","Envio (prazo e embalagem)"],notas:NOTAS},
   {id:"colaboradora",tipo:"um",t:"Com qual colaboradora você mais se identifica?",dica:"Pode ser da loja, do caixa ou do WhatsApp.",ops:["Márcia","Carol","Lina","Vanessa","Bia","Não lembro o nome"]},
   {id:"sugestao",tipo:"texto",t:"O que a Gabela pode melhorar?",dica:"Crítica, sugestão ou elogio. Pode falar sem medo 💗"},
@@ -93,9 +96,9 @@ TELAS.forEach((q,i)=>{
   const s = el("section","tela"); s.dataset.i=i;
   if(q.tipo==="inicio"){
     s.append(el("h1",null,"Oi! Queremos te ouvir 💗"));
-    s.append(el("p","dica","São 8 perguntinhas de clicar, leva uns 2 minutos."));
+    s.append(el("p","dica","É rapidinho, só clicar!"));
     s.append(el("div","selo","🔒 Anônima: não pedimos nome nem telefone"));
-    s.append(el("p","dica","Ninguém fica sabendo quem respondeu. Sua opinião vai ajudar a Gabela a melhorar pra você."));
+    s.append(el("p","dica","Sua opinião vai nos ajudar muito a melhorar a nossa qualidade de atendimento."));
   } else if(q.tipo==="fim"){
     s.classList.add("fim");
     s.append(el("div","grande","💗"));
@@ -113,7 +116,7 @@ TELAS.forEach((q,i)=>{
           if(q.tipo==="um"){R[q.id]=o;box.querySelectorAll(".op").forEach(x=>x.classList.toggle("sel",x===b));
             const ex=s.querySelector(".outro");if(ex){ex.style.display=(o===q.outro)?"":"none";if(o===q.outro){ex.focus();atualiza();return}}
             atualiza();setTimeout(avanca,250)}
-          else{const l=R[q.id]||(R[q.id]=[]);const k=l.indexOf(o);k<0?l.push(o):l.splice(k,1);b.classList.toggle("sel",k<0);atualiza()}
+          else{const l=R[q.id]||(R[q.id]=[]);const k=l.indexOf(o);const av=s.querySelector(".aviso");if(k<0&&q.max&&l.length>=q.max){av.textContent="Marque no máximo "+q.max+".";return}av.textContent="";k<0?l.push(o):l.splice(k,1);b.classList.toggle("sel",k<0);atualiza()}
         };
         box.append(b);
       });
@@ -173,16 +176,16 @@ voltar.onclick=()=>{if(atual>0){atual--;window.scrollTo(0,0);atualiza()}};
 async function envia(){
   const aviso=document.querySelector(".tela.on .aviso");
   seguir.disabled=true;seguir.textContent="Enviando...";aviso.textContent="";
-  const dados={
-    "1. Revende roupas?":R.revende,
-    "2. De onde é":R.regiao,
-    "3. Peças que mais vendem":(R.pecas||[]).join(", "),
-    "4. Como prefere receber":R.envio+(R.envio==="Queria outra forma"?(": "+((R.envio_qual||"").trim()||"(não escreveu)")):""),
-    "5. Comprou menos nos últimos 2 meses?":R.comprou_menos
-  };
-  for(const[k,v] of Object.entries(R.satisfacao)) dados["6. Satisfação - "+k]=v;
-  dados["7. Colaboradora com quem mais se identifica"]=R.colaboradora;
-  dados["8. O que pode melhorar"]=(R.sugestao||"").trim()||"(não escreveu)";
+  const dados={};let n=0;
+  TELAS.forEach(q=>{
+    if(!q.id) return; n++;
+    const v=R[q.id];
+    if(q.tipo==="grade"){for(const it of q.itens) dados[n+". "+q.t+" - "+it]=v[it];return}
+    let txt=Array.isArray(v)?v.join(", "):(v||"");
+    if(q.outro&&v===q.outro) txt+=": "+((R[q.id+"_qual"]||"").trim()||"(não escreveu)");
+    if(q.tipo==="texto") txt=txt.trim()||"(não escreveu)";
+    dados[n+". "+q.t]=txt;
+  });
   try{
     if(!CHAVE){await new Promise(r=>setTimeout(r,600));console.log("MODO TESTE",dados)}
     else{
