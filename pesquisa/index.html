@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Pesquisa Gabela Atacado</title>
+<meta property="og:title" content="Pesquisa rápida da Gabela 💗">
+<meta property="og:description" content="2 minutinhos, é só clicar. Anônima: ninguém fica sabendo quem respondeu.">
+<meta property="og:image" content="https://atacadogabela.com.br/midia/0806e1070f3f6f8d5cef6a22d7a3a481.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--rosa:#E8085A;--rosa-claro:#FFE3EE;--fundo:#FAF7F2;--tinta:#1B1720;--cinza:#6B6470;--linha:#E4DFE3;--verde:#1FA855;color-scheme:light}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--fundo);color:var(--tinta);font-family:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:520px;margin:0 auto;padding:16px 16px calc(110px + env(safe-area-inset-bottom))}
+header{text-align:center;padding:6px 0 4px}
+header img{width:150px;height:auto}
+.barra{height:8px;background:var(--linha);border-radius:99px;overflow:hidden;margin:10px 0 4px}
+.barra i{display:block;height:100%;width:0;background:var(--rosa);border-radius:99px;transition:width .3s}
+.passo{font-size:13px;color:var(--cinza);text-align:right;font-weight:700}
+.tela{display:none;animation:entra .25s ease}
+.tela.on{display:block}
+@keyframes entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1{font-size:26px;line-height:1.2;margin:18px 0 8px;font-weight:900}
+h2{font-size:22px;line-height:1.25;margin:20px 0 6px;font-weight:900}
+p.dica{margin:0 0 16px;color:var(--cinza);font-size:15px;font-weight:700}
+.selo{display:inline-block;background:var(--rosa-claro);color:var(--rosa);font-weight:900;border-radius:99px;padding:6px 12px;font-size:14px;margin:4px 0}
+.ops{display:grid;gap:10px}
+.op{display:block;width:100%;text-align:left;background:#fff;border:2px solid var(--linha);border-radius:16px;padding:15px 16px;font-family:inherit;font-weight:800;font-size:17px;line-height:1.25;color:var(--tinta);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.op.sel{border-color:var(--rosa);background:var(--rosa-claro);color:var(--rosa)}
+.op.sel::after{content:" ✓";font-weight:900}
+.grade{display:grid;gap:12px}
+.item{background:#fff;border:2px solid var(--linha);border-radius:16px;padding:12px}
+.item b{display:block;font-size:17px;margin-bottom:8px;font-weight:900}
+.notas{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.nota{border:2px solid var(--linha);background:var(--fundo);border-radius:12px;padding:8px 2px;font-family:inherit;font-size:12px;font-weight:800;color:var(--cinza);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.nota span{display:block;font-size:24px;line-height:1.2}
+.nota.sel{border-color:var(--rosa);background:var(--rosa-claro);color:var(--rosa)}
+textarea{width:100%;min-height:150px;border:2px solid var(--linha);border-radius:16px;padding:14px;font-family:inherit;font-weight:700;font-size:17px;line-height:1.4;background:#fff;color:var(--tinta)}
+textarea:focus{outline:none;border-color:var(--rosa)}
+.rodape{position:fixed;left:0;right:0;bottom:0;background:linear-gradient(transparent,var(--fundo) 30%);padding:18px 16px calc(14px + env(safe-area-inset-bottom))}
+.rodape .in{max-width:520px;margin:0 auto;display:flex;gap:10px}
+.btn{flex:1;border:0;border-radius:16px;padding:17px;font-family:inherit;font-weight:900;font-size:18px;background:var(--rosa);color:#fff;cursor:pointer}
+.btn:disabled{opacity:.35}
+.btn.volta{flex:0 0 auto;background:#fff;color:var(--tinta);border:2px solid var(--linha);padding:17px 18px}
+.aviso{color:var(--rosa);font-weight:800;font-size:14px;min-height:20px;margin-top:10px}
+.teste{background:#FFC21A;color:#1B1720;text-align:center;font-weight:900;font-size:13px;padding:6px;border-radius:10px;margin-bottom:6px}
+.fim{text-align:center;padding-top:30px}
+.fim .grande{font-size:64px}
+.fim a{display:inline-block;margin-top:18px;background:var(--rosa);color:#fff;text-decoration:none;font-weight:900;padding:15px 22px;border-radius:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><img src="../midia/0806e1070f3f6f8d5cef6a22d7a3a481.png" alt="Gabela Atacado"></header>
+  <div class="barra"><i id="barra"></i></div>
+  <div class="passo" id="passo"></div>
+  <form id="f" onsubmit="return false"></form>
+</div>
+<div class="rodape" id="rodape"><div class="in">
+  <button class="btn volta" id="voltar" type="button">‹</button>
+  <button class="btn" id="seguir" type="button">Começar</button>
+</div></div>
+
+<script>
+// Chave do Web3Forms (as respostas chegam no e-mail da Gabi). Vazio = modo teste.
+const CHAVE = "";
+
+const NOTAS = [["😍","Ótimo"],["🙂","Bom"],["😐","Regular"],["😕","Ruim"]];
+
+const TELAS = [
+  {tipo:"inicio"},
+  {id:"revende",tipo:"um",t:"Você revende roupas?",ops:["Sim","Não"]},
+  {id:"regiao",tipo:"um",t:"De onde você é?",ops:["Porto Alegre e região","Interior do RS","Outro estado"]},
+  {id:"pecas",tipo:"varios",t:"Quais peças mais vendem pra você?",dica:"Pode marcar várias.",ops:["Calças","Shorts","T-shirts","Blusa plus size","Bolsas","Tênis"]},
+  {id:"envio",tipo:"um",t:"Como você prefere receber suas compras?",ops:["Retiro na loja","Correios","Transportadora","Excursão","Motoboy"]},
+  {id:"comprou_menos",tipo:"um",t:"Nos últimos 2 meses, você comprou menos com a gente?",ops:["Não, comprei igual","Sim, minhas vendas caíram","Sim, achei preço melhor em outro lugar","Sim, o frete pesou","Sim, não achei o que procurava"]},
+  {id:"satisfacao",tipo:"grade",t:"O que você acha da Gabela?",dica:"Toque numa carinha em cada item.",itens:["Qualidade das peças","Preço","Atendimento no WhatsApp","Catálogo do site","Envio (prazo e embalagem)"],notas:NOTAS},
+  {id:"colaboradora",tipo:"um",t:"Com qual colaboradora você mais se identifica?",dica:"Pode ser da loja, do caixa ou do WhatsApp.",ops:["Márcia","Carol","Lina","Vanessa","Bia","Não lembro o nome"]},
+  {id:"sugestao",tipo:"texto",t:"O que a Gabela pode melhorar?",dica:"Crítica, sugestão ou elogio. Pode falar sem medo 💗"},
+  {tipo:"fim"}
+];
+
+const R = {};
+let atual = 0;
+const f = document.getElementById("f");
+
+function el(tag, cls, txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+
+TELAS.forEach((q,i)=>{
+  const s = el("section","tela"); s.dataset.i=i;
+  if(q.tipo==="inicio"){
+    s.append(el("h1",null,"Oi! Queremos te ouvir 💗"));
+    s.append(el("p","dica","São 8 perguntinhas de clicar, leva uns 2 minutos."));
+    s.append(el("div","selo","🔒 Anônima: não pedimos nome nem telefone"));
+    s.append(el("p","dica","Ninguém fica sabendo quem respondeu. Sua opinião vai ajudar a Gabela a melhorar pra você."));
+  } else if(q.tipo==="fim"){
+    s.classList.add("fim");
+    s.append(el("div","grande","💗"));
+    s.append(el("h1",null,"Muito obrigada!"));
+    s.append(el("p","dica","Sua resposta foi enviada. Ela vai nos ajudar muito."));
+    const a=el("a",null,"Ver o catálogo");a.href="https://atacadogabela.com.br/";s.append(a);
+  } else {
+    s.append(el("h2",null,q.t));
+    if(q.dica) s.append(el("p","dica",q.dica));
+    if(q.tipo==="um"||q.tipo==="varios"){
+      const box=el("div","ops");
+      q.ops.forEach(o=>{
+        const b=el("button","op",o);b.type="button";
+        b.onclick=()=>{
+          if(q.tipo==="um"){R[q.id]=o;box.querySelectorAll(".op").forEach(x=>x.classList.toggle("sel",x===b));atualiza();setTimeout(avanca,250)}
+          else{const l=R[q.id]||(R[q.id]=[]);const k=l.indexOf(o);k<0?l.push(o):l.splice(k,1);b.classList.toggle("sel",k<0);atualiza()}
+        };
+        box.append(b);
+      });
+      s.append(box);
+    } else if(q.tipo==="grade"){
+      const g=el("div","grade");R[q.id]={};
+      q.itens.forEach(it=>{
+        const c=el("div","item");c.append(el("b",null,it));
+        const n=el("div","notas");
+        q.notas.forEach(([emo,txt])=>{
+          const b=el("button","nota");b.type="button";
+          b.append(el("span",null,emo),document.createTextNode(txt));
+          b.onclick=()=>{R[q.id][it]=txt;n.querySelectorAll(".nota").forEach(x=>x.classList.toggle("sel",x===b));atualiza()};
+          n.append(b);
+        });
+        c.append(n);g.append(c);
+      });
+      s.append(g);
+    } else if(q.tipo==="texto"){
+      const t=el("textarea");t.placeholder="Escreva aqui (opcional)";t.maxLength=2000;
+      t.oninput=()=>{R[q.id]=t.value};s.append(t);
+    }
+  }
+  if(q.tipo!=="inicio"&&q.tipo!=="fim"){s.append(el("div","aviso"))}
+  f.append(s);
+});
+
+const nPerg = TELAS.length-2;
+const seguir=document.getElementById("seguir"), voltar=document.getElementById("voltar");
+
+function respondida(q){
+  if(q.tipo==="um") return !!R[q.id];
+  if(q.tipo==="varios") return (R[q.id]||[]).length>0;
+  if(q.tipo==="grade") return q.itens.every(it=>R[q.id][it]);
+  return true;
+}
+function atualiza(){
+  const q=TELAS[atual];
+  document.querySelectorAll(".tela").forEach(s=>s.classList.toggle("on",+s.dataset.i===atual));
+  document.getElementById("barra").style.width=(Math.min(atual,nPerg)/nPerg*100)+"%";
+  document.getElementById("passo").textContent=(atual>0&&atual<=nPerg)?("Pergunta "+atual+" de "+nPerg):"";
+  voltar.style.display=(atual>0&&q.tipo!=="fim")?"":"none";
+  document.getElementById("rodape").style.display=q.tipo==="fim"?"none":"";
+  seguir.textContent=q.tipo==="inicio"?"Começar":(q.tipo==="texto"?"Enviar respostas":"Próxima");
+  seguir.disabled=q.tipo!=="inicio"&&!respondida(q);
+}
+function avanca(){
+  const q=TELAS[atual];
+  if(q.tipo!=="inicio"&&!respondida(q)) return;
+  if(q.tipo==="texto") return envia();
+  atual++;window.scrollTo(0,0);atualiza();
+}
+seguir.onclick=avanca;
+voltar.onclick=()=>{if(atual>0){atual--;window.scrollTo(0,0);atualiza()}};
+
+async function envia(){
+  const aviso=document.querySelector(".tela.on .aviso");
+  seguir.disabled=true;seguir.textContent="Enviando...";aviso.textContent="";
+  const dados={
+    "1. Revende roupas?":R.revende,
+    "2. De onde é":R.regiao,
+    "3. Peças que mais vendem":(R.pecas||[]).join(", "),
+    "4. Como prefere receber":R.envio,
+    "5. Comprou menos nos últimos 2 meses?":R.comprou_menos
+  };
+  for(const[k,v] of Object.entries(R.satisfacao)) dados["6. Satisfação - "+k]=v;
+  dados["7. Colaboradora com quem mais se identifica"]=R.colaboradora;
+  dados["8. O que pode melhorar"]=(R.sugestao||"").trim()||"(não escreveu)";
+  try{
+    if(!CHAVE){await new Promise(r=>setTimeout(r,600));console.log("MODO TESTE",dados)}
+    else{
+      const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
+        body:JSON.stringify(Object.assign({access_key:CHAVE,subject:"Nova resposta da pesquisa Gabela 💗",from_name:"Pesquisa Gabela"},dados))});
+      const j=await r.json().catch(()=>({}));
+      if(!r.ok||j.success===false) throw new Error(j.message||"erro");
+    }
+    atual++;window.scrollTo(0,0);atualiza();
+  }catch(e){
+    aviso.textContent="Não conseguimos enviar. Confira sua internet e toque em Enviar de novo.";
+    seguir.disabled=false;seguir.textContent="Enviar respostas";
+  }
+}
+if(!CHAVE){const t=el("div","teste","MODO TESTE: as respostas ainda não são salvas");document.querySelector(".wrap").prepend(t)}
+atualiza();
+</script>
+</body>
+</html>
