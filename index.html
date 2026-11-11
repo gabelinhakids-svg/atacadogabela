@@ -572,22 +572,8 @@ vitrine.addEventListener("click", e => {
 document.getElementById("lista-limpar").addEventListener("click", () => {
   lista = []; guardar(); verTudo(); document.querySelectorAll(".acoes .msg").forEach(m => m.textContent = "");
 });
-// Enviar as separadas: abre o menu do celular com as FOTOS de todas as peças separadas (escolhe WhatsApp e a Gabela),
-// igual a mandar várias fotos do grupo. Onde o menu não abre, vai a lista com o link de cada foto.
-document.getElementById("mandar").addEventListener("click", async e => {
-  if (!lista.length || !navigator.canShare) return;
-  e.preventDefault();
-  const a = e.currentTarget;
-  try {
-    const blobs = await Promise.all(lista.filter(x => x.img).map(x => pegar(x.img)));
-    const files = blobs.map((b, k) => new File([b], `gabela-${k + 1}.jpg`, {type: b.type || "image/jpeg"}));
-    if (!files.length || !navigator.canShare({files})) throw new Error("sem-share");
-    await navigator.share({files, text: textoLista()});
-  } catch (err) {
-    if (err && err.name === "AbortError") return;
-    open(a.href, "_blank");
-  }
-});
+// Consultar: abre DIRETO a conversa com o WhatsApp do atacado (5551984509505), com a lista das peças marcadas
+// e o link de cada foto (aparece a prévia da foto na conversa). A cliente não precisa ter o número salvo.
 addEventListener("storage", e => { if (e.key === "gostei-gabela") { try { lista = JSON.parse(e.newValue || "[]"); } catch (err) {} verTudo(); } });
 
 montarBusca();
