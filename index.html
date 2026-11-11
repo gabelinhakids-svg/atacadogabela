@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html data-versao="20261111214820"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Catálogo Gabela Atacado</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka:wght@600;700&family=Nunito:wght@600;700;800;900&display=swap">
 <style id="estilo">
@@ -574,6 +574,19 @@ document.getElementById("lista-limpar").addEventListener("click", () => {
 });
 // Consultar: abre DIRETO a conversa com o WhatsApp do atacado (5551984509505), com a lista das peças marcadas
 // e o link de cada foto (aparece a prévia da foto na conversa). A cliente não precisa ter o número salvo.
+// Nunca abre a lista de contatos do celular: vai sempre direto para a conversa da Gabela.
+document.getElementById("mandar").addEventListener("click", e => {
+  e.preventDefault(); e.stopImmediatePropagation();
+  const url = "https://wa.me/" + ZAP + "?text=" + encodeURIComponent(lista.length ? textoLista() : "Oi! Vi o catálogo e quero fazer um pedido.");
+  location.href = url;
+}, true);
+// Site sempre na versão mais nova: se o celular abriu uma cópia antiga guardada, recarrega sozinho.
+if (!window.claude && /atacadogabela/.test(location.hostname)) {
+  fetch("versao.txt?t=" + Date.now(), {cache: "no-store"}).then(r => r.ok ? r.text() : "").then(v => {
+    v = v.trim(); const atual = document.documentElement.dataset.versao || "";
+    if (v && atual && v !== atual) { try { if (sessionStorage.getItem("recarregou") === v) return; sessionStorage.setItem("recarregou", v); } catch (e) {} location.replace(location.pathname + "?v=" + Date.now() + location.hash); }
+  }).catch(() => {});
+}
 addEventListener("storage", e => { if (e.key === "gostei-gabela") { try { lista = JSON.parse(e.newValue || "[]"); } catch (err) {} verTudo(); } });
 
 montarBusca();
