@@ -1,4 +1,4 @@
-<!doctype html><html data-versao="20261112143830"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html data-versao="20261112145142"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Catálogo Gabela Atacado</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka:wght@600;700&family=Nunito:wght@600;700;800;900&display=swap">
 <style id="estilo">
@@ -552,7 +552,14 @@ function verGostei(bt){
   bt.querySelector("span").textContent = sim ? "Marcada" : "Consultar";
 }
 const linkFoto = x => { const id = (String(x.img || "").match(/[0-9a-f]{32}/) || [])[0]; return SITE && id ? SITE + "f/" + id + ".html" : SITE ? SITE + "#" + x.id : ""; };
-const textoLista = () => "Oi! Quero consultar estas peças do catálogo:\n" + lista.map((x, k) => `${k + 1}) ${x.nome} (${x.qual})${linkFoto(x) ? "\n" + linkFoto(x) : ""}`).join("\n");
+// Pedido da Gabela (12/11): na conversa chega só 1 link; ao tocar, abrem TODAS as fotos marcadas juntas (pedido.html).
+const idFoto = x => (String(x.img || "").match(/[0-9a-f]{32}/) || [])[0];
+const textoLista = () => {
+  if (lista.length === 1) return "Oi! Quero consultar esta peça do catálogo 👇\n" + (linkFoto(lista[0]) || lista[0].nome);
+  const ids = lista.map(idFoto).filter(Boolean).map(i => i.slice(0, 10));
+  if (!SITE || !ids.length) return "Oi! Quero consultar estas peças do catálogo:\n" + lista.map((x, k) => `${k + 1}) ${x.nome}`).join("\n");
+  return `Oi! Quero consultar estas ${lista.length} peças do catálogo 👇\nToque no link para ver as fotos:\n` + SITE + "pedido.html#" + ids.join(".");
+};
 function verBarra(){
   const n = lista.length, a = document.getElementById("mandar");
   document.getElementById("lista-info").hidden = !n;
