@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>Caixinha de sugestões Gabela</title>
-<meta property="og:title" content="Não achou o que procurava na Gabela? 💗">
-<meta property="og:description" content="Conta pra gente qual peça tu procura. É rapidinho e ninguém fica sabendo quem escreveu.">
+<title>Sugestão de peças Gabela</title>
+<meta property="og:title" content="Qual peça tu quer ver na Gabela? 💗">
+<meta property="og:description" content="Conta pra gente qual peça tu quer que a gente traga pro final de ano. É rapidinho!">
 <meta property="og:image" content="https://atacadogabela.com.br/midia/0806e1070f3f6f8d5cef6a22d7a3a481.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
@@ -21,7 +21,8 @@ h1{font-size:26px;line-height:1.2;margin:18px 0 8px;font-weight:900}
 p.dica{margin:0 0 16px;color:var(--cinza);font-size:16px;font-weight:700;line-height:1.4}
 .selo{display:inline-block;background:var(--rosa-claro);color:var(--rosa);font-weight:900;border-radius:99px;padding:6px 12px;font-size:14px;margin:0 0 14px}
 textarea{width:100%;min-height:170px;border:2px solid var(--linha);border-radius:16px;padding:14px;font-family:inherit;font-weight:700;font-size:17px;line-height:1.4;background:#fff;color:var(--tinta)}
-textarea:focus{outline:none;border-color:var(--rosa)}
+textarea:focus,input:focus{outline:none;border-color:var(--rosa)}
+input{display:block;width:100%;margin-top:10px;border:2px solid var(--linha);border-radius:16px;padding:14px;font-family:inherit;font-weight:700;font-size:17px;background:#fff;color:var(--tinta)}
 .btn{display:block;width:100%;margin-top:14px;border:0;border-radius:16px;padding:17px;font-family:inherit;font-weight:900;font-size:18px;background:var(--rosa);color:#fff;cursor:pointer;text-align:center;text-decoration:none}
 .btn:disabled{opacity:.6}
 .btn.claro{background:#fff;color:var(--tinta);border:2px solid var(--linha)}
@@ -35,17 +36,19 @@ textarea:focus{outline:none;border-color:var(--rosa)}
 <div class="wrap">
   <header><img src="../midia/0806e1070f3f6f8d5cef6a22d7a3a481.png" alt="Gabela Atacado"></header>
   <div id="form">
-    <h1>Não achou o que procurava na Gabela?</h1>
-    <p class="dica">Conta pra gente qual peça tu procura: o modelo, a cor, o tamanho… Ou deixa uma sugestão. A gente vai atrás pra trazer! 💗</p>
-    <div class="selo">🔒 Ninguém fica sabendo quem escreveu</div>
+    <h1>Qual peça tu quer ver na Gabela?</h1>
+    <p class="dica">Conta pra gente qual peça tu quer que a gente traga pro final de ano, ou aquela que tu tá esperando chegar. Modelo, cor, tamanho… 💗</p>
     <textarea id="txt" placeholder="Ex.: Calça pantalona preta tamanho GG, blusa plus size de alcinha, tênis branco 38…"></textarea>
+    <p class="dica" style="margin:18px 0 8px">Quer que a gente te avise quando chegar? Deixa teu nome e WhatsApp <b>(não é obrigatório)</b>:</p>
+    <input id="nome" type="text" autocomplete="name" placeholder="Teu nome">
+    <input id="zap" type="tel" inputmode="tel" autocomplete="tel" placeholder="Teu WhatsApp com DDD">
     <button class="btn" id="enviar" type="button">Enviar</button>
     <div class="aviso" id="aviso"></div>
   </div>
   <div class="fim" id="fim">
     <div class="grande">💗</div>
     <h1>Recebemos, obrigada!</h1>
-    <p class="dica">A gente vai procurar o que tu pediu. As novidades saem primeiro no grupo do WhatsApp.</p>
+    <p class="dica">A gente vai procurar o que tu pediu. Se deixou teu WhatsApp, te avisamos quando chegar!</p>
     <button class="btn claro" id="outra" type="button">Mandar outra sugestão</button>
     <a class="btn" href="https://atacadogabela.com.br/">Ver o catálogo de peças</a>
   </div>
@@ -57,13 +60,13 @@ const $=id=>document.getElementById(id);
 if(!CHAVE){const t=document.createElement("div");t.className="teste";t.textContent="MODO TESTE: as sugestões ainda não são salvas";document.querySelector(".wrap").prepend(t)}
 $("enviar").onclick=async()=>{
   const txt=$("txt").value.trim();
-  if(txt.length<2){$("aviso").textContent="Escreve a peça ou a sugestão antes de enviar 😉";$("txt").focus();return}
+  if(txt.length<2){$("aviso").textContent="Escreve a peça que tu quer antes de enviar 😉";$("txt").focus();return}
   $("aviso").textContent="";$("enviar").disabled=true;$("enviar").textContent="Enviando…";
   try{
     if(!CHAVE){await new Promise(r=>setTimeout(r,600));console.log("MODO TESTE",txt)}
     else{
       const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
-        body:JSON.stringify({access_key:CHAVE,subject:"Nova sugestão de peça Gabela 💡",from_name:"Caixinha de sugestões Gabela","Peça ou sugestão":txt})});
+        body:JSON.stringify({access_key:CHAVE,subject:"Nova sugestão de peça Gabela 💡",from_name:"Caixinha de sugestões Gabela","Peça ou sugestão":txt,"Nome":$("nome").value.trim()||"(não deixou)","WhatsApp":$("zap").value.trim()||"(não deixou)"})});
       const j=await r.json().catch(()=>({}));
       if(!r.ok||j.success===false) throw new Error(j.message||"erro");
     }
@@ -71,7 +74,7 @@ $("enviar").onclick=async()=>{
   }catch(e){$("aviso").textContent="Não conseguimos enviar. Confira tua internet e toca em Enviar de novo."}
   $("enviar").disabled=false;$("enviar").textContent="Enviar";
 };
-$("outra").onclick=()=>{$("txt").value="";$("fim").style.display="none";$("form").style.display="block";$("txt").focus()};
+$("outra").onclick=()=>{$("txt").value="";/* nome e WhatsApp ficam */$("fim").style.display="none";$("form").style.display="block";$("txt").focus()};
 </script>
 </body>
 </html>
