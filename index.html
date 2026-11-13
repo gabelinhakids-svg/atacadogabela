@@ -1,4 +1,4 @@
-<!doctype html><html data-versao="20261113193506"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html data-versao="20261113195329"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Catálogo Gabela Atacado</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka:wght@600;700&family=Nunito:wght@600;700;800;900&display=swap">
 <style id="estilo">
@@ -253,16 +253,6 @@ body::before{background:var(--fundo)}
 .post .btn.share{background:var(--zap);color:#fff;grid-column:1/-1}
 .btn.share svg+svg{margin-left:-2px}
 .revende{border:2px solid #F7A8C6;background:#FFE4EF;font-size:16px;line-height:1.5;padding:12px 14px;box-shadow:0 1px 1.5px rgba(0,0,0,.10)}
-/* Passo 2 do Consultar: manda as fotos de verdade pra conversa da Gabela */
-.passo2{position:fixed;inset:0;z-index:30;background:rgba(20,17,20,.55);display:flex;align-items:flex-end;justify-content:center;padding:16px max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
-.passo2[hidden]{display:none}
-.p2-caixa{background:#fff;color:#1B1720;border-radius:20px;padding:18px 16px;max-width:520px;width:100%;display:grid;gap:10px;text-align:center}
-.p2-caixa>b{font-size:22px}
-.p2-caixa p{margin:0;font-size:16px;font-weight:700;color:#5C5560}
-.p2-enviar{background:#1FA855;color:#fff;font-size:19px;min-height:60px}
-.p2-fechar{font:inherit;font-weight:800;background:none;border:0;color:#5C5560;text-decoration:underline;padding:6px;cursor:pointer}
-.p2-msg{font-size:14px;color:#c0003a;font-weight:800}
-.p2-msg:empty{display:none}
 </style>
 <header class="topo g" id="topo"><div class="miolo">
   <img class="logo" src="midia/0806e1070f3f6f8d5cef6a22d7a3a481.png" alt="Gabela Atacado" width="900" height="384">
@@ -272,7 +262,7 @@ body::before{background:var(--fundo)}
 </div></header>
 <div class="g" id="corpo"><div class="miolo">
   <div class="folha">
-    <div class="revende"><b>◯ Consultar:</b> toque na bolinha no cantinho das fotos que quiser e mande todas de uma vez pra Gabela no botão verde lá embaixo. As fotos chegam direto na conversa.<br><b>Compartilhar:</b> manda a foto sem preço pras suas clientes, no WhatsApp ou no Instagram.</div>
+    <div class="revende"><b>◯ Consultar:</b> toque na bolinha no cantinho das fotos que quiser e mande todas de uma vez pra Gabela no botão lá embaixo.<br><b>Compartilhar:</b> manda a foto sem preço pras suas clientes, no WhatsApp ou no Instagram.</div>
   </div>
 
   <nav id="chips" aria-label="Categorias"></nav>
@@ -562,14 +552,7 @@ function verGostei(bt){
   bt.querySelector("span").textContent = sim ? "Marcada" : "Consultar";
 }
 const linkFoto = x => { const id = (String(x.img || "").match(/[0-9a-f]{32}/) || [])[0]; return SITE && id ? SITE + "f/" + id + ".html" : SITE ? SITE + "#" + x.id : ""; };
-// Pedido da Gabela (12/11): na conversa chega só 1 link; ao tocar, abrem TODAS as fotos marcadas juntas (pedido.html).
-const idFoto = x => (String(x.img || "").match(/[0-9a-f]{32}/) || [])[0];
-const textoLista = () => {
-  if (lista.length === 1) return "Oi! Quero consultar esta peça do catálogo 👇\n" + (linkFoto(lista[0]) || lista[0].nome);
-  const ids = lista.map(idFoto).filter(Boolean).map(i => i.slice(0, 10));
-  if (!SITE || !ids.length) return "Oi! Quero consultar estas peças do catálogo:\n" + lista.map((x, k) => `${k + 1}) ${x.nome}`).join("\n");
-  return `Oi! Quero consultar estas ${lista.length} peças do catálogo 👇\nToque no link para ver as fotos:\n` + SITE + "pedido.html#" + ids.join(".");
-};
+const textoLista = () => "Oi! Quero consultar estas peças do catálogo:\n" + lista.map((x, k) => `${k + 1}) ${x.nome} (${x.qual})${linkFoto(x) ? "\n" + linkFoto(x) : ""}`).join("\n");
 function verBarra(){
   const n = lista.length, a = document.getElementById("mandar");
   document.getElementById("lista-info").hidden = !n;
@@ -592,44 +575,11 @@ document.getElementById("lista-limpar").addEventListener("click", () => {
 // Consultar: abre DIRETO a conversa com o WhatsApp do atacado (5551984509505), com a lista das peças marcadas
 // e o link de cada foto (aparece a prévia da foto na conversa). A cliente não precisa ter o número salvo.
 // Nunca abre a lista de contatos do celular: vai sempre direto para a conversa da Gabela.
-// 13/11 (pedido da Gabi): as fotos marcadas chegam como FOTO de verdade, sem link e sem texto.
-// Um link do WhatsApp só leva texto, então são 2 toques: 1) abre a conversa da Gabela com um "oi" curto;
-// 2) a cliente volta e toca em "Enviar as fotos" -> WhatsApp -> Gabela (fica em 1º na lista, porque acabou de abrir).
-const podeFotos = () => { try { return !window.claude && !!navigator.canShare && navigator.canShare({files: [new File([new Blob(["x"], {type: "image/jpeg"})], "t.jpg", {type: "image/jpeg"})]}); } catch (e) { return false; } };
-const passo2 = document.createElement("div");
-passo2.className = "passo2"; passo2.hidden = true;
-passo2.innerHTML = `<div class="p2-caixa" role="dialog" aria-label="Enviar fotos"><b>Falta só 1 passo! 📸</b>
-  <p>Toque no botão verde, escolha <b>WhatsApp</b> e depois a conversa da <b>Gabela</b>. Ela aparece em primeiro na lista.</p>
-  <button type="button" class="btn p2-enviar"></button><div class="p2-msg" role="status"></div>
-  <button type="button" class="p2-fechar">Fechar</button></div>`;
-document.body.append(passo2);
-const qtd = () => lista.length === 1 ? "a foto" : `as ${lista.length} fotos`;
-function abrirPasso2(){ passo2.querySelector(".p2-enviar").textContent = `📸 Enviar ${qtd()} pra Gabela`; passo2.querySelector(".p2-msg").textContent = ""; passo2.hidden = false; }
-function fecharPasso2(){ passo2.hidden = true; try { sessionStorage.removeItem("passo2"); } catch (e) {} }
-passo2.querySelector(".p2-fechar").addEventListener("click", fecharPasso2);
-passo2.querySelector(".p2-enviar").addEventListener("pointerdown", () => lista.forEach(x => x.img && pegar(x.img).catch(() => {})));
-passo2.querySelector(".p2-enviar").addEventListener("click", async () => {
-  const msg = passo2.querySelector(".p2-msg"); msg.textContent = "";
-  try {
-    const files = await Promise.all(lista.filter(x => x.img).map((x, k) => pegar(x.img).then(b => new File([b], `gabela-${k + 1}.jpg`, {type: b.type || "image/jpeg"}))));
-    await navigator.share({files});
-    fecharPasso2(); lista = []; guardar(); verTudo();
-  } catch (err) {
-    if (err && err.name === "AbortError") return;
-    msg.textContent = "Não deu para enviar as fotos. Tente de novo.";
-  }
-});
 document.getElementById("mandar").addEventListener("click", e => {
   e.preventDefault(); e.stopImmediatePropagation();
-  if (lista.length && podeFotos()) {
-    try { sessionStorage.setItem("passo2", "1"); } catch (err) {}
-    abrirPasso2();
-    location.href = "https://wa.me/" + ZAP + "?text=" + encodeURIComponent(`Oi! Vi o catálogo e vou te mandar ${lista.length === 1 ? "1 foto" : lista.length + " fotos"} para consultar 👇`);
-    return;
-  }
-  location.href = "https://wa.me/" + ZAP + "?text=" + encodeURIComponent(lista.length ? textoLista() : "Oi! Vi o catálogo e quero fazer um pedido.");
+  const url = "https://wa.me/" + ZAP + "?text=" + encodeURIComponent(lista.length ? textoLista() : "Oi! Vi o catálogo e quero fazer um pedido.");
+  location.href = url;
 }, true);
-try { if (sessionStorage.getItem("passo2") && lista.length) abrirPasso2(); } catch (e) {}
 // Site sempre na versão mais nova: se o celular abriu uma cópia antiga guardada, recarrega sozinho.
 if (!window.claude && /atacadogabela/.test(location.hostname)) {
   fetch("versao.txt?t=" + Date.now(), {cache: "no-store"}).then(r => r.ok ? r.text() : "").then(v => {
