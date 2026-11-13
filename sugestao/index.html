@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex">
 <title>Sugestão de peças Gabela</title>
-<meta property="og:title" content="Qual peça tu quer ver na Gabela? 💗">
-<meta property="og:description" content="Conta pra gente qual peça tu quer que a gente traga pro final de ano. É rapidinho!">
+<meta property="og:title" content="Deixa tua dica de peças pra Gabela 💗">
+<meta property="og:description" content="Peças que tu não encontrou e está procurando, ou que tu acha que pode vender nesse final de ano. É rapidinho!">
 <meta property="og:image" content="https://atacadogabela.com.br/midia/0806e1070f3f6f8d5cef6a22d7a3a481.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
@@ -36,8 +36,8 @@ input{display:block;width:100%;margin-top:10px;border:2px solid var(--linha);bor
 <div class="wrap">
   <header><img src="../midia/0806e1070f3f6f8d5cef6a22d7a3a481.png" alt="Gabela Atacado"></header>
   <div id="form">
-    <h1>Qual peça tu quer ver na Gabela?</h1>
-    <p class="dica">Conta pra gente qual peça tu quer que a gente traga pro final de ano, ou aquela que tu tá esperando chegar. Modelo, cor, tamanho… 💗</p>
+    <h1>Deixa tua dica de peças pra Gabela 💗</h1>
+    <p class="dica">Deixa dicas de peças que tu não encontrou e está procurando, ou que tu acha que pode vender nesse final de ano. Modelo, cor, tamanho…</p>
     <textarea id="txt" placeholder="Ex.: Calça pantalona preta tamanho GG, blusa plus size de alcinha, tênis branco 38…"></textarea>
     <p class="dica" style="margin:18px 0 8px">Quer que a gente te avise quando chegar? Deixa teu nome e WhatsApp <b>(não é obrigatório)</b>:</p>
     <input id="nome" type="text" autocomplete="name" placeholder="Teu nome">
@@ -48,7 +48,7 @@ input{display:block;width:100%;margin-top:10px;border:2px solid var(--linha);bor
   <div class="fim" id="fim">
     <div class="grande">💗</div>
     <h1>Recebemos, obrigada!</h1>
-    <p class="dica">A gente vai procurar o que tu pediu. Se deixou teu WhatsApp, te avisamos quando chegar!</p>
+    <p class="dica">A gente vai procurar as peças da tua dica. Se deixou teu WhatsApp, te avisamos quando chegar!</p>
     <button class="btn claro" id="outra" type="button">Mandar outra sugestão</button>
     <a class="btn" href="https://atacadogabela.com.br/">Ver o catálogo de peças</a>
   </div>
@@ -60,7 +60,7 @@ const $=id=>document.getElementById(id);
 if(!CHAVE){const t=document.createElement("div");t.className="teste";t.textContent="MODO TESTE: as sugestões ainda não são salvas";document.querySelector(".wrap").prepend(t)}
 $("enviar").onclick=async()=>{
   const txt=$("txt").value.trim();
-  if(txt.length<2){$("aviso").textContent="Escreve a peça que tu quer antes de enviar 😉";$("txt").focus();return}
+  if(txt.length<2){$("aviso").textContent="Escreve tua dica antes de enviar 😉";$("txt").focus();return}
   $("aviso").textContent="";$("enviar").disabled=true;$("enviar").textContent="Enviando…";
   try{
     if(!CHAVE){await new Promise(r=>setTimeout(r,600));console.log("MODO TESTE",txt)}
