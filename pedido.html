@@ -16,10 +16,12 @@ a.v{display:block;text-align:center;color:#0B9A50;font-weight:800;margin:10px 0 
 const ids=decodeURIComponent(location.hash.slice(1)).split(".").filter(Boolean);
 const e=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let n=0;document.getElementById("l").innerHTML=ids.map(i=>{const x=M[i];if(!x)return"";n++;
-return `<div class="p"><a href="${x.g}"><img src="${x.f}" alt="${e(x.n)}" loading="lazy"></a><div><span class="k">${n}</span><b style="display:inline">${e(x.n)}</b><br>${e(x.p)} · ${e(x.t)}</div><button type="button" class="r" data-f="${x.f}" data-n="${n}">↩️ Responder sobre esta foto</button><div class="m"></div></div>`}).join("")||"<p>Nenhuma foto encontrada.</p>";
+return `<div class="p"><a href="${x.g}"><img src="${x.f}" alt="${e(x.n)}" loading="lazy"></a><div><span class="k">${n}</span><b style="display:inline">${e(x.n)}</b><br>${e(x.p)} · ${e(x.t)}</div><button type="button" class="r" data-f="${x.f}" data-n="${n}" data-nome="${e(x.n)}">↩️ Responder sobre esta foto</button><div class="m"></div></div>`}).join("")||"<p>Nenhuma foto encontrada.</p>";
 document.getElementById("t").textContent=n===1?"1 peça escolhida":n+" peças escolhidas";
-document.getElementById("l").addEventListener("click",async ev=>{const b=ev.target.closest(".r");if(!b)return;const m=b.nextElementSibling;m.textContent="";
-try{const r=await fetch(b.dataset.f);const bl=await r.blob();const f=new File([bl],"foto-"+b.dataset.n+".jpg",{type:"image/jpeg"});
-if(!(navigator.canShare&&navigator.canShare({files:[f]})))throw new Error("x");await navigator.share({files:[f]});m.textContent="Escolha a conversa da cliente e escreva a resposta na legenda.";}
-catch(err){if(err&&err.name==="AbortError")return;m.textContent="Este celular não abriu o compartilhar. Abra este link no Chrome.";}});
+document.getElementById("l").addEventListener("click",ev=>{const b=ev.target.closest(".r");if(!b)return;const m=b.nextElementSibling;
+const id=(b.dataset.f.match(/[0-9a-f]{32}/)||[""])[0];
+const txt="📸 Foto "+b.dataset.n+" – "+b.dataset.nome+"\n"+location.origin+"/f/"+id+".html\n\n";
+const ok=()=>{b.textContent="✓ Copiado! Agora volte para a conversa";m.innerHTML="Toque na seta <b>←</b> para voltar à conversa da cliente. Segure o dedo no campo de mensagem, toque em <b>Colar</b> e escreva tua resposta embaixo. A foto aparece junto."};
+const sel=()=>{m.textContent=txt};
+try{navigator.clipboard.writeText(txt).then(ok,sel)}catch(e){sel()}});
 </script></body></html>
