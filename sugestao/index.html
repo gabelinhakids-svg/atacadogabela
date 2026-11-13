@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Caixinha de sugestões Gabela</title>
+<meta property="og:title" content="Não achou o que procurava na Gabela? 💗">
+<meta property="og:description" content="Conta pra gente qual peça tu procura. É rapidinho e ninguém fica sabendo quem escreveu.">
+<meta property="og:image" content="https://atacadogabela.com.br/midia/0806e1070f3f6f8d5cef6a22d7a3a481.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--rosa:#E8085A;--rosa-claro:#FFE3EE;--fundo:#FAF7F2;--tinta:#1B1720;--cinza:#6B6470;--linha:#E4DFE3;color-scheme:light}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--fundo);color:var(--tinta);font-family:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:520px;margin:0 auto;padding:16px 16px 40px}
+header{text-align:center;padding:6px 0 4px}
+header img{width:150px;height:auto}
+h1{font-size:26px;line-height:1.2;margin:18px 0 8px;font-weight:900}
+p.dica{margin:0 0 16px;color:var(--cinza);font-size:16px;font-weight:700;line-height:1.4}
+.selo{display:inline-block;background:var(--rosa-claro);color:var(--rosa);font-weight:900;border-radius:99px;padding:6px 12px;font-size:14px;margin:0 0 14px}
+textarea{width:100%;min-height:170px;border:2px solid var(--linha);border-radius:16px;padding:14px;font-family:inherit;font-weight:700;font-size:17px;line-height:1.4;background:#fff;color:var(--tinta)}
+textarea:focus{outline:none;border-color:var(--rosa)}
+.btn{display:block;width:100%;margin-top:14px;border:0;border-radius:16px;padding:17px;font-family:inherit;font-weight:900;font-size:18px;background:var(--rosa);color:#fff;cursor:pointer;text-align:center;text-decoration:none}
+.btn:disabled{opacity:.6}
+.btn.claro{background:#fff;color:var(--tinta);border:2px solid var(--linha)}
+.aviso{color:var(--rosa);font-weight:800;font-size:15px;min-height:20px;margin-top:10px}
+.fim{display:none;text-align:center;padding-top:20px}
+.fim .grande{font-size:64px}
+.teste{background:#FFF3BF;border-radius:12px;padding:10px;font-weight:800;font-size:14px;text-align:center;margin-bottom:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><img src="../midia/0806e1070f3f6f8d5cef6a22d7a3a481.png" alt="Gabela Atacado"></header>
+  <div id="form">
+    <h1>Não achou o que procurava na Gabela?</h1>
+    <p class="dica">Conta pra gente qual peça tu procura: o modelo, a cor, o tamanho… Ou deixa uma sugestão. A gente vai atrás pra trazer! 💗</p>
+    <div class="selo">🔒 Ninguém fica sabendo quem escreveu</div>
+    <textarea id="txt" placeholder="Ex.: Calça pantalona preta tamanho GG, blusa plus size de alcinha, tênis branco 38…"></textarea>
+    <button class="btn" id="enviar" type="button">Enviar</button>
+    <div class="aviso" id="aviso"></div>
+  </div>
+  <div class="fim" id="fim">
+    <div class="grande">💗</div>
+    <h1>Recebemos, obrigada!</h1>
+    <p class="dica">A gente vai procurar o que tu pediu. As novidades saem primeiro no grupo do WhatsApp.</p>
+    <button class="btn claro" id="outra" type="button">Mandar outra sugestão</button>
+    <a class="btn" href="https://atacadogabela.com.br/">Ver o catálogo de peças</a>
+  </div>
+</div>
+<script>
+// Chave do Web3Forms (mesma da pesquisa: as sugestões chegam no e-mail da Gabi). Vazio = modo teste.
+const CHAVE = window.TESTE?"":"a949e599-d3ce-45b3-91b2-c45bfde18023";
+const $=id=>document.getElementById(id);
+if(!CHAVE){const t=document.createElement("div");t.className="teste";t.textContent="MODO TESTE: as sugestões ainda não são salvas";document.querySelector(".wrap").prepend(t)}
+$("enviar").onclick=async()=>{
+  const txt=$("txt").value.trim();
+  if(txt.length<2){$("aviso").textContent="Escreve a peça ou a sugestão antes de enviar 😉";$("txt").focus();return}
+  $("aviso").textContent="";$("enviar").disabled=true;$("enviar").textContent="Enviando…";
+  try{
+    if(!CHAVE){await new Promise(r=>setTimeout(r,600));console.log("MODO TESTE",txt)}
+    else{
+      const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
+        body:JSON.stringify({access_key:CHAVE,subject:"Nova sugestão de peça Gabela 💡",from_name:"Caixinha de sugestões Gabela","Peça ou sugestão":txt})});
+      const j=await r.json().catch(()=>({}));
+      if(!r.ok||j.success===false) throw new Error(j.message||"erro");
+    }
+    $("form").style.display="none";$("fim").style.display="block";window.scrollTo(0,0);
+  }catch(e){$("aviso").textContent="Não conseguimos enviar. Confira tua internet e toca em Enviar de novo."}
+  $("enviar").disabled=false;$("enviar").textContent="Enviar";
+};
+$("outra").onclick=()=>{$("txt").value="";$("fim").style.display="none";$("form").style.display="block";$("txt").focus()};
+</script>
+</body>
+</html>
