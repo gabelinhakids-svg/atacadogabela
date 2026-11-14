@@ -1,4 +1,4 @@
-<!doctype html><html data-versao="20261114130829"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html data-versao="20261114131225"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Catálogo Gabela Atacado</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka:wght@600;700&family=Nunito:wght@600;700;800;900&display=swap">
 <style id="estilo">
@@ -262,7 +262,7 @@ body::before{background:var(--fundo)}
 </div></header>
 <div class="g" id="corpo"><div class="miolo">
   <div class="folha">
-    <div class="revende"><b>◯ Consultar:</b> toque na bolinha no cantinho das fotos que quiser e mande todas de uma vez pra Gabela no botão lá embaixo.<br><b>Compartilhar:</b> manda a foto sem preço pras suas clientes, no WhatsApp ou no Instagram.</div>
+    <div class="revende"><b>◯ Consultar:</b> toque na bolinha no cantinho das fotos que quiser e mande todas de uma vez pra Gabela no botão lá embaixo: escolha <b>WhatsApp</b> e a conversa da <b>Gabela (51) 98450-9505</b>.<br><b>Compartilhar:</b> manda a foto sem preço pras suas clientes, no WhatsApp ou no Instagram.</div>
   </div>
 
   <nav id="chips" aria-label="Categorias"></nav>
@@ -575,10 +575,21 @@ document.getElementById("lista-limpar").addEventListener("click", () => {
 // Consultar: abre DIRETO a conversa com o WhatsApp do atacado (5551984509505), com a lista das peças marcadas
 // e o link de cada foto (aparece a prévia da foto na conversa). A cliente não precisa ter o número salvo.
 // Nunca abre a lista de contatos do celular: vai sempre direto para a conversa da Gabela.
-document.getElementById("mandar").addEventListener("click", e => {
+// 14/11 (Gabi): como no início, as fotos marcadas vão como FOTO de verdade (menu de compartilhar do celular:
+// a cliente escolhe WhatsApp e a conversa da Gabela). Assim a Gabi responde em cima de cada foto.
+// Sem fotos marcadas, ou se o celular não tiver o menu, abre direto a conversa com texto.
+document.getElementById("mandar").addEventListener("click", async e => {
   e.preventDefault(); e.stopImmediatePropagation();
-  const url = "https://wa.me/" + ZAP + "?text=" + encodeURIComponent(lista.length ? textoLista() : "Oi! Vi o catálogo e quero fazer um pedido.");
-  location.href = url;
+  const texto = () => { location.href = "https://wa.me/" + ZAP + "?text=" + encodeURIComponent(lista.length ? textoLista() : "Oi! Vi o catálogo e quero fazer um pedido."); };
+  if (!lista.length || window.claude || !navigator.canShare) return texto();
+  try {
+    const files = await Promise.all(lista.filter(x => x.img).map((x, k) => pegar(x.img).then(b => new File([b], `gabela-${k + 1}.jpg`, {type: b.type || "image/jpeg"}))));
+    if (!files.length || !navigator.canShare({files})) return texto();
+    await navigator.share({files});
+  } catch (err) {
+    if (err && err.name === "AbortError") return;
+    texto();
+  }
 }, true);
 // Site sempre na versão mais nova: se o celular abriu uma cópia antiga guardada, recarrega sozinho.
 if (!window.claude && /atacadogabela/.test(location.hostname)) {
