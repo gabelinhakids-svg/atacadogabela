@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Conferência Fran 15/11</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#F7F2EE;--card:#fff;--fg:#2B2226;--muted:#6E5F66;--accent:#E6007E;--bubble:#DCF8C6;--bubble-fg:#1F2A1C;--line:#EADCE2;--ok:#1E8E4E;--bad:#C62828}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:20px 16px 40px}
+.wrap{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+header{background:var(--accent);color:#fff;border-radius:14px;padding:16px}
+header h1{margin:0;font-size:1.4rem}
+header p{margin:4px 0 0;font-size:1rem}
+.total{font-size:1.15rem;font-weight:800}
+.dica{margin:0;color:var(--muted);font-size:.95rem}
+.post{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.qtd{background:var(--fg);color:#fff;padding:12px 14px}
+.qtd .num{font-size:1.6rem;font-weight:900;line-height:1.1}
+.qtd .det{font-size:1.05rem;margin-top:2px}
+.post img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover;background:#eee}
+.corpo{padding:12px;display:flex;flex-direction:column;gap:10px}
+.prov{font-size:.8rem;color:var(--muted);margin:0}
+pre{margin:0;white-space:pre-wrap;font:inherit;background:var(--bubble);color:var(--bubble-fg);border-radius:10px;padding:12px 14px}
+button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:12px;background:var(--accent);color:#fff;cursor:pointer}
+.conf{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.conf button{background:#fff;color:var(--fg);border:2px solid var(--line);border-radius:12px}
+.conf button.sim.on{background:var(--ok);border-color:var(--ok);color:#fff}
+.conf button.nao.on{background:var(--bad);border-color:var(--bad);color:#fff}
+.falta{display:none;gap:8px;align-items:center}
+.falta.on{display:flex}
+.falta input{font:inherit;width:90px;padding:8px;border:2px solid var(--line);border-radius:10px}
+button.ok{background:var(--ok)}
+</style></head><body>
+<div class="wrap">
+<header>
+<h1>📦 Conferência do fardo</h1>
+<p>Fornecedor: <b>Fran Novo Brass</b> · pedido de 15/11</p>
+<p class="total">Total previsto: 48 peças</p>
+</header>
+<p class="dica">Quando o fardo chegar: conte cada peça e compare com o número no topo da foto. Toque em <b>"Chegou certo"</b> ou <b>"Faltou"</b>. O texto verde já é a postagem pronta pro grupo.</p>
+<div id="lista"></div>
+</div>
+<script>
+var PECAS=[
+ {nome:"Shorts com cinto",qtd:12,det:"6 M + 6 G",tam:"M e G",cores:"preto e marrom café",valor:""},
+ {nome:"Shorts com cinto",qtd:12,det:"6 G + 6 GG",tam:"G e GG",cores:"preto, marrom e caramelo",valor:""},
+ {nome:"Conjunto blusinha estampada + shorts",qtd:12,det:"4 G1 + 4 G2 + 4 G3",tam:"G1, G2 e G3",cores:"estampa preta e estampa marrom",valor:""},
+ {nome:"Macaquinho com cinto",qtd:12,det:"6 G1 + 6 G2",tam:"G1 e G2",cores:"vinho e preto",valor:""}
+];
+function desc(v){var n=parseFloat(v.replace(',','.'));return (Math.round(n*0.95*10)/10).toFixed(2).replace('.',',')}
+function texto(p){return "Novidades 🤩\n🔥 "+p.nome+"\n\nTam "+p.tam+"\n🎨 Cores: "+p.cores+"\n\n"+(p.valor?"Valor $"+p.valor+" ou (💵 $"+desc(p.valor)+")":"Valor: aguardando a Gabi")}
+function ler(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function gravar(k,v){try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}}
+var L=document.getElementById('lista');L.style.cssText='display:flex;flex-direction:column;gap:22px';
+PECAS.forEach(function(p,i){
+ var k='conf-fran-15-11-'+i;
+ var a=document.createElement('article');a.className='post';
+ a.innerHTML='<div class="qtd"><div class="num">'+(i+1)+') VEM '+p.qtd+' PEÇAS</div><div class="det">'+p.det+'</div></div>'+
+ '<img src="img/fran-15-11-'+(i+1)+'.jpg" alt="'+p.nome+'">'+
+ '<div class="corpo"><p class="prov">Foto provisória (aguardando foto original)</p><pre></pre>'+
+ '<button type="button" class="cp">Copiar texto</button>'+
+ '<div class="conf"><button type="button" class="sim">✅ Chegou certo</button><button type="button" class="nao">❌ Faltou</button></div>'+
+ '<div class="falta"><span>Chegaram quantas?</span><input type="number" inputmode="numeric" min="0"></div></div>';
+ a.querySelector('pre').textContent=texto(p);
+ var sim=a.querySelector('.sim'),nao=a.querySelector('.nao'),f=a.querySelector('.falta'),inp=f.querySelector('input');
+ function pintar(){var s=ler(k);sim.classList.toggle('on',s==='ok');nao.classList.toggle('on',s==='falta');f.classList.toggle('on',s==='falta');inp.value=ler(k+'-n')||''}
+ sim.onclick=function(){gravar(k,ler(k)==='ok'?null:'ok');pintar()};
+ nao.onclick=function(){gravar(k,ler(k)==='falta'?null:'falta');pintar()};
+ inp.oninput=function(){gravar(k+'-n',inp.value)};
+ var cp=a.querySelector('.cp');cp.onclick=function(){var t=a.querySelector('pre').textContent;
+  function ok(){cp.textContent='Copiado ✓';cp.classList.add('ok');setTimeout(function(){cp.textContent='Copiar texto';cp.classList.remove('ok')},2000)}
+  try{navigator.clipboard.writeText(t).then(ok,function(){})}catch(e){}};
+ pintar();L.appendChild(a);
+});
+</script>
+</body></html>
