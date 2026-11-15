@@ -36,7 +36,7 @@ button{font:inherit;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:t
 <header>
 <h1>📦 Conferência do fardo</h1>
 <p>Fornecedor: <b>Fran Novo Brass</b> · pedido de 15/11</p>
-<p class="total">Total previsto: 48 peças</p>
+<p class="total">Total previsto: 96 peças</p>
 </header>
 <p class="dica">Quando o fardo chegar: conte cada peça e compare com a faixa em cima da foto. Toque em <b>"Chegou certo"</b> ou em <b>"Faltou"</b> e escreva quantas chegaram. Fica salvo neste celular.</p>
 <div class="resumo" id="resumo"></div>
@@ -47,19 +47,22 @@ var PECAS=[
  {nome:"Short com cinto",qtd:12,det:"6 M + 6 G",tam:"M e G",cores:"preto e marrom café",valor:""},
  {nome:"Short com cinto",qtd:12,det:"6 G + 6 GG",tam:"G e GG",cores:"preto, marrom e caramelo (as 3 cores da foto)",valor:""},
  {nome:"Conjunto blusinha estampada + short",qtd:12,det:"4 G1 + 4 G2 + 4 G3",tam:"G1, G2 e G3",cores:"estampa preta e estampa marrom",valor:""},
- {nome:"Macaquinho com cinto",qtd:12,det:"6 G1 + 6 G2",tam:"G1 e G2",cores:"vinho e preto",valor:""}
+ {nome:"Macaquinho com cinto",qtd:12,det:"6 G1 + 6 G2",tam:"G1 e G2",cores:"vinho e preto",valor:""},
+ {nome:"Suplex: regata + pantalona",qtd:24,det:"24 peças nas 3 cores",tam:"",cores:"preto, marinho e marrom café",valor:""},
+ {nome:"Vestido de babado",qtd:12,det:"4 vermelho + 4 off-white + 4 amarelo",tam:"",cores:"vermelho, off-white e amarelo",valor:""},
+ {nome:"Short com cinto (Shost Pluz)",qtd:12,det:"6 G1 + 6 G2",tam:"G1 e G2",cores:"preto",valor:""}
 ];
 function ler(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function gravar(k,v){try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}}
 function resumo(){var ok=0,f=0,cheg=0;PECAS.forEach(function(p,i){var s=ler('conf-fran-15-11-'+i);if(s==='ok'){ok++;cheg+=p.qtd}if(s==='falta'){f++;cheg+=parseInt(ler('conf-fran-15-11-'+i+'-n')||'0',10)||0}});
- document.getElementById('resumo').textContent='Conferidas: '+(ok+f)+' de '+PECAS.length+' · ✅ '+ok+' certas · ❌ '+f+' com falta · peças contadas: '+cheg+' de 48'}
+ document.getElementById('resumo').textContent='Conferidas: '+(ok+f)+' de '+PECAS.length+' · ✅ '+ok+' certas · ❌ '+f+' com falta · peças contadas: '+cheg+' de 96'}
 var L=document.getElementById('lista');
 PECAS.forEach(function(p,i){
  var k='conf-fran-15-11-'+i;
  var a=document.createElement('article');a.className='post';
- a.innerHTML='<div class="faixa">'+(i+1)+') VEM '+p.qtd+' PEÇAS – '+p.tam+'<small>'+p.det+'</small></div>'+
+ a.innerHTML='<div class="faixa">'+(i+1)+') VEM '+p.qtd+' PEÇAS – '+(p.tam||'tamanho a conferir')+'<small>'+p.det+'</small></div>'+
  '<div class="foto"><img src="img/fran-15-11-'+(i+1)+'.jpg?v=3" alt=""><div class="selo">VEM '+p.qtd+' PEÇAS</div></div>'+
- '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> '+p.tam+'</p><p><b>🎨 Cores:</b> '+p.cores+'</p>'+
+ '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> '+(p.tam||'conferir')+'</p><p><b>🎨 Cores:</b> '+p.cores+'</p>'+
  '<p class="valor">'+(p.valor?'Valor $'+p.valor:'Valor: aguardando a Gabi')+'</p>'+
  ''+
  '<div class="conf"><button type="button" class="sim">✅ Chegou certo</button><button type="button" class="nao">❌ Faltou</button></div>'+
