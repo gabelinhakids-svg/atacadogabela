@@ -3,31 +3,34 @@
 <title>Conferência Fran 15/11</title>
 <style>
 *{box-sizing:border-box}
-:root{--bg:#F7F2EE;--card:#fff;--fg:#2B2226;--muted:#6E5F66;--accent:#E6007E;--bubble:#DCF8C6;--bubble-fg:#1F2A1C;--line:#EADCE2;--ok:#1E8E4E;--bad:#C62828}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:20px 16px 40px}
-.wrap{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+:root{--bg:#F7F2EE;--card:#fff;--fg:#2B2226;--muted:#6E5F66;--accent:#E6007E;--line:#EADCE2;--ok:#1E8E4E;--bad:#C62828}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:16px 12px 40px;-webkit-text-size-adjust:100%}
+.wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
 header{background:var(--accent);color:#fff;border-radius:14px;padding:16px}
 header h1{margin:0;font-size:1.4rem}
-header p{margin:4px 0 0;font-size:1rem}
-.total{font-size:1.15rem;font-weight:800}
+header p{margin:4px 0 0}
+.total{font-size:1.25rem;font-weight:800}
+.resumo{background:#fff;border:2px solid var(--line);border-radius:12px;padding:10px 14px;font-weight:700}
 .dica{margin:0;color:var(--muted);font-size:.95rem}
-.post{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
-.qtd{background:var(--fg);color:#fff;padding:12px 14px}
-.qtd .num{font-size:1.6rem;font-weight:900;line-height:1.1}
-.qtd .det{font-size:1.05rem;margin-top:2px}
-.post img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover;background:#eee}
-.corpo{padding:12px;display:flex;flex-direction:column;gap:10px}
-.prov{font-size:.8rem;color:var(--muted);margin:0}
-pre{margin:0;white-space:pre-wrap;font:inherit;background:var(--bubble);color:var(--bubble-fg);border-radius:10px;padding:12px 14px}
-button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:12px;background:var(--accent);color:#fff;cursor:pointer}
-.conf{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.conf button{background:#fff;color:var(--fg);border:2px solid var(--line);border-radius:12px}
+.post{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.faixa{background:var(--fg);color:#fff;padding:14px;font-size:1.55rem;font-weight:900;line-height:1.15}
+.faixa small{display:block;font-size:1.1rem;font-weight:700;margin-top:4px;color:#FFD3EA}
+.foto{position:relative}
+.foto img{width:100%;display:block;background:#eee}
+.selo{position:absolute;top:10px;left:10px;background:rgba(230,0,126,.94);color:#fff;font-weight:900;font-size:1.35rem;padding:8px 14px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.corpo{padding:14px;display:flex;flex-direction:column;gap:8px}
+.corpo h2{margin:0;font-size:1.3rem}
+.corpo p{margin:0}
+.valor{font-weight:800;color:var(--accent)}
+.prov{font-size:.8rem;color:var(--muted)}
+button{font:inherit;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.conf{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.conf button{background:#fff;color:var(--fg);border:2px solid var(--line);border-radius:12px;padding:14px 6px}
 .conf button.sim.on{background:var(--ok);border-color:var(--ok);color:#fff}
 .conf button.nao.on{background:var(--bad);border-color:var(--bad);color:#fff}
-.falta{display:none;gap:8px;align-items:center}
+.falta{display:none;gap:10px;align-items:center;flex-wrap:wrap}
 .falta.on{display:flex}
-.falta input{font:inherit;width:90px;padding:8px;border:2px solid var(--line);border-radius:10px}
-button.ok{background:var(--ok)}
+.falta input{font:inherit;font-size:1.2rem;width:100px;padding:10px;border:2px solid var(--bad);border-radius:10px}
 </style></head><body>
 <div class="wrap">
 <header>
@@ -35,39 +38,38 @@ button.ok{background:var(--ok)}
 <p>Fornecedor: <b>Fran Novo Brass</b> · pedido de 15/11</p>
 <p class="total">Total previsto: 48 peças</p>
 </header>
-<p class="dica">Quando o fardo chegar: conte cada peça e compare com o número no topo da foto. Toque em <b>"Chegou certo"</b> ou <b>"Faltou"</b>. O texto verde já é a postagem pronta pro grupo.</p>
-<div id="lista"></div>
+<p class="dica">Quando o fardo chegar: conte cada peça e compare com a faixa em cima da foto. Toque em <b>"Chegou certo"</b> ou em <b>"Faltou"</b> e escreva quantas chegaram. Fica salvo neste celular.</p>
+<div class="resumo" id="resumo"></div>
+<div id="lista" style="display:flex;flex-direction:column;gap:22px"></div>
 </div>
 <script>
 var PECAS=[
- {nome:"Shorts com cinto",qtd:12,det:"6 M + 6 G",tam:"M e G",cores:"preto e marrom café",valor:""},
- {nome:"Shorts com cinto",qtd:12,det:"6 G + 6 GG",tam:"G e GG",cores:"preto, marrom e caramelo",valor:""},
- {nome:"Conjunto blusinha estampada + shorts",qtd:12,det:"4 G1 + 4 G2 + 4 G3",tam:"G1, G2 e G3",cores:"estampa preta e estampa marrom",valor:""},
+ {nome:"Short com cinto",qtd:12,det:"6 M + 6 G",tam:"M e G",cores:"preto e marrom café",valor:""},
+ {nome:"Short com cinto",qtd:12,det:"6 G + 6 GG",tam:"G e GG",cores:"preto, marrom e caramelo (as 3 cores da foto)",valor:""},
+ {nome:"Conjunto blusinha estampada + short",qtd:12,det:"4 G1 + 4 G2 + 4 G3",tam:"G1, G2 e G3",cores:"estampa preta e estampa marrom",valor:""},
  {nome:"Macaquinho com cinto",qtd:12,det:"6 G1 + 6 G2",tam:"G1 e G2",cores:"vinho e preto",valor:""}
 ];
-function desc(v){var n=parseFloat(v.replace(',','.'));return (Math.round(n*0.95*10)/10).toFixed(2).replace('.',',')}
-function texto(p){return "Novidades 🤩\n🔥 "+p.nome+"\n\nTam "+p.tam+"\n🎨 Cores: "+p.cores+"\n\n"+(p.valor?"Valor $"+p.valor+" ou (💵 $"+desc(p.valor)+")":"Valor: aguardando a Gabi")}
 function ler(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function gravar(k,v){try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}}
-var L=document.getElementById('lista');L.style.cssText='display:flex;flex-direction:column;gap:22px';
+function resumo(){var ok=0,f=0,cheg=0;PECAS.forEach(function(p,i){var s=ler('conf-fran-15-11-'+i);if(s==='ok'){ok++;cheg+=p.qtd}if(s==='falta'){f++;cheg+=parseInt(ler('conf-fran-15-11-'+i+'-n')||'0',10)||0}});
+ document.getElementById('resumo').textContent='Conferidas: '+(ok+f)+' de '+PECAS.length+' · ✅ '+ok+' certas · ❌ '+f+' com falta · peças contadas: '+cheg+' de 48'}
+var L=document.getElementById('lista');
 PECAS.forEach(function(p,i){
  var k='conf-fran-15-11-'+i;
  var a=document.createElement('article');a.className='post';
- a.innerHTML='<div class="qtd"><div class="num">'+(i+1)+') VEM '+p.qtd+' PEÇAS</div><div class="det">'+p.det+'</div></div>'+
- '<img src="img/fran-15-11-'+(i+1)+'.jpg" alt="'+p.nome+'">'+
- '<div class="corpo"><p class="prov">Foto provisória (aguardando foto original)</p><pre></pre>'+
- '<button type="button" class="cp">Copiar texto</button>'+
+ a.innerHTML='<div class="faixa">'+(i+1)+') VEM '+p.qtd+' PEÇAS – '+p.tam+'<small>'+p.det+'</small></div>'+
+ '<div class="foto"><img src="img/fran-15-11-'+(i+1)+'.jpg?v=2" alt=""><div class="selo">'+p.qtd+' PEÇAS · '+p.det+'</div></div>'+
+ '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> '+p.det+'</p><p><b>🎨 Cores:</b> '+p.cores+'</p>'+
+ '<p class="valor">'+(p.valor?'Valor $'+p.valor:'Valor: aguardando a Gabi')+'</p>'+
+ '<p class="prov">Foto provisória (tirada do print). Será trocada pela foto original.</p>'+
  '<div class="conf"><button type="button" class="sim">✅ Chegou certo</button><button type="button" class="nao">❌ Faltou</button></div>'+
- '<div class="falta"><span>Chegaram quantas?</span><input type="number" inputmode="numeric" min="0"></div></div>';
- a.querySelector('pre').textContent=texto(p);
+ '<div class="falta"><span>Chegaram quantas?</span><input type="number" inputmode="numeric" min="0" placeholder="0"></div></div>';
+ a.querySelector('h2').textContent=p.nome;a.querySelector('img').alt=p.nome;
  var sim=a.querySelector('.sim'),nao=a.querySelector('.nao'),f=a.querySelector('.falta'),inp=f.querySelector('input');
- function pintar(){var s=ler(k);sim.classList.toggle('on',s==='ok');nao.classList.toggle('on',s==='falta');f.classList.toggle('on',s==='falta');inp.value=ler(k+'-n')||''}
+ function pintar(){var s=ler(k);sim.classList.toggle('on',s==='ok');nao.classList.toggle('on',s==='falta');f.classList.toggle('on',s==='falta');inp.value=ler(k+'-n')||'';resumo()}
  sim.onclick=function(){gravar(k,ler(k)==='ok'?null:'ok');pintar()};
- nao.onclick=function(){gravar(k,ler(k)==='falta'?null:'falta');pintar()};
- inp.oninput=function(){gravar(k+'-n',inp.value)};
- var cp=a.querySelector('.cp');cp.onclick=function(){var t=a.querySelector('pre').textContent;
-  function ok(){cp.textContent='Copiado ✓';cp.classList.add('ok');setTimeout(function(){cp.textContent='Copiar texto';cp.classList.remove('ok')},2000)}
-  try{navigator.clipboard.writeText(t).then(ok,function(){})}catch(e){}};
+ nao.onclick=function(){gravar(k,ler(k)==='falta'?null:'falta');pintar();if(ler(k)==='falta')inp.focus()};
+ inp.oninput=function(){gravar(k+'-n',inp.value);resumo()};
  pintar();L.appendChild(a);
 });
 </script>
