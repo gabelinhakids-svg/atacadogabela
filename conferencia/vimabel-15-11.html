@@ -56,7 +56,6 @@ button{font:inherit;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:t
 <h1>Fornecedor: Vimabel Blusas</h1>
 <p class="total">15/11 · 199 peças</p>
 </header>
-<div class="resumo" id="resumo"></div>
 <div id="lista" style="display:flex;flex-direction:column;gap:22px"></div>
 <div class="envia">
 <button type="button" class="wa" id="envWa">📤 Enviar lista pelo WhatsApp</button><button type="button" id="envCp">Copiar lista</button></div>
@@ -75,9 +74,12 @@ function num(v){var n=parseFloat(String(v||'').replace(/\s|\$|R/g,'').replace(/\
 function valorDe(p,i){return num(p.valor)}
 function textoValor(n){return n==null?'Valor: aguardando a Gabi':'Valor $'+fmt(n)+' ou 💵 $'+fmt(Math.round(n*95)/100)+' à vista (5% desc.)'}
 function ler(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function temOk(s){return !!s&&s.indexOf('ok')>=0}
+function temF(s){return !!s&&s.indexOf('falta')>=0}
+function marca(k,o,f){gravar(k,o&&f?'ok+falta':o?'ok':f?'falta':null)}
 function gravar(k,v){try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}}
-function resumo(){var ok=0,f=0,cheg=0;PECAS.forEach(function(p,i){var s=ler('conf-vimabel-15-11-'+i);if(s==='ok'){ok++;cheg+=p.qtd}if(s==='falta'){f++;cheg+=Math.max(0,p.qtd-(parseInt(ler('conf-vimabel-15-11-'+i+'-n')||'0',10)||0))}});
- document.getElementById('resumo').textContent='✅ '+ok+' no catálogo · ❌ '+f+' faltou · '+cheg+' de '+TOTAL+' peças chegaram'}
+function resumo(){var ok=0,f=0,cheg=0;PECAS.forEach(function(p,i){var s=ler('conf-vimabel-15-11-'+i);if(temOk(s))ok++;if(!temF(s)&&temOk(s))cheg+=p.qtd;if(temF(s)){f++;cheg+=Math.max(0,p.qtd-(parseInt(ler('conf-vimabel-15-11-'+i+'-n')||'0',10)||0))}});
+ var R=document.getElementById('resumo');if(R)R.textContent='✅ '+ok+' no catálogo · ❌ '+f+' faltou · '+cheg+' de '+TOTAL+' peças chegaram'}
 var L=document.getElementById('lista');
 PECAS.forEach(function(p,i){
  var k='conf-vimabel-15-11-'+i;
@@ -93,9 +95,9 @@ PECAS.forEach(function(p,i){
  '<div class="falta"><span>Quantas faltaram?</span><input type="number" inputmode="numeric" min="0" placeholder="0"></div></div>';
  a.querySelector('h2').textContent=p.nome;a.querySelector('img').alt=p.nome;
  var sim=a.querySelector('.sim'),nao=a.querySelector('.nao'),f=a.querySelector('.falta'),inp=f.querySelector('input');
- function pintar(){var s=ler(k);sim.classList.toggle('on',s==='ok');nao.classList.toggle('on',s==='falta');f.classList.toggle('on',s==='falta');inp.value=ler(k+'-n')||'';resumo()}
- sim.onclick=function(){gravar(k,ler(k)==='ok'?null:'ok');pintar()};
- nao.onclick=function(){gravar(k,ler(k)==='falta'?null:'falta');pintar();if(ler(k)==='falta')inp.focus()};
+ function pintar(){var s=ler(k);sim.classList.toggle('on',temOk(s));nao.classList.toggle('on',temF(s));f.classList.toggle('on',temF(s));inp.value=ler(k+'-n')||'';resumo()}
+ sim.onclick=function(){var s=ler(k);marca(k,!temOk(s),temF(s));pintar()};
+ nao.onclick=function(){var s=ler(k);marca(k,temOk(s),!temF(s));pintar();if(temF(ler(k)))inp.focus()};
  inp.oninput=function(){gravar(k+'-n',inp.value);resumo()};
  a.querySelector('.valor').textContent=textoValor(num(p.valor));
 var eb=a.querySelector('.edb'),ed2=a.querySelector('.edd'),ta=ed2.querySelector('textarea'),dk='det-vimabel-15-11-'+i;
@@ -104,7 +106,7 @@ var eb=a.querySelector('.edb'),ed2=a.querySelector('.edd'),ta=ed2.querySelector(
  ed2.querySelector('.salvad').onclick=function(){var t=ta.value.trim();gravar(dk,t||null);ed2.classList.remove('on');pd()};
  pd();pintar();L.appendChild(a);
 });
-function listaValores(){var t='Vimabel Blusas 15/11',c=[],fl=[],al=[];PECAS.forEach(function(p,i){var n=valorDe(p,i);var st=ler('conf-vimabel-15-11-'+i),dt=ler('det-vimabel-15-11-'+i);if(dt)al.push((i+1)+') '+p.nome+': '+dt);if(st==='falta')fl.push((i+1)+') '+p.nome+': faltaram '+(parseInt(ler('conf-vimabel-15-11-'+i+'-n')||'0',10)||0)+' de '+p.qtd);if(st==='ok')c.push((i+1)+') '+p.nome+' ('+(p.tam||'tamanho único')+')'+(n==null?'':' $'+fmt(n)))});
+function listaValores(){var t='Vimabel Blusas 15/11',c=[],fl=[],al=[];PECAS.forEach(function(p,i){var n=valorDe(p,i);var k2='conf-vimabel-15-11-'+i,st=ler(k2),dt=ler('det-vimabel-15-11-'+i);if(dt)al.push((i+1)+') '+p.nome+': '+dt);if(temF(st))fl.push((i+1)+') '+p.nome+': faltaram '+(parseInt(ler('conf-vimabel-15-11-'+i+'-n')||'0',10)||0)+' de '+p.qtd);if(temOk(st))c.push((i+1)+') '+p.nome+' ('+(p.tam||'tamanho único')+')'+(temF(st)?' – chegaram '+Math.max(0,p.qtd-(parseInt(ler(k2+'-n')||'0',10)||0))+' de '+p.qtd:'')+(n==null?'':' $'+fmt(n)))});
  t+='\n\n✅ OK, colocar no catálogo:'+(c.length?'\n'+c.join('\n'):' nenhuma');t+='\n\n❌ Faltou:'+(fl.length?'\n'+fl.join('\n'):' nada');if(al.length)t+='\n\n✏️ Alterações:\n'+al.join('\n');return t}
 document.getElementById('envWa').onclick=function(){location.href='https://wa.me/?text='+encodeURIComponent(listaValores())};
 document.getElementById('envCp').onclick=function(){var b=this,t=listaValores();function ok(){b.textContent='Copiado ✓';setTimeout(function(){b.textContent='Copiar lista'},2000)}
