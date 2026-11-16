@@ -91,7 +91,7 @@ PECAS.forEach(function(p,i){
  '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> '+(p.tam||'tamanho único')+'</p><p><b>🎨 Cores:</b> '+p.cores+'</p>'+
  '<p class="valor"></p>'+
  '<button type="button" class="edb">✏️ Edição detalhes<small></small></button>'+
- '<div class="edd"><textarea placeholder="Ex.: veio azul em vez de preto, só G"></textarea><button type="button" class="salvad">Salvar</button></div>'+
+ '<div class="edd"><textarea placeholder="Ex.: o nome é Blusa Plus GG, veio só GG, veio azul em vez de preto"></textarea><button type="button" class="salvad">Salvar</button></div>'+
  ''+
  '<div class="conf"><button type="button" class="sim">✅ OK · Catálogo</button><button type="button" class="nao">❌ Faltou</button></div>'+
  '<div class="falta"><span>Quantas faltaram?</span><input type="number" inputmode="numeric" min="0" placeholder="0"></div></div>';
@@ -103,7 +103,7 @@ PECAS.forEach(function(p,i){
  inp.oninput=function(){gravar(k+'-n',inp.value);resumo()};
  a.querySelector('.valor').textContent=textoValor(num(p.valor));
 var eb=a.querySelector('.edb'),ed2=a.querySelector('.edd'),ta=ed2.querySelector('textarea'),dk='det-fran-15-11-'+i;
- function pd(){var t=ler(dk)||'';eb.querySelector('small').textContent=t?t:'toque pra escrever cores ou tamanhos diferentes'}
+ function pd(){var t=ler(dk)||'';eb.querySelector('small').textContent=t?t:'toque pra escrever o que mudar (nome, tamanho, cor...)'}
  eb.onclick=function(){ed2.classList.toggle('on');ta.value=ler(dk)||'';if(ed2.classList.contains('on'))ta.focus()};
  ed2.querySelector('.salvad').onclick=function(){var t=ta.value.trim();gravar(dk,t||null);ed2.classList.remove('on');pd()};
  pd();pintar();L.appendChild(a);
