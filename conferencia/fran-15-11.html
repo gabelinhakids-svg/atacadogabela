@@ -60,9 +60,9 @@ var L=document.getElementById('lista');
 PECAS.forEach(function(p,i){
  var k='conf-fran-15-11-'+i;
  var a=document.createElement('article');a.className='post';
- a.innerHTML='<div class="faixa">'+(i+1)+') VEM '+p.qtd+' PEÇAS – '+(p.tam||'tamanho a conferir')+'<small>'+p.det+'</small></div>'+
+ a.innerHTML='<div class="faixa">'+(i+1)+') VEM '+p.qtd+' PEÇAS – '+(p.tam||'tamanho único')+'<small>'+p.det+'</small></div>'+
  '<div class="foto"><img src="img/fran-15-11-'+(i+1)+'.jpg?v=3" alt=""><div class="selo">VEM '+p.qtd+' PEÇAS</div></div>'+
- '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> '+(p.tam||'conferir')+'</p><p><b>🎨 Cores:</b> '+p.cores+'</p>'+
+ '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> '+(p.tam||'tamanho único')+'</p><p><b>🎨 Cores:</b> '+p.cores+'</p>'+
  '<p class="valor">'+(p.valor?'Valor $'+p.valor:'Valor: aguardando a Gabi')+'</p>'+
  ''+
  '<div class="conf"><button type="button" class="sim">✅ Chegou certo</button><button type="button" class="nao">❌ Faltou</button></div>'+
