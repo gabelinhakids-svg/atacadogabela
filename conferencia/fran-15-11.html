@@ -21,7 +21,7 @@ header p{margin:4px 0 0}
 .corpo{padding:14px;display:flex;flex-direction:column;gap:8px}
 .corpo h2{margin:0;font-size:1.3rem}
 .corpo p{margin:0}
-.valor{font-weight:800;color:var(--accent);background:#FFF0F7;border:2px dashed var(--accent);border-radius:12px;padding:12px;text-align:left;width:100%}
+.valor{font-weight:800;color:var(--accent)}
 .valor small{display:block;font-weight:600;font-size:.8rem;color:var(--muted)}
 .edval{display:none;gap:8px;align-items:center;flex-wrap:wrap}
 .edval.on{display:flex}
@@ -70,7 +70,7 @@ var PECAS=[
 ];
 function fmt(n){return n.toFixed(2).replace('.',',')}
 function num(v){var n=parseFloat(String(v||'').replace(/\s|\$|R/g,'').replace(/\./g,'').replace(',','.'));return isNaN(n)?null:n}
-function valorDe(p,i){var v=ler('val-fran-15-11-'+i);return num(v!=null&&v!==''?v:p.valor)}
+function valorDe(p,i){return num(p.valor)}
 function textoValor(n){return n==null?'Valor: aguardando a Gabi':'Valor $'+fmt(n)+' ou 💵 $'+fmt(Math.round(n*95)/100)+' à vista (5% desc.)'}
 function ler(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function gravar(k,v){try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}}
@@ -83,8 +83,7 @@ PECAS.forEach(function(p,i){
  a.innerHTML='<div class="faixa">'+(i+1)+') VEM '+p.qtd+' PEÇAS – '+(p.tam||'tamanho único')+'<small>'+p.det+'</small></div>'+
  '<div class="foto"><img src="img/fran-15-11-'+(i+1)+'.jpg?v=3" alt=""></div>'+
  '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> '+(p.tam||'tamanho único')+'</p><p><b>🎨 Cores:</b> '+p.cores+'</p>'+
- '<button type="button" class="valor"></button>'+
- '<div class="edval"><span>Valor $</span><input type="text" inputmode="decimal" placeholder="0,00"><button type="button" class="salva">Salvar</button></div>'+
+ '<p class="valor"></p>'+
  '<button type="button" class="edb">✏️ Edição detalhes<small></small></button>'+
  '<div class="edd"><textarea placeholder="Ex.: veio azul em vez de preto, só G"></textarea><button type="button" class="salvad">Salvar</button></div>'+
  ''+
@@ -96,18 +95,14 @@ PECAS.forEach(function(p,i){
  sim.onclick=function(){gravar(k,ler(k)==='ok'?null:'ok');pintar()};
  nao.onclick=function(){gravar(k,ler(k)==='falta'?null:'falta');pintar();if(ler(k)==='falta')inp.focus()};
  inp.oninput=function(){gravar(k+'-n',inp.value);resumo()};
- var vb=a.querySelector('.valor'),ed=a.querySelector('.edval'),vi=ed.querySelector('input');
- function pv(){vb.innerHTML='';vb.appendChild(document.createTextNode(textoValor(valorDe(p,i))));var sm=document.createElement('small');sm.textContent='✏️ toque pra escrever';vb.appendChild(sm)}
- vb.onclick=function(){ed.classList.toggle('on');var n=valorDe(p,i);vi.value=n==null?'':fmt(n);if(ed.classList.contains('on'))vi.focus()};
- function salvar(){var n=num(vi.value);gravar('val-fran-15-11-'+i,n==null?null:fmt(n));ed.classList.remove('on');pv()}
- ed.querySelector('.salva').onclick=salvar;vi.onkeydown=function(e){if(e.key==='Enter')salvar()};
+ a.querySelector('.valor').textContent=textoValor(num(p.valor));
 var eb=a.querySelector('.edb'),ed2=a.querySelector('.edd'),ta=ed2.querySelector('textarea'),dk='det-fran-15-11-'+i;
  function pd(){var t=ler(dk)||'';eb.querySelector('small').textContent=t?t:'toque pra escrever cores ou tamanhos diferentes'}
  eb.onclick=function(){ed2.classList.toggle('on');ta.value=ler(dk)||'';if(ed2.classList.contains('on'))ta.focus()};
  ed2.querySelector('.salvad').onclick=function(){var t=ta.value.trim();gravar(dk,t||null);ed2.classList.remove('on');pd()};
- pd();pv();pintar();L.appendChild(a);
+ pd();pintar();L.appendChild(a);
 });
-function listaValores(){var t='Fran Novo Brass 15/11\n\nValores:',c=[],fl=[],al=[];PECAS.forEach(function(p,i){var n=valorDe(p,i);t+='\n'+(i+1)+') '+p.nome+': '+(n==null?'sem valor':'$'+fmt(n));var st=ler('conf-fran-15-11-'+i),dt=ler('det-fran-15-11-'+i);if(dt)al.push((i+1)+') '+p.nome+': '+dt);if(st==='falta')fl.push((i+1)+') '+p.nome+': faltaram '+(parseInt(ler('conf-fran-15-11-'+i+'-n')||'0',10)||0)+' de '+p.qtd);if(st==='ok')c.push((i+1)+') '+p.nome+' ('+(p.tam||'tamanho único')+')'+(n==null?'':' $'+fmt(n)))});
+function listaValores(){var t='Fran Novo Brass 15/11',c=[],fl=[],al=[];PECAS.forEach(function(p,i){var n=valorDe(p,i);var st=ler('conf-fran-15-11-'+i),dt=ler('det-fran-15-11-'+i);if(dt)al.push((i+1)+') '+p.nome+': '+dt);if(st==='falta')fl.push((i+1)+') '+p.nome+': faltaram '+(parseInt(ler('conf-fran-15-11-'+i+'-n')||'0',10)||0)+' de '+p.qtd);if(st==='ok')c.push((i+1)+') '+p.nome+' ('+(p.tam||'tamanho único')+')'+(n==null?'':' $'+fmt(n)))});
  t+='\n\n✅ OK, colocar no catálogo:'+(c.length?'\n'+c.join('\n'):' nenhuma');t+='\n\n❌ Faltou:'+(fl.length?'\n'+fl.join('\n'):' nada');if(al.length)t+='\n\n✏️ Alterações:\n'+al.join('\n');return t}
 document.getElementById('envWa').onclick=function(){location.href='https://wa.me/?text='+encodeURIComponent(listaValores())};
 document.getElementById('envCp').onclick=function(){var b=this,t=listaValores();function ok(){b.textContent='Copiado ✓';setTimeout(function(){b.textContent='Copiar lista'},2000)}
