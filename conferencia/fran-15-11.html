@@ -32,7 +32,7 @@ header p{margin:4px 0 0}
 .envia .wa{background:#1E8E4E}
 .prov{font-size:.8rem;color:var(--muted)}
 button{font:inherit;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.conf{display:grid;grid-template-columns:1fr 1fr auto;gap:6px;margin-top:6px}
+.conf{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
 .conf button.cat{padding:8px;font-size:.8rem;line-height:1.1;min-width:64px}
 .conf button.cat.on{background:#7B2CBF;border-color:#7B2CBF;color:#fff}
 .conf button{background:#fff;color:var(--fg);border:2px solid var(--line);border-radius:12px;padding:14px 6px}
@@ -44,15 +44,13 @@ button{font:inherit;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:t
 </style></head><body>
 <div class="wrap">
 <header>
-<h1>📦 Conferência do fardo</h1>
-<p>Fornecedor: <b>Fran Novo Brass</b> · pedido de 15/11</p>
-<p class="total">Total previsto: 96 peças</p>
+<h1>Fornecedor: Fran Novo Brass</h1>
+<p class="total">15/11 · 96 peças</p>
 </header>
-<p class="dica">Quando o fardo chegar: conte cada peça e compare com a faixa em cima da foto. Toque em <b>"Chegou certo"</b> ou em <b>"Faltou"</b> e escreva quantas chegaram. Fica salvo neste celular.</p>
 <div class="resumo" id="resumo"></div>
 <div id="lista" style="display:flex;flex-direction:column;gap:22px"></div>
-<div class="envia"><b>Só pra Gabi: valores e catálogo</b><p>Toque no valor de cada peça e escreva o preço. Toque em 📒 Catálogo nas peças que vão pro catálogo. Depois toque abaixo e mande a lista pra gente publicar.</p>
-<button type="button" class="wa" id="envWa">📤 Enviar valores e catálogo pelo WhatsApp</button><button type="button" id="envCp">Copiar valores</button></div>
+<div class="envia"><b>Só pra Gabi</b>
+<button type="button" class="wa" id="envWa">📤 Enviar lista pelo WhatsApp</button><button type="button" id="envCp">Copiar lista</button></div>
 </div>
 <script>
 var PECAS=[
@@ -71,7 +69,7 @@ function textoValor(n){return n==null?'Valor: aguardando a Gabi':'Valor $'+fmt(n
 function ler(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function gravar(k,v){try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}}
 function resumo(){var ok=0,f=0,cheg=0;PECAS.forEach(function(p,i){var s=ler('conf-fran-15-11-'+i);if(s==='ok'){ok++;cheg+=p.qtd}if(s==='falta'){f++;cheg+=parseInt(ler('conf-fran-15-11-'+i+'-n')||'0',10)||0}});
- document.getElementById('resumo').textContent='Conferidas: '+(ok+f)+' de '+PECAS.length+' · ✅ '+ok+' certas · ❌ '+f+' com falta · peças contadas: '+cheg+' de 96'}
+ document.getElementById('resumo').textContent='✅ '+ok+' no catálogo · ❌ '+f+' faltou · '+cheg+' de 96 peças'}
 var L=document.getElementById('lista');
 PECAS.forEach(function(p,i){
  var k='conf-fran-15-11-'+i;
@@ -82,7 +80,7 @@ PECAS.forEach(function(p,i){
  '<button type="button" class="valor"></button>'+
  '<div class="edval"><span>Valor $</span><input type="text" inputmode="decimal" placeholder="0,00"><button type="button" class="salva">Salvar</button></div>'+
  ''+
- '<div class="conf"><button type="button" class="sim">✅ Chegou certo</button><button type="button" class="nao">❌ Faltou</button><button type="button" class="cat">📒<br>Catálogo</button></div>'+
+ '<div class="conf"><button type="button" class="sim">✅ OK · Catálogo</button><button type="button" class="nao">❌ Faltou</button></div>'+
  '<div class="falta"><span>Chegaram quantas?</span><input type="number" inputmode="numeric" min="0" placeholder="0"></div></div>';
  a.querySelector('h2').textContent=p.nome;a.querySelector('img').alt=p.nome;
  var sim=a.querySelector('.sim'),nao=a.querySelector('.nao'),f=a.querySelector('.falta'),inp=f.querySelector('input');
@@ -91,19 +89,16 @@ PECAS.forEach(function(p,i){
  nao.onclick=function(){gravar(k,ler(k)==='falta'?null:'falta');pintar();if(ler(k)==='falta')inp.focus()};
  inp.oninput=function(){gravar(k+'-n',inp.value);resumo()};
  var vb=a.querySelector('.valor'),ed=a.querySelector('.edval'),vi=ed.querySelector('input');
- function pv(){vb.innerHTML='';vb.appendChild(document.createTextNode(textoValor(valorDe(p,i))));var sm=document.createElement('small');sm.textContent='✏️ toque pra escrever o valor';vb.appendChild(sm)}
+ function pv(){vb.innerHTML='';vb.appendChild(document.createTextNode(textoValor(valorDe(p,i))));var sm=document.createElement('small');sm.textContent='✏️ toque pra escrever';vb.appendChild(sm)}
  vb.onclick=function(){ed.classList.toggle('on');var n=valorDe(p,i);vi.value=n==null?'':fmt(n);if(ed.classList.contains('on'))vi.focus()};
  function salvar(){var n=num(vi.value);gravar('val-fran-15-11-'+i,n==null?null:fmt(n));ed.classList.remove('on');pv()}
  ed.querySelector('.salva').onclick=salvar;vi.onkeydown=function(e){if(e.key==='Enter')salvar()};
- var cb=a.querySelector('.cat'),ck='cat-fran-15-11-'+i;
- function pc(){var on=ler(ck)==='1';cb.classList.toggle('on',on);cb.innerHTML=on?'📒<br>No catálogo ✓':'📒<br>Catálogo'}
- cb.onclick=function(){gravar(ck,ler(ck)==='1'?null:'1');pc()};
- pc();pv();pintar();L.appendChild(a);
+pv();pintar();L.appendChild(a);
 });
-function listaValores(){var t='Valores Fran 15/11:',c=[];PECAS.forEach(function(p,i){var n=valorDe(p,i);t+='\n'+(i+1)+') '+p.nome+': '+(n==null?'sem valor':'$'+fmt(n));if(ler('cat-fran-15-11-'+i)==='1')c.push((i+1)+') '+p.nome+' ('+(p.tam||'tamanho único')+')'+(n==null?'':' $'+fmt(n)))});
- t+='\n\nColocar no catálogo:'+(c.length?'\n'+c.join('\n'):' nenhuma marcada');return t}
+function listaValores(){var t='Fran Novo Brass 15/11\n\nValores:',c=[],fl=[];PECAS.forEach(function(p,i){var n=valorDe(p,i);t+='\n'+(i+1)+') '+p.nome+': '+(n==null?'sem valor':'$'+fmt(n));var st=ler('conf-fran-15-11-'+i);if(st==='falta')fl.push((i+1)+') '+p.nome+': vieram '+(parseInt(ler('conf-fran-15-11-'+i+'-n')||'0',10)||0)+' de '+p.qtd);if(st==='ok')c.push((i+1)+') '+p.nome+' ('+(p.tam||'tamanho único')+')'+(n==null?'':' $'+fmt(n)))});
+ t+='\n\n✅ OK, colocar no catálogo:'+(c.length?'\n'+c.join('\n'):' nenhuma');t+='\n\n❌ Faltou:'+(fl.length?'\n'+fl.join('\n'):' nada');return t}
 document.getElementById('envWa').onclick=function(){location.href='https://wa.me/?text='+encodeURIComponent(listaValores())};
-document.getElementById('envCp').onclick=function(){var b=this,t=listaValores();function ok(){b.textContent='Copiado ✓';setTimeout(function(){b.textContent='Copiar valores'},2000)}
+document.getElementById('envCp').onclick=function(){var b=this,t=listaValores();function ok(){b.textContent='Copiado ✓';setTimeout(function(){b.textContent='Copiar lista'},2000)}
  try{navigator.clipboard.writeText(t).then(ok,function(){fb()})}catch(e){fb()}
  function fb(){var x=document.createElement('textarea');x.value=t;x.setAttribute('readonly','');x.style.position='fixed';x.style.opacity='0';document.body.appendChild(x);x.select();x.setSelectionRange(0,99999);try{document.execCommand('copy');ok()}catch(e){}document.body.removeChild(x)}};
 </script>
