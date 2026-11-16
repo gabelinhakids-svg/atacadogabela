@@ -60,7 +60,7 @@ button{font:inherit;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:t
 </div>
 <script>
 var PECAS=[
- {nome:"Short com cinto",qtd:12,det:"G e GG",tam:"G e GG",cores:"preto",valor:"29,90"},
+ {nome:"Short com cinto",qtd:12,det:"",tam:"G e GG",cores:"preto",valor:"29,90"},
  {nome:"Short com cinto",qtd:12,det:"6 G + 6 GG",tam:"G e GG",cores:"preto, marrom e caramelo (as 3 cores da foto)",valor:""},
  {nome:"Conjunto blusinha estampada + short",qtd:12,det:"4 G1 + 4 G2 + 4 G3",tam:"G1, G2 e G3",cores:"estampa preta e estampa marrom",valor:""},
  {nome:"Macaquinho com cinto",qtd:12,det:"6 G1 + 6 G2",tam:"G1 e G2",cores:"vinho e preto",valor:""},
@@ -80,7 +80,7 @@ var L=document.getElementById('lista');
 PECAS.forEach(function(p,i){
  var k='conf-fran-15-11-'+i;
  var a=document.createElement('article');a.className='post';
- a.innerHTML='<div class="faixa">'+(i+1)+') VEM '+p.qtd+' PEÇAS – '+(p.tam||'tamanho único')+'<small>'+p.det+'</small></div>'+
+ a.innerHTML='<div class="faixa">'+(i+1)+') VEM '+p.qtd+' PEÇAS – '+(p.tam||'tamanho único')+(p.det?'<small>'+p.det+'</small>':'')+'</div>'+
  '<div class="foto"><img src="img/fran-15-11-'+(i+1)+'.jpg?v=3" alt=""></div>'+
  '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> '+(p.tam||'tamanho único')+'</p><p><b>🎨 Cores:</b> '+p.cores+'</p>'+
  '<p class="valor"></p>'+
