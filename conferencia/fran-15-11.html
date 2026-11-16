@@ -13,8 +13,8 @@ header p{margin:4px 0 0}
 .resumo{background:#fff;border:2px solid var(--line);border-radius:12px;padding:10px 14px;font-weight:700}
 .dica{margin:0;color:var(--muted);font-size:.95rem}
 .post{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.faixa{background:var(--fg);color:#fff;padding:14px;font-size:1.55rem;font-weight:900;line-height:1.15}
-.faixa small{display:block;font-size:1.1rem;font-weight:700;margin-top:4px;color:#FFD3EA}
+.faixa{background:var(--accent);color:#fff;padding:14px;font-size:1.55rem;font-weight:900;line-height:1.15}
+.faixa small{display:block;font-size:1.1rem;font-weight:700;margin-top:4px;color:#fff;opacity:.95}
 .foto{position:relative}
 .foto img{width:100%;display:block;background:#eee}
 .selo{position:absolute;top:10px;left:10px;background:rgba(230,0,126,.94);color:#fff;font-weight:900;font-size:1.35rem;padding:8px 14px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.35)}
@@ -68,20 +68,20 @@ function valorDe(p,i){var v=ler('val-fran-15-11-'+i);return num(v!=null&&v!==''?
 function textoValor(n){return n==null?'Valor: aguardando a Gabi':'Valor $'+fmt(n)+' ou 💵 $'+fmt(Math.round(n*95)/100)+' à vista (5% desc.)'}
 function ler(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function gravar(k,v){try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}}
-function resumo(){var ok=0,f=0,cheg=0;PECAS.forEach(function(p,i){var s=ler('conf-fran-15-11-'+i);if(s==='ok'){ok++;cheg+=p.qtd}if(s==='falta'){f++;cheg+=parseInt(ler('conf-fran-15-11-'+i+'-n')||'0',10)||0}});
- document.getElementById('resumo').textContent='✅ '+ok+' no catálogo · ❌ '+f+' faltou · '+cheg+' de 96 peças'}
+function resumo(){var ok=0,f=0,cheg=0;PECAS.forEach(function(p,i){var s=ler('conf-fran-15-11-'+i);if(s==='ok'){ok++;cheg+=p.qtd}if(s==='falta'){f++;cheg+=Math.max(0,p.qtd-(parseInt(ler('conf-fran-15-11-'+i+'-n')||'0',10)||0))}});
+ document.getElementById('resumo').textContent='✅ '+ok+' no catálogo · ❌ '+f+' faltou · '+cheg+' de 96 peças chegaram'}
 var L=document.getElementById('lista');
 PECAS.forEach(function(p,i){
  var k='conf-fran-15-11-'+i;
  var a=document.createElement('article');a.className='post';
  a.innerHTML='<div class="faixa">'+(i+1)+') VEM '+p.qtd+' PEÇAS – '+(p.tam||'tamanho único')+'<small>'+p.det+'</small></div>'+
- '<div class="foto"><img src="img/fran-15-11-'+(i+1)+'.jpg?v=3" alt=""><div class="selo">VEM '+p.qtd+' PEÇAS</div></div>'+
+ '<div class="foto"><img src="img/fran-15-11-'+(i+1)+'.jpg?v=3" alt=""></div>'+
  '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> '+(p.tam||'tamanho único')+'</p><p><b>🎨 Cores:</b> '+p.cores+'</p>'+
  '<button type="button" class="valor"></button>'+
  '<div class="edval"><span>Valor $</span><input type="text" inputmode="decimal" placeholder="0,00"><button type="button" class="salva">Salvar</button></div>'+
  ''+
  '<div class="conf"><button type="button" class="sim">✅ OK · Catálogo</button><button type="button" class="nao">❌ Faltou</button></div>'+
- '<div class="falta"><span>Chegaram quantas?</span><input type="number" inputmode="numeric" min="0" placeholder="0"></div></div>';
+ '<div class="falta"><span>Quantas faltaram?</span><input type="number" inputmode="numeric" min="0" placeholder="0"></div></div>';
  a.querySelector('h2').textContent=p.nome;a.querySelector('img').alt=p.nome;
  var sim=a.querySelector('.sim'),nao=a.querySelector('.nao'),f=a.querySelector('.falta'),inp=f.querySelector('input');
  function pintar(){var s=ler(k);sim.classList.toggle('on',s==='ok');nao.classList.toggle('on',s==='falta');f.classList.toggle('on',s==='falta');inp.value=ler(k+'-n')||'';resumo()}
@@ -95,7 +95,7 @@ PECAS.forEach(function(p,i){
  ed.querySelector('.salva').onclick=salvar;vi.onkeydown=function(e){if(e.key==='Enter')salvar()};
 pv();pintar();L.appendChild(a);
 });
-function listaValores(){var t='Fran Novo Brass 15/11\n\nValores:',c=[],fl=[];PECAS.forEach(function(p,i){var n=valorDe(p,i);t+='\n'+(i+1)+') '+p.nome+': '+(n==null?'sem valor':'$'+fmt(n));var st=ler('conf-fran-15-11-'+i);if(st==='falta')fl.push((i+1)+') '+p.nome+': vieram '+(parseInt(ler('conf-fran-15-11-'+i+'-n')||'0',10)||0)+' de '+p.qtd);if(st==='ok')c.push((i+1)+') '+p.nome+' ('+(p.tam||'tamanho único')+')'+(n==null?'':' $'+fmt(n)))});
+function listaValores(){var t='Fran Novo Brass 15/11\n\nValores:',c=[],fl=[];PECAS.forEach(function(p,i){var n=valorDe(p,i);t+='\n'+(i+1)+') '+p.nome+': '+(n==null?'sem valor':'$'+fmt(n));var st=ler('conf-fran-15-11-'+i);if(st==='falta')fl.push((i+1)+') '+p.nome+': faltaram '+(parseInt(ler('conf-fran-15-11-'+i+'-n')||'0',10)||0)+' de '+p.qtd);if(st==='ok')c.push((i+1)+') '+p.nome+' ('+(p.tam||'tamanho único')+')'+(n==null?'':' $'+fmt(n)))});
  t+='\n\n✅ OK, colocar no catálogo:'+(c.length?'\n'+c.join('\n'):' nenhuma');t+='\n\n❌ Faltou:'+(fl.length?'\n'+fl.join('\n'):' nada');return t}
 document.getElementById('envWa').onclick=function(){location.href='https://wa.me/?text='+encodeURIComponent(listaValores())};
 document.getElementById('envCp').onclick=function(){var b=this,t=listaValores();function ok(){b.textContent='Copiado ✓';setTimeout(function(){b.textContent='Copiar lista'},2000)}
