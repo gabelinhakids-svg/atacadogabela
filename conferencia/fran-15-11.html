@@ -27,6 +27,12 @@ header p{margin:4px 0 0}
 .edval.on{display:flex}
 .edval input{font:inherit;font-size:1.2rem;width:120px;padding:10px;border:2px solid var(--accent);border-radius:10px}
 .edval button,.envia button{background:var(--accent);color:#fff;border:0;border-radius:12px;padding:12px 16px}
+.edb{background:#fff;color:var(--fg);border:2px dashed var(--line);border-radius:12px;padding:10px 12px;text-align:left;width:100%;font-weight:700}
+.edb small{display:block;font-weight:600;color:var(--muted);white-space:pre-wrap}
+.edd{display:none;flex-direction:column;gap:8px}
+.edd.on{display:flex}
+.edd textarea{font:inherit;font-size:16px;min-height:80px;padding:10px;border:2px solid var(--accent);border-radius:10px;width:100%}
+.edd button{background:var(--accent);color:#fff;border:0;border-radius:12px;padding:12px 16px}
 .envia{background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}
 .envia p{margin:0;color:var(--muted);font-size:.95rem}
 .envia .wa{background:#1E8E4E}
@@ -79,6 +85,8 @@ PECAS.forEach(function(p,i){
  '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> '+(p.tam||'tamanho único')+'</p><p><b>🎨 Cores:</b> '+p.cores+'</p>'+
  '<button type="button" class="valor"></button>'+
  '<div class="edval"><span>Valor $</span><input type="text" inputmode="decimal" placeholder="0,00"><button type="button" class="salva">Salvar</button></div>'+
+ '<button type="button" class="edb">✏️ Edição detalhes<small></small></button>'+
+ '<div class="edd"><textarea placeholder="Ex.: veio azul em vez de preto, só G"></textarea><button type="button" class="salvad">Salvar</button></div>'+
  ''+
  '<div class="conf"><button type="button" class="sim">✅ OK · Catálogo</button><button type="button" class="nao">❌ Faltou</button></div>'+
  '<div class="falta"><span>Quantas faltaram?</span><input type="number" inputmode="numeric" min="0" placeholder="0"></div></div>';
@@ -93,10 +101,14 @@ PECAS.forEach(function(p,i){
  vb.onclick=function(){ed.classList.toggle('on');var n=valorDe(p,i);vi.value=n==null?'':fmt(n);if(ed.classList.contains('on'))vi.focus()};
  function salvar(){var n=num(vi.value);gravar('val-fran-15-11-'+i,n==null?null:fmt(n));ed.classList.remove('on');pv()}
  ed.querySelector('.salva').onclick=salvar;vi.onkeydown=function(e){if(e.key==='Enter')salvar()};
-pv();pintar();L.appendChild(a);
+var eb=a.querySelector('.edb'),ed2=a.querySelector('.edd'),ta=ed2.querySelector('textarea'),dk='det-fran-15-11-'+i;
+ function pd(){var t=ler(dk)||'';eb.querySelector('small').textContent=t?t:'toque pra escrever cores ou tamanhos diferentes'}
+ eb.onclick=function(){ed2.classList.toggle('on');ta.value=ler(dk)||'';if(ed2.classList.contains('on'))ta.focus()};
+ ed2.querySelector('.salvad').onclick=function(){var t=ta.value.trim();gravar(dk,t||null);ed2.classList.remove('on');pd()};
+ pd();pv();pintar();L.appendChild(a);
 });
-function listaValores(){var t='Fran Novo Brass 15/11\n\nValores:',c=[],fl=[];PECAS.forEach(function(p,i){var n=valorDe(p,i);t+='\n'+(i+1)+') '+p.nome+': '+(n==null?'sem valor':'$'+fmt(n));var st=ler('conf-fran-15-11-'+i);if(st==='falta')fl.push((i+1)+') '+p.nome+': faltaram '+(parseInt(ler('conf-fran-15-11-'+i+'-n')||'0',10)||0)+' de '+p.qtd);if(st==='ok')c.push((i+1)+') '+p.nome+' ('+(p.tam||'tamanho único')+')'+(n==null?'':' $'+fmt(n)))});
- t+='\n\n✅ OK, colocar no catálogo:'+(c.length?'\n'+c.join('\n'):' nenhuma');t+='\n\n❌ Faltou:'+(fl.length?'\n'+fl.join('\n'):' nada');return t}
+function listaValores(){var t='Fran Novo Brass 15/11\n\nValores:',c=[],fl=[],al=[];PECAS.forEach(function(p,i){var n=valorDe(p,i);t+='\n'+(i+1)+') '+p.nome+': '+(n==null?'sem valor':'$'+fmt(n));var st=ler('conf-fran-15-11-'+i),dt=ler('det-fran-15-11-'+i);if(dt)al.push((i+1)+') '+p.nome+': '+dt);if(st==='falta')fl.push((i+1)+') '+p.nome+': faltaram '+(parseInt(ler('conf-fran-15-11-'+i+'-n')||'0',10)||0)+' de '+p.qtd);if(st==='ok')c.push((i+1)+') '+p.nome+' ('+(p.tam||'tamanho único')+')'+(n==null?'':' $'+fmt(n)))});
+ t+='\n\n✅ OK, colocar no catálogo:'+(c.length?'\n'+c.join('\n'):' nenhuma');t+='\n\n❌ Faltou:'+(fl.length?'\n'+fl.join('\n'):' nada');if(al.length)t+='\n\n✏️ Alterações:\n'+al.join('\n');return t}
 document.getElementById('envWa').onclick=function(){location.href='https://wa.me/?text='+encodeURIComponent(listaValores())};
 document.getElementById('envCp').onclick=function(){var b=this,t=listaValores();function ok(){b.textContent='Copiado ✓';setTimeout(function(){b.textContent='Copiar lista'},2000)}
  try{navigator.clipboard.writeText(t).then(ok,function(){fb()})}catch(e){fb()}
