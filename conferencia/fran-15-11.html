@@ -33,6 +33,9 @@ header p{margin:4px 0 0}
 .edd.on{display:flex}
 .edd textarea{font:inherit;font-size:16px;min-height:80px;padding:10px;border:2px solid var(--accent);border-radius:10px;width:100%}
 .edd button{background:var(--accent);color:#fff;border:0;border-radius:12px;padding:12px 16px}
+.forn{margin:10px 0 -6px;background:var(--fg);color:#fff;border-radius:14px;padding:14px 16px}
+.forn h2{margin:0;font-size:1.3rem}
+.forn p{margin:2px 0 0;font-weight:700}
 .envia{background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}
 .envia p{margin:0;color:var(--muted);font-size:.95rem}
 .envia .wa{background:#1E8E4E}
@@ -50,24 +53,33 @@ button{font:inherit;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:t
 </style></head><body>
 <div class="wrap">
 <header>
-<h1>Fornecedor: Fran Novo Brass</h1>
-<p class="total">15/11 · 96 peças</p>
+<h1>Conferência de terça 17/11</h1>
+<p class="total" id="total"></p>
 </header>
 <div class="resumo" id="resumo"></div>
 <div id="lista" style="display:flex;flex-direction:column;gap:22px"></div>
-<div class="envia"><b>Só pra Gabi</b>
+<div class="envia">
 <button type="button" class="wa" id="envWa">📤 Enviar lista pelo WhatsApp</button><button type="button" id="envCp">Copiar lista</button></div>
 </div>
 <script>
 var PECAS=[
- {nome:"Short alfaiataria com cinto",qtd:12,det:"",tam:"G e GG",cores:"preto",valor:"49,90"},
- {nome:"Short alfaiataria com cinto",qtd:12,det:"6 G + 6 GG",tam:"G e GG",cores:"preto, marrom e caramelo (as 3 cores da foto)",valor:"49,90"},
- {nome:"Conjunto Plus Size",qtd:12,det:"4 G1 + 4 G2 + 4 G3",tam:"G1, G2 e G3",cores:"estampa preta e estampa marrom",valor:"79,90"},
- {nome:"Macaquinho Plus Size",qtd:12,det:"6 G1 + 6 G2",tam:"G1 e G2",cores:"vinho e preto",valor:"79,90"},
- {nome:"Regata de suplex",qtd:24,det:"24 peças nas 3 cores",tam:"",cores:"preto, marinho e marrom café",valor:"29,90"},
- {nome:"Vestido de babado",qtd:12,det:"4 vermelho + 4 off-white + 4 amarelo",tam:"",cores:"vermelho, off-white e amarelo",valor:"69,90"},
- {nome:"Short Plus Alfaiataria",qtd:12,det:"6 G1 + 6 G2",tam:"G1 e G2",cores:"preto e vinho",valor:"49,90"}
+ {nome:"Short alfaiataria com cinto",qtd:12,det:"",tam:"G e GG",cores:"preto",valor:"49,90",forn:0},
+ {nome:"Short alfaiataria com cinto",qtd:12,det:"6 G + 6 GG",tam:"G e GG",cores:"preto, marrom e caramelo (as 3 cores da foto)",valor:"49,90",forn:0},
+ {nome:"Conjunto Plus Size",qtd:12,det:"4 G1 + 4 G2 + 4 G3",tam:"G1, G2 e G3",cores:"estampa preta e estampa marrom",valor:"79,90",forn:0},
+ {nome:"Macaquinho Plus Size",qtd:12,det:"6 G1 + 6 G2",tam:"G1 e G2",cores:"vinho e preto",valor:"79,90",forn:0},
+ {nome:"Regata de suplex",qtd:24,det:"24 peças nas 3 cores",tam:"",cores:"preto, marinho e marrom café",valor:"29,90",forn:0},
+ {nome:"Vestido de babado",qtd:12,det:"4 vermelho + 4 off-white + 4 amarelo",tam:"",cores:"vermelho, off-white e amarelo",valor:"69,90",forn:0},
+ {nome:"Short Plus Alfaiataria",qtd:12,det:"6 G1 + 6 G2",tam:"G1 e G2",cores:"preto e vinho",valor:"49,90",forn:0},
+ {nome:"Blusa plus estampada",qtd:48,det:"4 estampas, 12 de cada",tam:"",cores:"cores médias e escuras",valor:"",forn:1},
+ {nome:"Regata GG estampada",qtd:48,det:"4 estampas, 12 de cada",tam:"GG",cores:"preta, vinho, marinho e marrom (estampas discretas)",valor:"",forn:1},
+ {nome:"Blusa Garfield",qtd:48,det:"4 estampas, 12 de cada",tam:"",cores:"cores médias e escuras",valor:"",forn:1},
+ {nome:"Blusa alongada com fenda",qtd:30,det:"",tam:"",cores:"a conferir",valor:"",forn:1},
+ {nome:"Vestido com babado",qtd:25,det:"10 preto + 10 marrom + 5 marinho",tam:"",cores:"preto, marrom e marinho",valor:"",forn:1}
 ];
+var FORN=[{nome:"Fran Novo Brass",data:"15/11"},{nome:"Vimabel Blusas",data:"15/11"}];
+var TOTAL=PECAS.reduce(function(t,p){return t+p.qtd},0);
+FORN.forEach(function(f,j){f.qtd=PECAS.filter(function(p){return p.forn===j}).reduce(function(t,p){return t+p.qtd},0)});
+document.getElementById('total').textContent=FORN.length+' fornecedores · '+TOTAL+' peças';
 function fmt(n){return n.toFixed(2).replace('.',',')}
 function num(v){var n=parseFloat(String(v||'').replace(/\s|\$|R/g,'').replace(/\./g,'').replace(',','.'));return isNaN(n)?null:n}
 function valorDe(p,i){return num(p.valor)}
@@ -75,13 +87,14 @@ function textoValor(n){return n==null?'Valor: aguardando a Gabi':'Valor $'+fmt(n
 function ler(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function gravar(k,v){try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}}
 function resumo(){var ok=0,f=0,cheg=0;PECAS.forEach(function(p,i){var s=ler('conf-fran-15-11-'+i);if(s==='ok'){ok++;cheg+=p.qtd}if(s==='falta'){f++;cheg+=Math.max(0,p.qtd-(parseInt(ler('conf-fran-15-11-'+i+'-n')||'0',10)||0))}});
- document.getElementById('resumo').textContent='✅ '+ok+' no catálogo · ❌ '+f+' faltou · '+cheg+' de 96 peças chegaram'}
+ document.getElementById('resumo').textContent='✅ '+ok+' no catálogo · ❌ '+f+' faltou · '+cheg+' de '+TOTAL+' peças chegaram'}
 var L=document.getElementById('lista');
 PECAS.forEach(function(p,i){
+ if(i===0||PECAS[i-1].forn!==p.forn){var fh=document.createElement('div');fh.className='forn';fh.innerHTML='<h2></h2><p></p>';fh.querySelector('h2').textContent='Fornecedor: '+FORN[p.forn].nome;fh.querySelector('p').textContent=FORN[p.forn].data+' · '+FORN[p.forn].qtd+' peças';L.appendChild(fh)}
  var k='conf-fran-15-11-'+i;
  var a=document.createElement('article');a.className='post';
  a.innerHTML='<div class="faixa">'+(i+1)+') VEM '+p.qtd+' PEÇAS – '+(p.tam||'tamanho único')+(p.det?'<small>'+p.det+'</small>':'')+'</div>'+
- '<div class="foto"><img src="img/fran-15-11-'+(i+1)+'.jpg?v=3" alt=""></div>'+
+ '<div class="foto"><img src="img/fran-15-11-'+(i+1)+'.jpg?v=4" alt=""></div>'+
  '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> '+(p.tam||'tamanho único')+'</p><p><b>🎨 Cores:</b> '+p.cores+'</p>'+
  '<p class="valor"></p>'+
  '<button type="button" class="edb">✏️ Edição detalhes<small></small></button>'+
@@ -102,8 +115,8 @@ var eb=a.querySelector('.edb'),ed2=a.querySelector('.edd'),ta=ed2.querySelector(
  ed2.querySelector('.salvad').onclick=function(){var t=ta.value.trim();gravar(dk,t||null);ed2.classList.remove('on');pd()};
  pd();pintar();L.appendChild(a);
 });
-function listaValores(){var t='Fran Novo Brass 15/11',c=[],fl=[],al=[];PECAS.forEach(function(p,i){var n=valorDe(p,i);var st=ler('conf-fran-15-11-'+i),dt=ler('det-fran-15-11-'+i);if(dt)al.push((i+1)+') '+p.nome+': '+dt);if(st==='falta')fl.push((i+1)+') '+p.nome+': faltaram '+(parseInt(ler('conf-fran-15-11-'+i+'-n')||'0',10)||0)+' de '+p.qtd);if(st==='ok')c.push((i+1)+') '+p.nome+' ('+(p.tam||'tamanho único')+')'+(n==null?'':' $'+fmt(n)))});
- t+='\n\n✅ OK, colocar no catálogo:'+(c.length?'\n'+c.join('\n'):' nenhuma');t+='\n\n❌ Faltou:'+(fl.length?'\n'+fl.join('\n'):' nada');if(al.length)t+='\n\n✏️ Alterações:\n'+al.join('\n');return t}
+function listaValores(){var t='Conferência de terça 17/11';FORN.forEach(function(F,j){var c=[],fl=[],al=[];PECAS.forEach(function(p,i){if(p.forn!==j)return;var n=valorDe(p,i);var st=ler('conf-fran-15-11-'+i),dt=ler('det-fran-15-11-'+i);if(dt)al.push((i+1)+') '+p.nome+': '+dt);if(st==='falta')fl.push((i+1)+') '+p.nome+': faltaram '+(parseInt(ler('conf-fran-15-11-'+i+'-n')||'0',10)||0)+' de '+p.qtd);if(st==='ok')c.push((i+1)+') '+p.nome+' ('+(p.tam||'tamanho único')+')'+(n==null?'':' $'+fmt(n)))});
+ t+='\n\n📦 '+F.nome+' '+F.data;t+='\n✅ OK, colocar no catálogo:'+(c.length?'\n'+c.join('\n'):' nenhuma');t+='\n❌ Faltou:'+(fl.length?'\n'+fl.join('\n'):' nada');if(al.length)t+='\n✏️ Alterações:\n'+al.join('\n')});return t}
 document.getElementById('envWa').onclick=function(){location.href='https://wa.me/?text='+encodeURIComponent(listaValores())};
 document.getElementById('envCp').onclick=function(){var b=this,t=listaValores();function ok(){b.textContent='Copiado ✓';setTimeout(function(){b.textContent='Copiar lista'},2000)}
  try{navigator.clipboard.writeText(t).then(ok,function(){fb()})}catch(e){fb()}
