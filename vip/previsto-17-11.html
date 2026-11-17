@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Gabela · Novidades chegando</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#F7F2EE;--card:#fff;--fg:#2B2226;--muted:#6E5F66;--accent:#E6007E;--line:#EADCE2}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:16px 12px 40px;-webkit-text-size-adjust:100%}
+.wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+header{background:var(--accent);color:#fff;border-radius:14px;padding:16px}
+header h1{margin:0;font-size:1.4rem}header p{margin:4px 0 0;font-weight:600}
+.post{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.foto{position:relative;background:#eee}
+.car{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.car::-webkit-scrollbar{display:none}
+.car>*{flex:0 0 100%;width:100%;scroll-snap-align:center;display:block;object-fit:contain;background:#eee;max-height:80vh}
+.cnt{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.6);color:#fff;font-weight:800;font-size:.9rem;padding:4px 10px;border-radius:20px;pointer-events:none}
+.rola{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);color:#fff;font-size:.85rem;font-weight:700;padding:4px 12px;border-radius:20px;pointer-events:none;white-space:nowrap}
+.corpo{padding:14px;display:flex;flex-direction:column;gap:6px}
+.corpo h2{margin:0;font-size:1.25rem}.corpo p{margin:0}
+.valor{font-weight:800;color:var(--accent);font-size:1.1rem}
+.bts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+button,.bt{font:inherit;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:transparent;border-radius:12px;padding:12px 8px;text-align:center;text-decoration:none;border:2px solid var(--line);background:#fff;color:var(--fg)}
+.salva{grid-column:1/-1;background:var(--accent);border-color:var(--accent);color:#fff}
+.wa{background:#1E8E4E;border-color:#1E8E4E;color:#fff}
+.dica{margin:0;color:var(--muted);font-size:.9rem;text-align:center}
+</style></head><body><div class="wrap">
+<header><h1>✨ Previsto pra chegar</h1><p>Novidades chegando na terça, 17/11</p></header>
+<div id="lista" style="display:flex;flex-direction:column;gap:20px"></div>
+<p class="dica">Fotos ilustrativas. Cores e modelos podem variar conforme a chegada.</p>
+</div>
+<script>
+var PECAS=[{"nome":"Short alfaiataria com cinto de fivela, barra dobrada","tam":"G e GG","cores":"preto","valor":"49,90","fotos":["img/p01-1.jpg"]},{"nome":"Short alfaiataria liso com cinto de fivela","tam":"G e GG","cores":"preto, marrom e caramelo","valor":"49,90","fotos":["img/p02-1.jpg"]},{"nome":"Conjunto plus: blusa de alcinha estampada + short preto","tam":"G1, G2 e G3","cores":"estampa preta e estampa marrom","valor":"79,90","fotos":["img/p03-1.jpg"]},{"nome":"Macaquinho plus de alça com cinto (costas com lastex)","tam":"G1 e G2","cores":"vinho e preto","valor":"79,90","fotos":["img/p04-1.jpg"]},{"nome":"Regata de suplex alça larga","tam":"Tamanho único","cores":"preto, marinho e marrom café","valor":"29,90","fotos":["img/p05-1.jpg"]},{"nome":"Macaquinho curto de babados em camadas","tam":"Tamanho único","cores":"vermelho, off-white e amarelo","valor":"69,90","fotos":["img/p06-1.jpg"]},{"nome":"Short plus alfaiataria com cinto de fivela","tam":"G1 e G2","cores":"preto e vinho","valor":"49,90","fotos":["img/p07-1.jpg"]},{"nome":"Blusinhas plus de malha manga curta","tam":"Plus Size","cores":"vários modelos e cores (arraste as fotos)","valor":"","fotos":["img/p08-1.jpg","img/p08-2.jpg","img/p08-3.jpg","img/p08-4.jpg","img/p08-5.jpg","img/p08-6.jpg","img/p08-7.jpg","img/p08-8.jpg","img/p08-9.jpg"]},{"nome":"Blusa plus manga curta com estampa de coração","tam":"Tamanho único","cores":"cores sortidas","valor":"","fotos":["img/p09-1.jpg"]},{"nome":"Regata GG com estampa de coração","tam":"GG","cores":"preta, vinho, marinho e marrom","valor":"","fotos":["img/p10-1.jpg"]},{"nome":"Blusa plus manga curta com estampa do Garfield","tam":"Tamanho único","cores":"cores sortidas","valor":"","fotos":["img/p11-1.jpg"]},{"nome":"Blusa alongada manga curta com fenda lateral","tam":"Tamanho único","cores":"cores sortidas","valor":"","fotos":["img/p12-1.jpg"]},{"nome":"Vestido curto manga curta com babado na barra","tam":"Tamanho único","cores":"preto, marrom e marinho","valor":"","fotos":["img/p13-1.jpg"]},{"nome":"Vestido mídi plus liso, gola V","tam":"Tamanho único","cores":"marinho e preto","valor":"49,90","fotos":["img/p14-1.jpg"]},{"nome":"Vestido longo plus com fenda, gola e manga com detalhe branco","tam":"Tamanho único","cores":"preto e marrom","valor":"69,90","fotos":["img/p15-1.jpg"]},{"nome":"Vestido mídi plus de moletinho com listras no ombro","tam":"Tamanho único","cores":"preto e marrom","valor":"69,90","fotos":["img/p16-1.jpg"]},{"nome":"Vestido longo estampado, costas abertas com laço","tam":"Tamanho único","cores":"estampas com vermelho e preto","valor":"","fotos":["img/p17-1.jpg","img/p17-2.jpg","vid/p17-3.mp4"]},{"nome":"Vestido curto estampado de alcinha, recorte na cintura","tam":"Tamanho único","cores":"estampas coloridas","valor":"","fotos":["img/p18-1.jpg"]},{"nome":"Vestido longo frente única com barra de folhas","tam":"Tamanho único","cores":"verde, marinho e bege","valor":"","fotos":["img/p19-1.jpg","img/p19-2.jpg","img/p19-3.jpg"]},{"nome":"Vestido longo de alça liso (viscolinho)","tam":"Tamanho único (veste M e G)","cores":"vermelho, verde e amarelo","valor":"","fotos":["img/p20-1.jpg","img/p20-2.jpg","img/p20-3.jpg"]},{"nome":"Cropped liso de alça larga","tam":"Tamanho único","cores":"cores variadas","valor":"","fotos":["img/p21-1.jpg"]},{"nome":"Body liso de alcinha","tam":"Tamanho único","cores":"marrom","valor":"","fotos":["img/p22-1.jpg"]},{"nome":"Regata ribana gola redonda","tam":"Tamanho único","cores":"preto, marrom, off-white e caramelo","valor":"","fotos":["img/p23-1.jpg"]},{"nome":"Cropped canelado frente única","tam":"Tamanho único","cores":"azul","valor":"","fotos":["img/p24-1.jpg"]},{"nome":"Saia longa estampada de folhas, com fenda","tam":"Tamanho único","cores":"bege, preta, marrom e azul","valor":"","fotos":["img/p25-1.jpg"]},{"nome":"Conjunto floral: cropped de alcinha + saia longa com fenda","tam":"Tamanho único","cores":"floral verde","valor":"","fotos":["img/p26-1.jpg"]},{"nome":"Calça jeans skinny escura · modelo 1","tam":"36 ao 46","cores":"jeans escuro","valor":"59,90","fotos":["img/p27-1.jpg","img/p27-2.jpg","img/p27-3.jpg"]},{"nome":"Calça jeans skinny escura · modelo 2","tam":"36 ao 46","cores":"jeans escuro","valor":"59,90","fotos":["img/p28-1.jpg","img/p28-2.jpg","img/p28-3.jpg"]},{"nome":"Calça jeans skinny escura · modelo 3","tam":"36 ao 46","cores":"jeans escuro","valor":"59,90","fotos":["img/p29-1.jpg","img/p29-2.jpg","img/p29-3.jpg"]},{"nome":"Short jeans claro, barra desfiada","tam":"36 ao 46","cores":"jeans claro, barra desfiada","valor":"59,90","fotos":["img/p30-1.jpg","img/p30-2.jpg","img/p30-3.jpg"]},{"nome":"Short jeans escuro, barra desfiada","tam":"36 ao 46","cores":"jeans escuro, barra desfiada","valor":"59,90","fotos":["img/p31-1.jpg","img/p31-2.jpg","img/p31-3.jpg"]},{"nome":"Short jeans cinza, barra desfiada","tam":"36 ao 46","cores":"jeans cinza, barra desfiada","valor":"59,90","fotos":["img/p32-1.jpg","img/p32-2.jpg","img/p32-3.jpg"]},{"nome":"Short jeans médio, barra dobrada","tam":"36 ao 46","cores":"jeans médio, barra dobrada","valor":"59,90","fotos":["img/p33-1.jpg","img/p33-2.jpg","img/p33-3.jpg"]},{"nome":"Bermuda leve com cordão e bolsos","tam":"P, M, G e GG","cores":"cinza, preta, verde e marinho","valor":"39,90","fotos":["img/p34-1.jpg"]},{"nome":"Pijama camisa de botão + short, estampa de corações","tam":"P, M, G e GG","cores":"rosa e azul","valor":"59,90","fotos":["img/p35-1.jpg"]}];
+function fmt(n){return n.toFixed(2).replace('.',',')}
+function num(v){var n=parseFloat(String(v||'').replace(/\s|\$|R/g,'').replace(/\./g,'').replace(',','.'));return isNaN(n)?null:n}
+function textoValor(v){var n=num(v);return n==null?'':'Valor $'+fmt(n)+' ou 💵 $'+fmt(Math.round(n*95)/100)+' à vista (5% desc.)'}
+function texto(p){return p.nome+'\nTamanhos: '+p.tam+'\nCores: '+p.cores+(p.valor?'\n'+textoValor(p.valor):'')+'\n\nPrevisto pra chegar terça, 17/11 ✨'}
+function nomeArq(p,u){return ('gabela-'+p.nome).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/-+$/,'')+u.slice(u.lastIndexOf('.'))}
+function salvar(p,u,btn){var old=btn.textContent;btn.textContent='Abrindo…';
+ fetch(u).then(function(r){return r.blob()}).then(function(bl){var f=new File([bl],nomeArq(p,u),{type:bl.type||'image/jpeg'});
+  if(navigator.canShare&&navigator.canShare({files:[f]})){return navigator.share({files:[f]}).catch(function(){})}
+  var a=document.createElement('a');a.href=URL.createObjectURL(bl);a.download=f.name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},2000)})
+ .catch(function(){window.open(u,'_blank')}).then(function(){btn.textContent=old})}
+function copiar(t,b){function ok(){var o=b.textContent;b.textContent='Copiado ✓';setTimeout(function(){b.textContent=o},2000)}
+ try{navigator.clipboard.writeText(t).then(ok,fb)}catch(e){fb()}
+ function fb(){var x=document.createElement('textarea');x.value=t;x.setAttribute('readonly','');x.style.position='fixed';x.style.opacity='0';document.body.appendChild(x);x.select();x.setSelectionRange(0,99999);try{document.execCommand('copy');ok()}catch(e){}x.remove()}}
+var L=document.getElementById('lista');
+PECAS.forEach(function(p){
+ var a=document.createElement('article');a.className='post';
+ var m=p.fotos.map(function(u){return /\.mp4$/.test(u)?'<video src="'+u+'" poster="'+u.replace('vid/','img/').replace('.mp4','.jpg')+'" muted playsinline loop controls preload="none"></video>':'<img src="'+u+'" alt="'+p.nome.replace(/"/g,'')+'" loading="lazy">'}).join('');
+ a.innerHTML='<div class="foto"><div class="car">'+m+'</div>'+(p.fotos.length>1?'<span class="cnt">1/'+p.fotos.length+'</span><span class="rola">⇠ arraste pro lado ⇢</span>':'')+'</div>'+
+  '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> <span class="t"></span></p><p><b>🎨 Cores:</b> <span class="c"></span></p><p class="valor"></p>'+
+  '<div class="bts"><button type="button" class="salva">⬇️ Salvar foto</button><a class="bt wa" target="_blank" rel="noopener">WhatsApp</a><button type="button" class="cp">Copiar texto</button></div></div>';
+ a.querySelector('h2').textContent=p.nome;a.querySelector('.t').textContent=p.tam;a.querySelector('.c').textContent=p.cores;var vv=a.querySelector('.valor');if(p.valor)vv.textContent=textoValor(p.valor);else vv.remove();
+ var c=a.querySelector('.car'),cn=a.querySelector('.cnt'),sb=a.querySelector('.salva');
+ function atual(){return Math.min(p.fotos.length-1,Math.round(c.scrollLeft/(c.clientWidth||1)))}
+ function rot(){var u=p.fotos[atual()];sb.textContent=/\.mp4$/.test(u)?'⬇️ Salvar vídeo':'⬇️ Salvar foto'+(p.fotos.length>1?' '+(atual()+1)+'/'+p.fotos.length:'')}
+ c.addEventListener('scroll',function(){if(cn)cn.textContent=(atual()+1)+'/'+p.fotos.length;var r=a.querySelector('.rola');if(r)r.style.display='none';rot()},{passive:true});
+ rot();sb.onclick=function(){salvar(p,p.fotos[atual()],sb)};
+ a.querySelector('.wa').href='https://wa.me/?text='+encodeURIComponent(texto(p));
+ a.querySelector('.cp').onclick=function(){copiar(texto(p),this)};
+ L.appendChild(a)});
+</script></body></html>
