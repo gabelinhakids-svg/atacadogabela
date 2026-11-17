@@ -18,10 +18,9 @@ header h1{margin:0;font-size:1.4rem}header p{margin:4px 0 0;font-weight:600}
 .corpo{padding:14px;display:flex;flex-direction:column;gap:6px}
 .corpo h2{margin:0;font-size:1.25rem}.corpo p{margin:0}
 .valor{font-weight:800;color:var(--accent);font-size:1.1rem}
-.bts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.bts{display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px}
 button,.bt{font:inherit;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:transparent;border-radius:12px;padding:12px 8px;text-align:center;text-decoration:none;border:2px solid var(--line);background:#fff;color:var(--fg)}
 .salva{grid-column:1/-1;background:var(--accent);border-color:var(--accent);color:#fff}
-.wa{background:#1E8E4E;border-color:#1E8E4E;color:#fff}
 .dica{margin:0;color:var(--muted);font-size:.9rem;text-align:center}
 </style></head><body><div class="wrap">
 <header><h1>✨ Previsto pra chegar</h1><p>Novidades chegando na terça, 17/11</p></header>
@@ -40,23 +39,18 @@ function salvar(p,u,btn){var old=btn.textContent;btn.textContent='Abrindo…';
   if(navigator.canShare&&navigator.canShare({files:[f]})){return navigator.share({files:[f]}).catch(function(){})}
   var a=document.createElement('a');a.href=URL.createObjectURL(bl);a.download=f.name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},2000)})
  .catch(function(){window.open(u,'_blank')}).then(function(){btn.textContent=old})}
-function copiar(t,b){function ok(){var o=b.textContent;b.textContent='Copiado ✓';setTimeout(function(){b.textContent=o},2000)}
- try{navigator.clipboard.writeText(t).then(ok,fb)}catch(e){fb()}
- function fb(){var x=document.createElement('textarea');x.value=t;x.setAttribute('readonly','');x.style.position='fixed';x.style.opacity='0';document.body.appendChild(x);x.select();x.setSelectionRange(0,99999);try{document.execCommand('copy');ok()}catch(e){}x.remove()}}
 var L=document.getElementById('lista');
 PECAS.forEach(function(p){
  var a=document.createElement('article');a.className='post';
  var m=p.fotos.map(function(u){return /\.mp4$/.test(u)?'<video src="'+u+'" poster="'+u.replace('vid/','img/').replace('.mp4','.jpg')+'" muted playsinline loop controls preload="none"></video>':'<img src="'+u+'" alt="'+p.nome.replace(/"/g,'')+'" loading="lazy">'}).join('');
  a.innerHTML='<div class="foto"><div class="car">'+m+'</div>'+(p.fotos.length>1?'<span class="cnt">1/'+p.fotos.length+'</span><span class="rola">⇠ arraste pro lado ⇢</span>':'')+'</div>'+
   '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> <span class="t"></span></p><p><b>🎨 Cores:</b> <span class="c"></span></p><p class="valor"></p>'+
-  '<div class="bts"><button type="button" class="salva">⬇️ Salvar foto</button><a class="bt wa" target="_blank" rel="noopener">WhatsApp</a><button type="button" class="cp">Copiar texto</button></div></div>';
+  '<div class="bts"><button type="button" class="salva">⬇️ Salvar foto</button></div></div>';
  a.querySelector('h2').textContent=p.nome;a.querySelector('.t').textContent=p.tam;a.querySelector('.c').textContent=p.cores;var vv=a.querySelector('.valor');if(p.valor)vv.textContent=textoValor(p.valor);else vv.remove();
  var c=a.querySelector('.car'),cn=a.querySelector('.cnt'),sb=a.querySelector('.salva');
  function atual(){return Math.min(p.fotos.length-1,Math.round(c.scrollLeft/(c.clientWidth||1)))}
  function rot(){var u=p.fotos[atual()];sb.textContent=/\.mp4$/.test(u)?'⬇️ Salvar vídeo':'⬇️ Salvar foto'+(p.fotos.length>1?' '+(atual()+1)+'/'+p.fotos.length:'')}
  c.addEventListener('scroll',function(){if(cn)cn.textContent=(atual()+1)+'/'+p.fotos.length;var r=a.querySelector('.rola');if(r)r.style.display='none';rot()},{passive:true});
  rot();sb.onclick=function(){salvar(p,p.fotos[atual()],sb)};
- a.querySelector('.wa').href='https://wa.me/?text='+encodeURIComponent(texto(p));
- a.querySelector('.cp').onclick=function(){copiar(texto(p),this)};
  L.appendChild(a)});
 </script></body></html>
