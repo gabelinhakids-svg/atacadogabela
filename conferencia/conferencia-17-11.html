@@ -65,21 +65,43 @@ button{font:inherit;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:t
 </div>
 <script>
 var PECAS=[
- {nome:"Short alfaiataria com cinto",qtd:12,det:"",tam:"G e GG",cores:"preto",valor:"49,90",forn:0},
- {nome:"Short alfaiataria com cinto",qtd:12,det:"6 G + 6 GG",tam:"G e GG",cores:"preto, marrom e caramelo (as 3 cores da foto)",valor:"49,90",forn:0},
- {nome:"Conjunto Plus Size",qtd:12,det:"4 G1 + 4 G2 + 4 G3",tam:"G1, G2 e G3",cores:"estampa preta e estampa marrom",valor:"79,90",forn:0},
- {nome:"Macaquinho Plus Size",qtd:12,det:"6 G1 + 6 G2",tam:"G1 e G2",cores:"vinho e preto",valor:"79,90",forn:0},
- {nome:"Regata de suplex",qtd:24,det:"",tam:"",cores:"preto, marinho e marrom café",valor:"29,90",forn:0},
- {nome:"Macaquinho feminino",qtd:12,det:"",tam:"",cores:"vermelho, off-white e amarelo",valor:"69,90",forn:0},
- {nome:"Short Plus Alfaiataria",qtd:12,det:"6 G1 + 6 G2",tam:"G1 e G2",cores:"preto e vinho",valor:"49,90",forn:0},
- {nome:"Blusinhas plus",qtd:98,det:"9 modelos, total de todos juntos",tam:"Plus",cores:"modelos e cores das fotos",valor:"",fotos:["img/fran-15-11-8-1.jpg","img/fran-15-11-8-2.jpg","img/fran-15-11-8-3.jpg","img/fran-15-11-8-4.jpg","img/fran-15-11-8-5.jpg","img/fran-15-11-8-6.jpg","img/fran-15-11-8-7.jpg","img/fran-15-11-8-8.jpg","img/fran-15-11-8-9.jpg"],forn:0},
- {nome:"Blusa plus estampada",qtd:48,det:"",tam:"",cores:"cores médias e escuras",valor:"",forn:1},
- {nome:"Regata GG estampada",qtd:48,det:"",tam:"GG",cores:"preta, vinho, marinho e marrom (estampas discretas)",valor:"",forn:1},
- {nome:"Blusa Garfield",qtd:48,det:"",tam:"",cores:"cores médias e escuras",valor:"",forn:1},
- {nome:"Blusa alongada com fenda",qtd:30,det:"",tam:"",cores:"a conferir",valor:"",forn:1},
- {nome:"Vestido com babado",qtd:25,det:"",tam:"",cores:"preto, marrom e marinho",valor:"",forn:1}
+ {"nome":"Short alfaiataria com cinto","qtd":12,"det":"","tam":"G e GG","cores":"preto","valor":"49,90","forn":0},
+ {"nome":"Short alfaiataria com cinto","qtd":12,"det":"6 G + 6 GG","tam":"G e GG","cores":"preto, marrom e caramelo (as 3 cores da foto)","valor":"49,90","forn":0},
+ {"nome":"Conjunto Plus Size","qtd":12,"det":"4 G1 + 4 G2 + 4 G3","tam":"G1, G2 e G3","cores":"estampa preta e estampa marrom","valor":"79,90","forn":0},
+ {"nome":"Macaquinho Plus Size","qtd":12,"det":"6 G1 + 6 G2","tam":"G1 e G2","cores":"vinho e preto","valor":"79,90","forn":0},
+ {"nome":"Regata de suplex","qtd":24,"det":"","tam":"","cores":"preto, marinho e marrom café","valor":"29,90","forn":0},
+ {"nome":"Macaquinho feminino","qtd":12,"det":"","tam":"","cores":"vermelho, off-white e amarelo","valor":"69,90","forn":0},
+ {"nome":"Short Plus Alfaiataria","qtd":12,"det":"6 G1 + 6 G2","tam":"G1 e G2","cores":"preto e vinho","valor":"49,90","forn":0},
+ {"nome":"Blusinhas plus","qtd":98,"det":"9 modelos, total de todos juntos","tam":"Plus","cores":"modelos e cores das fotos","valor":"","fotos":["img/fran-15-11-8-1.jpg","img/fran-15-11-8-2.jpg","img/fran-15-11-8-3.jpg","img/fran-15-11-8-4.jpg","img/fran-15-11-8-5.jpg","img/fran-15-11-8-6.jpg","img/fran-15-11-8-7.jpg","img/fran-15-11-8-8.jpg","img/fran-15-11-8-9.jpg"],"forn":0},
+ {"nome":"Blusa plus estampada","qtd":48,"det":"","tam":"","cores":"cores médias e escuras","valor":"","forn":1},
+ {"nome":"Regata GG estampada","qtd":48,"det":"","tam":"GG","cores":"preta, vinho, marinho e marrom (estampas discretas)","valor":"","forn":1},
+ {"nome":"Blusa Garfield","qtd":48,"det":"","tam":"","cores":"cores médias e escuras","valor":"","forn":1},
+ {"nome":"Blusa alongada com fenda","qtd":30,"det":"","tam":"","cores":"a conferir","valor":"","forn":1},
+ {"nome":"Vestido com babado","qtd":25,"det":"","tam":"","cores":"preto, marrom e marinho","valor":"","forn":1},
+ {"nome":"Vestido Gola V Mídi Plus Size","qtd":12,"det":"","tam":"","cores":"marinho e preto","valor":"49,90","forn":2},
+ {"nome":"Vestido Bicolor Longo de Fenda Plus Size","qtd":12,"det":"","tam":"","cores":"preto e marrom","valor":"69,90","forn":2},
+ {"nome":"Vestido Magda Moletinho Plus Size","qtd":12,"det":"","tam":"","cores":"preto e marrom","valor":"69,90","forn":2},
+ {"nome":"Vestido longo estampado","qtd":12,"det":"","tam":"","cores":"estampas com vermelho e preto, mais escuras (até 3 estampas)","valor":"","fotos":["img/modakris-16-11-1-a.jpg","img/modakris-16-11-1-b.jpg","vid/modakris-16-11-1-v.mp4"],"forn":3},
+ {"nome":"Vestido curto estampado","qtd":12,"det":"","tam":"","cores":"estampas da foto, menos as marcadas com X","valor":"","fotos":["img/modakris-16-11-2-a.jpg"],"forn":3},
+ {"nome":"Vestido longo frente única de folhas","qtd":36,"det":"","tam":"","cores":"verde, marinho e bege","valor":"","fotos":["img/modakris-16-11-3-a.jpg","img/modakris-16-11-3-b.jpg","img/modakris-16-11-3-c.jpg"],"forn":3},
+ {"nome":"Vestido viscolinho","qtd":12,"det":"","tam":"Tamanho único (veste M e G)","cores":"vermelho, verde e amarelo","valor":"","fotos":["img/modakris-16-11-4-a.jpg","img/modakris-16-11-4-b.jpg","img/modakris-16-11-4-c.jpg"],"forn":3},
+ {"nome":"Cropped","qtd":20,"det":"","tam":"","cores":"cores variadas da foto","valor":"","fotos":["img/modakris-16-11-5-a.jpg"],"forn":3},
+ {"nome":"Body","qtd":20,"det":"","tam":"","cores":"marrom (cor da foto)","valor":"","fotos":["img/modakris-16-11-6-a.jpg"],"forn":3},
+ {"nome":"Blusa regata ribana","qtd":20,"det":"","tam":"","cores":"preto, marrom, off-white e caramelo","valor":"","fotos":["img/modakris-16-11-7-a.jpg"],"forn":3},
+ {"nome":"Cropped canelado","qtd":30,"det":"","tam":"","cores":"azul (cor da foto)","valor":"","fotos":["img/modakris-16-11-8-a.jpg"],"forn":3},
+ {"nome":"Saia longa de folhas","qtd":12,"det":"","tam":"","cores":"bege, preta, marrom e azul","valor":"","fotos":["img/modakris-16-11-9-a.jpg"],"forn":3},
+ {"nome":"Conjunto cropped e saia longa","qtd":9,"det":"","tam":"","cores":"estampa floral verde (da foto)","valor":"","fotos":["img/modakris-16-11-10-a.jpg"],"forn":3},
+ {"nome":"Calça jeans skinny REF 742","qtd":14,"det":"","tam":"36 ao 46","cores":"jeans escuro","valor":"59,90","forn":4},
+ {"nome":"Calça jeans skinny REF 747","qtd":14,"det":"","tam":"36 ao 46","cores":"jeans escuro","valor":"59,90","forn":4},
+ {"nome":"Calça jeans skinny REF A83","qtd":14,"det":"","tam":"36 ao 46","cores":"jeans escuro","valor":"59,90","forn":4},
+ {"nome":"Short jeans feminino REF 751","qtd":14,"det":"","tam":"36 ao 46","cores":"jeans claro, barra desfiada","valor":"59,90","forn":4},
+ {"nome":"Short jeans feminino REF 706","qtd":14,"det":"","tam":"36 ao 46","cores":"jeans escuro, barra desfiada","valor":"59,90","forn":4},
+ {"nome":"Short jeans feminino REF 707","qtd":14,"det":"","tam":"36 ao 46","cores":"jeans cinza, barra desfiada","valor":"59,90","forn":4},
+ {"nome":"Short jeans feminino REF 733","qtd":14,"det":"","tam":"36 ao 46","cores":"jeans médio, barra dobrada","valor":"59,90","forn":4},
+ {"nome":"Bermuda REF 3141","qtd":60,"det":"","tam":"P, M, G e GG","cores":"cinza, preta, verde e marinho","valor":"39,90","forn":5},
+ {"nome":"Pijama de corações REF 6142","qtd":16,"det":"","tam":"P, M, G e GG","cores":"rosa e azul","valor":"59,90","forn":5}
 ]
-var FORN=[{nome:"Fran Novo Brass",data:"15/11",slug:"fran-15-11"},{nome:"Vimabel Blusas",data:"15/11",slug:"vimabel-15-11"}];
+var FORN=[{"nome":"Fran Novo Brass","data":"15/11","slug":"fran-15-11"},{"nome":"Vimabel Blusas","data":"15/11","slug":"vimabel-15-11"},{"nome":"Bela Modas Vestidos","data":"16/11","slug":"belamodas-16-11"},{"nome":"Moda Kris Sp","data":"16/11","slug":"modakris-16-11"},{"nome":"Faixa Rosa","data":"16/11","slug":"faixarosa-16-11"},{"nome":"Duravest","data":"16/11","slug":"duravest-16-11"}];
 var CONT={};PECAS.forEach(function(p){p.slug=FORN[p.forn].slug;p.li=CONT[p.forn]=(CONT[p.forn]||0);CONT[p.forn]++;p.n=p.li+1});
 var TOTAL=PECAS.reduce(function(t,p){return t+p.qtd},0);
 FORN.forEach(function(f,j){f.qtd=PECAS.filter(function(p){return p.forn===j}).reduce(function(t,p){return t+p.qtd},0)});
