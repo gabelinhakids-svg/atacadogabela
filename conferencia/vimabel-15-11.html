@@ -64,7 +64,7 @@ button{font:inherit;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:t
 var PECAS=[
  {nome:"Blusa plus estampada",qtd:48,det:"",tam:"",cores:"cores médias e escuras",valor:"29,90"},
  {nome:"Regata plus GG estampada",qtd:48,det:"",tam:"GG",cores:"estampas e cores variadas",valor:"29,90"},
- {nome:"Blusa plus manga curta estampada",qtd:48,det:"",tam:"",cores:"estampas e cores variadas",valor:"29,90"},
+ {nome:"Blusa estampada",qtd:48,det:"",tam:"",cores:"estampas e cores variadas",valor:"29,90",fotos:["img/vimabel-15-11-3.jpg?v=5"]},
  {nome:"Blusa sobreleg plus com fenda",qtd:30,det:"",tam:"",cores:"estampas e cores variadas",valor:"29,90"},
  {nome:"Vestido com babado",qtd:25,det:"",tam:"",cores:"preto, marrom e marinho",valor:"59,90"},
  {nome:"Shorts viscolycra plus size",qtd:24,det:"",tam:"G1, G2 e G3",cores:"preto, marrom e vinho",valor:"29,90",fotos:["img/vimabel-15-11-6-a.jpg","img/vimabel-15-11-6-b.jpg"]}
@@ -86,7 +86,7 @@ PECAS.forEach(function(p,i){
  var k='conf-vimabel-15-11-'+i;
  var a=document.createElement('article');a.className='post';
  a.innerHTML='<div class="faixa">'+(i+1)+') VEM '+p.qtd+' PEÇAS – '+(p.tam||'tamanho único')+(p.det?'<small>'+p.det+'</small>':'')+'</div>'+
- '<div class="foto"><img src="img/vimabel-15-11-'+(i+1)+'.jpg?v=4" alt=""></div>'+
+ '<div class="foto"><img src="img/vimabel-15-11-'+(i+1)+'.jpg?v=5" alt=""></div>'+
  '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> '+(p.tam||'tamanho único')+'</p><p><b>🎨 Cores:</b> '+p.cores+'</p>'+
  '<p class="valor"></p>'+
  '<button type="button" class="edb">✏️ Edição detalhes<small></small></button>'+
