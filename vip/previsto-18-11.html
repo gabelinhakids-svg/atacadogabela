@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Gabela · Novidades chegando</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#F7F2EE;--card:#fff;--fg:#2B2226;--muted:#6E5F66;--accent:#E6007E;--line:#EADCE2}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:16px 12px 40px;-webkit-text-size-adjust:100%}
+.wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+header{background:var(--accent);color:#fff;border-radius:14px;padding:16px}
+header h1{margin:0;font-size:1.4rem}header p{margin:4px 0 0;font-weight:600}
+.post{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.foto{position:relative;background:#eee}
+.car{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.car::-webkit-scrollbar{display:none}
+.car>*{flex:0 0 100%;width:100%;scroll-snap-align:center;display:block;object-fit:contain;background:#eee;max-height:80vh}
+.cnt{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.6);color:#fff;font-weight:800;font-size:.9rem;padding:4px 10px;border-radius:20px;pointer-events:none}
+.rola{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);color:#fff;font-size:.85rem;font-weight:700;padding:4px 12px;border-radius:20px;pointer-events:none;white-space:nowrap}
+.corpo{padding:14px;display:flex;flex-direction:column;gap:6px}
+.corpo h2{margin:0;font-size:1.25rem}.corpo p{margin:0}
+.valor{font-weight:800;color:var(--accent);font-size:1.1rem}
+.bts{display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px}
+button,.bt{font:inherit;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:transparent;border-radius:12px;padding:12px 8px;text-align:center;text-decoration:none;border:2px solid var(--line);background:#fff;color:var(--fg)}
+.salva{grid-column:1/-1;background:var(--accent);border-color:var(--accent);color:#fff}
+.dica{margin:0;color:var(--muted);font-size:.9rem;text-align:center}
+</style></head><body><div class="wrap">
+<header><h1>✨ Previsto pra chegar</h1><p>Novidades chegando na quarta, 18/11</p></header>
+<div id="lista" style="display:flex;flex-direction:column;gap:20px"></div>
+<p class="dica">Fotos ilustrativas. Cores e modelos podem variar conforme a chegada.</p>
+</div>
+<script>
+var PECAS=[{"nome":"Conjunto fitness: top de alcinha + shorts com bolso","tam":"GGG","cores":"preto","valor":"69,90","fotos":["img/18-p01-1.jpg"]},{"nome":"Shorts fitness plus size cintura alta com bolso lateral","tam":"G1 e G2","cores":"preto","valor":"49,90","fotos":["img/18-p02-1.jpg"]},{"nome":"Shorts fitness com bolso lateral","tam":"GGG","cores":"preto e marrom","valor":"49,90","fotos":["img/18-p03-1.jpg"]},{"nome":"Top Zebra poliamida (textura de zebra)","tam":"Tamanho único","cores":"cores sortidas","valor":"29,90","fotos":["img/18-p04-1.jpg"]},{"nome":"Vestido longo regata com babado na barra","tam":"Tamanho único, veste M e G (até 44)","cores":"preto e marinho","valor":"59,90","fotos":["img/18-p05-1.jpg"]},{"nome":"Vestidos curtos plus (2 modelos: alça com laço no decote e manguinha com babados)","tam":"GG","cores":"com laço: preto e vinho · de manguinha: preto, marrom e vinho","valor":"59,90","fotos":["img/18-p06-1.jpg","img/18-p06-2.jpg","img/18-p06-3.jpg"]},{"nome":"Vestido longo alça larga, costas vazadas com fenda","tam":"Tamanho único, veste M e G (até 44)","cores":"vermelho e preto","valor":"59,90","fotos":["img/18-p07-1.jpg","img/18-p07-2.jpg"]},{"nome":"Vestido longo de alça com amarração nas costas","tam":"Tamanho único, veste M e G (até 44)","cores":"preto e vermelho","valor":"59,90","fotos":["img/18-p08-1.jpg"]},{"nome":"Vestido longo ombro a ombro com elástico na cintura","tam":"Tamanho único, veste M e G (até 44)","cores":"preto e vermelho","valor":"59,90","fotos":["img/18-p09-1.jpg","img/18-p09-2.jpg"]},{"nome":"Macacão plus pantalona com decote V transpassado","tam":"Plus size, veste GG","cores":"preto e marrom","valor":"59,90","fotos":["img/18-p10-1.jpg","img/18-p10-2.jpg"]},{"nome":"Camiseta peruana Adidas (logo no peito e listras na manga)","tam":"P ao GG","cores":"cores variadas","valor":"39,90","fotos":["img/18-p11-1.jpg"]},{"nome":"Papete Beira Rio com tiras de strass","tam":"Consulte a numeração","cores":"branca e nude","valor":"79,90","fotos":["img/18-p12-1.jpg","img/18-p12-2.jpg"]},{"nome":"Camiseta plus size lisa","tam":"Plus size","cores":"cores variadas","valor":"29,90","fotos":["img/18-p13-1.jpg"]},{"nome":"Blusa plus manga curta com estampa de coração","tam":"Tamanho único","cores":"cores sortidas","valor":"29,90","fotos":["img/18-p14-1.jpg"]},{"nome":"Regata GG com estampa de coração","tam":"GG","cores":"preta, vinho, marinho e marrom","valor":"29,90","fotos":["img/18-p15-1.jpg"]},{"nome":"Blusa plus manga curta com estampa do Garfield","tam":"Tamanho único","cores":"cores sortidas","valor":"29,90","fotos":["img/18-p16-1.jpg"]},{"nome":"Blusa alongada manga curta com fenda lateral","tam":"Tamanho único","cores":"cores sortidas","valor":"29,90","fotos":["img/18-p17-1.jpg"]},{"nome":"Vestido curto manga curta com babado na barra","tam":"Tamanho único","cores":"preto, marrom e marinho","valor":"59,90","fotos":["img/18-p18-1.jpg"]}];
+function fmt(n){return n.toFixed(2).replace('.',',')}
+function num(v){var n=parseFloat(String(v||'').replace(/\s|\$|R/g,'').replace(/\./g,'').replace(',','.'));return isNaN(n)?null:n}
+function textoValor(v){var n=num(v);return n==null?'':'Valor $'+fmt(n)+' ou 💵 $'+fmt(Math.round(n*95)/100)+' à vista (5% desc.)'}
+function texto(p){return p.nome+'\nTamanhos: '+p.tam+'\nCores: '+p.cores+(p.valor?'\n'+textoValor(p.valor):'')+'\n\nPrevisto pra chegar quarta, 18/11 ✨'}
+function nomeArq(p,u){return ('gabela-'+p.nome).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/-+$/,'')+u.slice(u.lastIndexOf('.'))}
+function salvar(p,u,btn){var old=btn.textContent;btn.textContent='Abrindo…';
+ fetch(u).then(function(r){return r.blob()}).then(function(bl){var f=new File([bl],nomeArq(p,u),{type:bl.type||'image/jpeg'});
+  if(navigator.canShare&&navigator.canShare({files:[f]})){return navigator.share({files:[f]}).catch(function(){})}
+  var a=document.createElement('a');a.href=URL.createObjectURL(bl);a.download=f.name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},2000)})
+ .catch(function(){window.open(u,'_blank')}).then(function(){btn.textContent=old})}
+var L=document.getElementById('lista');
+PECAS.forEach(function(p){
+ var a=document.createElement('article');a.className='post';
+ var m=p.fotos.map(function(u){return /\.mp4$/.test(u)?'<video src="'+u+'" poster="'+u.replace('vid/','img/').replace('.mp4','.jpg')+'" muted playsinline loop controls preload="none"></video>':'<img src="'+u+'" alt="'+p.nome.replace(/"/g,'')+'" loading="lazy">'}).join('');
+ a.innerHTML='<div class="foto"><div class="car">'+m+'</div>'+(p.fotos.length>1?'<span class="cnt">1/'+p.fotos.length+'</span><span class="rola">⇠ arraste pro lado ⇢</span>':'')+'</div>'+
+  '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> <span class="t"></span></p><p><b>🎨 Cores:</b> <span class="c"></span></p><p class="valor"></p>'+
+  '<div class="bts"><button type="button" class="salva">⬇️ Salvar foto</button></div></div>';
+ a.querySelector('h2').textContent=p.nome;a.querySelector('.t').textContent=p.tam;a.querySelector('.c').textContent=p.cores;var vv=a.querySelector('.valor');if(p.valor)vv.textContent=textoValor(p.valor);else vv.remove();
+ var c=a.querySelector('.car'),cn=a.querySelector('.cnt'),sb=a.querySelector('.salva');
+ function atual(){return Math.min(p.fotos.length-1,Math.round(c.scrollLeft/(c.clientWidth||1)))}
+ function rot(){var u=p.fotos[atual()];sb.textContent=/\.mp4$/.test(u)?'⬇️ Salvar vídeo':'⬇️ Salvar foto'+(p.fotos.length>1?' '+(atual()+1)+'/'+p.fotos.length:'')}
+ c.addEventListener('scroll',function(){if(cn)cn.textContent=(atual()+1)+'/'+p.fotos.length;var r=a.querySelector('.rola');if(r)r.style.display='none';rot()},{passive:true});
+ rot();sb.onclick=function(){salvar(p,p.fotos[atual()],sb)};
+ L.appendChild(a)});
+</script></body></html>
