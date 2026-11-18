@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
-<title>Conferência Ôlinda Novo 18/11</title>
+<title>Conferência Olinda 18/11</title>
 <style>
 *{box-sizing:border-box}
 :root{--bg:#F7F2EE;--card:#fff;--fg:#2B2226;--muted:#6E5F66;--accent:#E6007E;--line:#EADCE2;--ok:#1E8E4E;--bad:#C62828}
@@ -59,7 +59,7 @@ button{font:inherit;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:t
 </style></head><body>
 <div class="wrap">
 <header>
-<h1>Fornecedor: Ôlinda Novo</h1>
+<h1>Fornecedor: Olinda</h1>
 <p class="total">chega sexta 20/11 · <span id="tot"></span></p>
 </header>
 <div id="lista" style="display:flex;flex-direction:column;gap:22px"></div>
@@ -69,10 +69,10 @@ button{font:inherit;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:t
 <script>
 var PECAS=[
  {nome:"Conjunto blusa + shorts",qtd:24,det:"",tam:"Tamanho único, veste do 40 ao 44",cores:"preto",valor:"",fotos:["img/olinda-18-11-1-a.jpg","img/olinda-18-11-1-b.jpg"]},
- {nome:"Macacão pantacourt manga curta com amarração",qtd:24,det:"",tam:"Tamanho único",cores:"preto e cores a confirmar",valor:"",fotos:["img/olinda-18-11-2-a.jpg"]},
- {nome:"Macacão regata pantacourt",qtd:12,det:"",tam:"Tamanho único",cores:"preto",valor:"",fotos:["img/olinda-18-11-3-a.jpg","img/olinda-18-11-3-b.jpg","img/olinda-18-11-3-c.jpg"]},
- {nome:"Vestido mídi regata com fenda",qtd:24,det:"12 no Tamanho único (veste M e G) + 12 no plus Tamanho GG",tam:"Tamanho único veste M e G · plus Tamanho GG",cores:"preto e marrom",valor:"",fotos:["img/olinda-18-11-4-a.jpg","img/olinda-18-11-4-b.jpg","img/olinda-18-11-4-c.jpg"]},
- {nome:"Shortinho",qtd:30,det:"",tam:"Tamanho único, veste do 40 ao 44",cores:"preto, marrom, marinho e mais 2 cores a confirmar",valor:"",fotos:["img/olinda-18-11-5-a.jpg"]}
+ {nome:"Macacão pantacourt manga curta com amarração",qtd:24,det:"",tam:"Tamanho único",cores:"preto e cores a confirmar",valor:"59,90",fotos:["img/olinda-18-11-2-a.jpg"]},
+ {nome:"Macacão regata pantacourt",qtd:12,det:"",tam:"Tamanho único",cores:"preto",valor:"59,90",fotos:["img/olinda-18-11-3-a.jpg","img/olinda-18-11-3-b.jpg","img/olinda-18-11-3-c.jpg"]},
+ {nome:"Vestido mídi regata com fenda",qtd:24,det:"12 no Tamanho único (veste M e G) + 12 no plus Tamanho GG",tam:"Tamanho único veste M e G · plus Tamanho GG",cores:"preto e marrom",valor:"59,90",fotos:["img/olinda-18-11-4-a.jpg","img/olinda-18-11-4-b.jpg","img/olinda-18-11-4-c.jpg"]},
+ {nome:"Shortinho",qtd:30,det:"",tam:"Tamanho único, veste do 40 ao 44",cores:"preto, marrom, marinho e mais 2 cores a confirmar",valor:"29,90",fotos:["img/olinda-18-11-5-a.jpg"]}
 ];
 var TOTAL=PECAS.reduce(function(t,p){return t+p.qtd},0);
 function fmt(n){return n.toFixed(2).replace('.',',')}
@@ -117,7 +117,7 @@ var eb=a.querySelector('.edb'),ed2=a.querySelector('.edd'),ta=ed2.querySelector(
  pd();pintar();L.appendChild(a);
  var c=a.querySelector('.car'),cn=a.querySelector('.cnt');if(c&&cn)c.addEventListener('scroll',function(){cn.textContent=(Math.round(c.scrollLeft/c.clientWidth)+1)+'/'+c.children.length;var r=a.querySelector('.rola');if(r)r.style.display='none'},{passive:true});
 });
-function listaValores(){var t='Ôlinda Novo (chega 20/11)',c=[],fl=[],al=[];PECAS.forEach(function(p,i){var n=valorDe(p,i);var k2='conf-olinda-18-11-'+i,st=ler(k2),dt=ler('det-olinda-18-11-'+i);if(dt)al.push((i+1)+') '+p.nome+': '+dt);if(temF(st))fl.push((i+1)+') '+p.nome+': faltaram '+(parseInt(ler('conf-olinda-18-11-'+i+'-n')||'0',10)||0)+' de '+p.qtd);if(temOk(st))c.push((i+1)+') '+p.nome+' ('+(p.tam||'tamanho único')+')'+(temF(st)?' – chegaram '+Math.max(0,p.qtd-(parseInt(ler(k2+'-n')||'0',10)||0))+' de '+p.qtd:'')+(n==null?'':' $'+fmt(n)))});
+function listaValores(){var t='Olinda (chega 20/11)',c=[],fl=[],al=[];PECAS.forEach(function(p,i){var n=valorDe(p,i);var k2='conf-olinda-18-11-'+i,st=ler(k2),dt=ler('det-olinda-18-11-'+i);if(dt)al.push((i+1)+') '+p.nome+': '+dt);if(temF(st))fl.push((i+1)+') '+p.nome+': faltaram '+(parseInt(ler('conf-olinda-18-11-'+i+'-n')||'0',10)||0)+' de '+p.qtd);if(temOk(st))c.push((i+1)+') '+p.nome+' ('+(p.tam||'tamanho único')+')'+(temF(st)?' – chegaram '+Math.max(0,p.qtd-(parseInt(ler(k2+'-n')||'0',10)||0))+' de '+p.qtd:'')+(n==null?'':' $'+fmt(n)))});
  t+='\n\n✅ OK, colocar no catálogo:'+(c.length?'\n'+c.join('\n'):' nenhuma');t+='\n\n❌ Faltou:'+(fl.length?'\n'+fl.join('\n'):' nada');if(al.length)t+='\n\n✏️ Alterações:\n'+al.join('\n');return t}
 document.getElementById('envWa').onclick=function(){location.href='https://wa.me/?text='+encodeURIComponent(listaValores())};
 document.getElementById('envCp').onclick=function(){var b=this,t=listaValores();function ok(){b.textContent='Copiado ✓';setTimeout(function(){b.textContent='Copiar lista'},2000)}
