@@ -60,12 +60,19 @@ button{font:inherit;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:t
 .abas button{background:#fff;color:var(--fg);border:2px solid var(--accent);border-radius:12px;padding:14px 6px;font-size:1.05rem}
 .abas button.on{background:var(--accent);color:#fff}
 .abas span{display:block;font-size:.85rem;font-weight:700}
+.nota{background:#fff;border:2px solid var(--accent);border-radius:14px;padding:14px 16px}
+.nota h2{margin:0 0 4px;font-size:1.25rem}
+.nota p{margin:0 0 8px;color:var(--muted);font-size:.95rem}
+.nota ul{margin:0;padding:0;list-style:none;columns:2;column-gap:14px}
+.nota li{padding:3px 0;break-inside:avoid}
+.nota li b{display:inline-block;min-width:28px;color:var(--accent);font-size:1.1rem}
 </style></head><body>
 <div class="wrap">
 <header>
 <h1>Fornecedor: Bolsas em Geral</h1>
 <p class="total">chega sexta 20/11 · <span id="tot"></span></p>
 </header>
+<div class="nota"><h2>📋 Lista da nota (112 peças)</h2><p>Escrito do jeito que veio na nota. Confiram as quantidades por aqui; as fotos embaixo são só os modelos.</p><ul><li><b>12</b> Sacola Alo</li><li><b>12</b> Kipling comprida</li><li><b>12</b> Alo bolsa</li><li><b>11</b> Alo PP</li><li><b>6</b> T60</li><li><b>10</b> Kipling</li><li><b>10</b> Adidas saco</li><li><b>10</b> Mochila Kipling</li><li><b>6</b> Alo comprido</li><li><b>10</b> Alo</li><li><b>13</b> Saco mix</li></ul></div>
 <div class="abas"><button type="button" data-a="s" class="on">👜 Bolsa sacola <span id="ns"></span></button><button type="button" data-a="m">🎒 Mochilas <span id="nm"></span></button></div>
 <div id="lista" style="display:flex;flex-direction:column;gap:22px"></div>
 <div class="envia">
@@ -73,17 +80,17 @@ button{font:inherit;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:t
 </div>
 <script>
 var PECAS=[
- {nome:"Bolsa Alo com porta-garrafa",qtd:12,det:"",tam:"Tamanho único",cores:"marinho, cinza e preta",valor:"89,90",aba:"s",fotos:["img/bolsasemgeral-19-11-1-a.jpg", "img/bolsasemgeral-19-11-1-b.jpg", "img/bolsasemgeral-19-11-1-c.jpg"]},
- {nome:"Bolsa sacola Alo com bolso na frente",qtd:12,det:"",tam:"Tamanho único",cores:"marrom, verde oliva e preta",valor:"89,90",aba:"s",fotos:["img/bolsasemgeral-19-11-2-a.jpg", "img/bolsasemgeral-19-11-2-b.jpg", "img/bolsasemgeral-19-11-2-c.jpg"]},
- {nome:"Bolsa Alo tipo saco (pequena)",qtd:11,det:"",tam:"Tamanho único",cores:"bege, rosa e preta",valor:"89,90",aba:"s",fotos:["img/bolsasemgeral-19-11-3-a.jpg", "img/bolsasemgeral-19-11-3-b.jpg", "img/bolsasemgeral-19-11-3-c.jpg"]},
- {nome:"Bolsa de viagem Alo grande",qtd:6,det:"",tam:"Tamanho único",cores:"preta e caramelo",valor:"89,90",aba:"s",fotos:["img/bolsasemgeral-19-11-4-a.jpg", "img/bolsasemgeral-19-11-4-b.jpg"]},
- {nome:"Bolsa Alo matelassê",qtd:10,det:"",tam:"Tamanho único",cores:"marinho",valor:"89,90",aba:"s",fotos:["img/bolsasemgeral-19-11-5-a.jpg"]},
- {nome:"Bolsa de viagem Kipling",qtd:12,det:"",tam:"Tamanho único",cores:"preta e azul",valor:"89,90",aba:"s",fotos:["img/bolsasemgeral-19-11-6-a.jpg", "img/bolsasemgeral-19-11-6-b.jpg"]},
- {nome:"Bolsa sacola Kipling",qtd:10,det:"",tam:"Tamanho único",cores:"marrom e preta",valor:"89,90",aba:"s",fotos:["img/bolsasemgeral-19-11-7-a.jpg", "img/bolsasemgeral-19-11-7-b.jpg"]},
- {nome:"Bolsa esportiva T60",qtd:6,det:"",tam:"Tamanho único",cores:"preta",valor:"89,90",aba:"s",fotos:["img/bolsasemgeral-19-11-8-a.jpg"]},
- {nome:"Bolsa saco Adidas",qtd:10,det:"",tam:"Tamanho único",cores:"preta",valor:"89,90",aba:"s",fotos:["img/bolsasemgeral-19-11-9-a.jpg"]},
- {nome:"Bolsa saco mix (Nike, Alo e Adidas)",qtd:13,det:"",tam:"Tamanho único",cores:"preta e marrom, sortidas",valor:"89,90",aba:"s",fotos:["img/bolsasemgeral-19-11-10-a.jpg", "img/bolsasemgeral-19-11-10-b.jpg", "img/bolsasemgeral-19-11-10-c.jpg"]},
- {nome:"Mochila Kipling",qtd:10,det:"",tam:"Tamanho único",cores:"preta e marinho",valor:"89,90",aba:"m",fotos:["img/bolsasemgeral-19-11-11-a.jpg", "img/bolsasemgeral-19-11-11-b.jpg"]}
+ {nome:"Bolsa Alo com porta-garrafa",qtd:0,det:"",tam:"Tamanho único",cores:"marinho, cinza e preta",valor:"89,90",aba:"s",fotos:["img/bolsasemgeral-19-11-1-a.jpg", "img/bolsasemgeral-19-11-1-b.jpg", "img/bolsasemgeral-19-11-1-c.jpg"]},
+ {nome:"Bolsa sacola Alo com bolso na frente",qtd:0,det:"",tam:"Tamanho único",cores:"marrom, verde oliva e preta",valor:"89,90",aba:"s",fotos:["img/bolsasemgeral-19-11-2-a.jpg", "img/bolsasemgeral-19-11-2-b.jpg", "img/bolsasemgeral-19-11-2-c.jpg"]},
+ {nome:"Bolsa Alo tipo saco (pequena)",qtd:0,det:"",tam:"Tamanho único",cores:"bege, rosa e preta",valor:"89,90",aba:"s",fotos:["img/bolsasemgeral-19-11-3-a.jpg", "img/bolsasemgeral-19-11-3-b.jpg", "img/bolsasemgeral-19-11-3-c.jpg"]},
+ {nome:"Bolsa de viagem Alo grande",qtd:0,det:"",tam:"Tamanho único",cores:"preta e caramelo",valor:"89,90",aba:"s",fotos:["img/bolsasemgeral-19-11-4-a.jpg", "img/bolsasemgeral-19-11-4-b.jpg"]},
+ {nome:"Bolsa Alo matelassê",qtd:0,det:"",tam:"Tamanho único",cores:"marinho",valor:"89,90",aba:"s",fotos:["img/bolsasemgeral-19-11-5-a.jpg"]},
+ {nome:"Bolsa de viagem Kipling",qtd:0,det:"",tam:"Tamanho único",cores:"preta e azul",valor:"89,90",aba:"s",fotos:["img/bolsasemgeral-19-11-6-a.jpg", "img/bolsasemgeral-19-11-6-b.jpg"]},
+ {nome:"Bolsa sacola Kipling",qtd:0,det:"",tam:"Tamanho único",cores:"marrom e preta",valor:"89,90",aba:"s",fotos:["img/bolsasemgeral-19-11-7-a.jpg", "img/bolsasemgeral-19-11-7-b.jpg"]},
+ {nome:"Bolsa esportiva T60",qtd:0,det:"",tam:"Tamanho único",cores:"preta",valor:"89,90",aba:"s",fotos:["img/bolsasemgeral-19-11-8-a.jpg"]},
+ {nome:"Bolsa saco Adidas",qtd:0,det:"",tam:"Tamanho único",cores:"preta",valor:"89,90",aba:"s",fotos:["img/bolsasemgeral-19-11-9-a.jpg"]},
+ {nome:"Bolsa saco mix (Nike, Alo e Adidas)",qtd:0,det:"",tam:"Tamanho único",cores:"preta e marrom, sortidas",valor:"89,90",aba:"s",fotos:["img/bolsasemgeral-19-11-10-a.jpg", "img/bolsasemgeral-19-11-10-b.jpg", "img/bolsasemgeral-19-11-10-c.jpg"]},
+ {nome:"Mochila Kipling",qtd:0,det:"",tam:"Tamanho único",cores:"preta e marinho",valor:"89,90",aba:"m",fotos:["img/bolsasemgeral-19-11-11-a.jpg", "img/bolsasemgeral-19-11-11-b.jpg"]}
 ];
 var TOTAL=PECAS.reduce(function(t,p){return t+p.qtd},0);
 function fmt(n){return n.toFixed(2).replace('.',',')}
@@ -100,12 +107,12 @@ function resumo(){var ok=0,f=0,cheg=0;PECAS.forEach(function(p,i){var s=ler('con
 function midia(p){var f=p.fotos||[];if(!f.length)return '<div class="semfoto">📷 Foto a caminho</div>';
  var h=f.map(function(u){return /\.mp4$/.test(u)?'<video src="'+u+'" poster="'+u.replace('vid/','img/').replace('.mp4','.jpg')+'" muted playsinline loop controls preload="none"></video>':'<img src="'+u+'" alt="" loading="lazy">'}).join('');
  return '<div class="car">'+h+'</div>'+(f.length>1?'<span class="cnt">1/'+f.length+'</span><span class="rola">⇠ arraste pro lado ⇢</span>':'')}
-document.getElementById('tot').textContent=PECAS.every(function(p){return p.qtd})?TOTAL+' peças':'quantidade a confirmar';
+document.getElementById('tot').textContent='112 peças';
 var L=document.getElementById('lista');
 PECAS.forEach(function(p,i){
  var k='conf-bolsasemgeral-19-11-'+i;
  var a=document.createElement('article');a.className='post';
- a.dataset.aba=p.aba;a.innerHTML='<div class="faixa">'+(i+1)+') '+(p.qtd?'VEM '+p.qtd+' PEÇAS':'QUANTIDADE A CONFIRMAR')+' – '+(p.tam||'tamanho único')+(p.det?'<small>'+p.det+'</small>':'')+'</div>'+
+ a.dataset.aba=p.aba;a.innerHTML='<div class="faixa">MODELO '+(i+1)+(p.det?'<small>'+p.det+'</small>':'')+'</div>'+
  '<div class="foto">'+midia(p)+'</div>'+
  '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> '+(p.tam||'tamanho único')+'</p><p><b>🎨 Cores:</b> '+p.cores+'</p>'+
  '<p class="valor"></p>'+
@@ -128,12 +135,12 @@ var eb=a.querySelector('.edb'),ed2=a.querySelector('.edd'),ta=ed2.querySelector(
  pd();pintar();L.appendChild(a);
  var c=a.querySelector('.car'),cn=a.querySelector('.cnt');if(c&&cn)c.addEventListener('scroll',function(){cn.textContent=(Math.round(c.scrollLeft/c.clientWidth)+1)+'/'+c.children.length;var r=a.querySelector('.rola');if(r)r.style.display='none'},{passive:true});
 });
-function qa(x){return PECAS.reduce(function(t,p){return t+(p.aba==x?p.qtd:0)},0)}
-document.getElementById('ns').textContent=qa('s')+' peças';document.getElementById('nm').textContent=qa('m')+' peças';
+function qa(x){return PECAS.filter(function(p){return p.aba==x}).length}
+document.getElementById('ns').textContent=qa('s')+' modelos';document.getElementById('nm').textContent=qa('m')+' modelo'+(qa('m')>1?'s':'');
 function aba(x){[].forEach.call(document.querySelectorAll('.abas button'),function(b){b.classList.toggle('on',b.dataset.a==x)});[].forEach.call(L.children,function(e){e.style.display=e.dataset.aba==x?'':'none'});try{localStorage.setItem('aba-bolsasemgeral-19-11',x)}catch(e){}}
 [].forEach.call(document.querySelectorAll('.abas button'),function(b){b.onclick=function(){aba(b.dataset.a)}});
 aba(ler('aba-bolsasemgeral-19-11')||'s');
-function listaValores(){var t='Bolsas em Geral (chega 20/11)',c=[],fl=[],al=[];PECAS.forEach(function(p,i){var n=valorDe(p,i);var k2='conf-bolsasemgeral-19-11-'+i,st=ler(k2),dt=ler('det-bolsasemgeral-19-11-'+i);if(dt)al.push((i+1)+') '+p.nome+': '+dt);if(temF(st))fl.push((i+1)+') '+p.nome+': faltaram '+(parseInt(ler('conf-bolsasemgeral-19-11-'+i+'-n')||'0',10)||0)+' de '+p.qtd);if(temOk(st))c.push((i+1)+') '+p.nome+' ('+(p.tam||'tamanho único')+')'+(temF(st)?' – chegaram '+Math.max(0,p.qtd-(parseInt(ler(k2+'-n')||'0',10)||0))+' de '+p.qtd:'')+(n==null?'':' $'+fmt(n)))});
+function listaValores(){var t='Bolsas em Geral (chega 20/11)',c=[],fl=[],al=[];PECAS.forEach(function(p,i){var n=valorDe(p,i);var k2='conf-bolsasemgeral-19-11-'+i,st=ler(k2),dt=ler('det-bolsasemgeral-19-11-'+i);if(dt)al.push('Modelo '+(i+1)+') '+p.nome+': '+dt);if(temF(st))fl.push('Modelo '+(i+1)+') '+p.nome+': faltaram '+(parseInt(ler('conf-bolsasemgeral-19-11-'+i+'-n')||'0',10)||0));if(temOk(st))c.push('Modelo '+(i+1)+') '+p.nome+(n==null?'':' $'+fmt(n)))});
  t+='\n\n✅ OK, colocar no catálogo:'+(c.length?'\n'+c.join('\n'):' nenhuma');t+='\n\n❌ Faltou:'+(fl.length?'\n'+fl.join('\n'):' nada');if(al.length)t+='\n\n✏️ Alterações:\n'+al.join('\n');return t}
 document.getElementById('envWa').onclick=function(){location.href='https://wa.me/?text='+encodeURIComponent(listaValores())};
 document.getElementById('envCp').onclick=function(){var b=this,t=listaValores();function ok(){b.textContent='Copiado ✓';setTimeout(function(){b.textContent='Copiar lista'},2000)}
