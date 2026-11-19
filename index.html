@@ -1,4 +1,4 @@
-<!doctype html><html data-versao="20261118214915"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html data-versao="20261119134921"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Catálogo Gabela Atacado</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka:wght@600;700&family=Nunito:wght@600;700;800;900&display=swap">
 <style id="estilo">
@@ -586,16 +586,61 @@ document.getElementById("lista-limpar").addEventListener("click", () => {
 document.getElementById("mandar").addEventListener("click", async e => {
   e.preventDefault(); e.stopImmediatePropagation();
   const texto = () => { location.href = "https://wa.me/" + ZAP + "?text=" + encodeURIComponent(lista.length ? textoLista() : "Oi! Vi o catálogo e quero fazer um pedido."); };
-  if (!lista.length || window.claude || !navigator.canShare) return texto();
+  if (!lista.length || window.claude) return texto();
+  // 19/11 (Gabi): a consulta tem que chegar SEMPRE em foto. Se o celular não deixar mandar foto daqui
+  // (ex.: catálogo aberto dentro do Instagram/Facebook), NÃO manda texto sozinho: mostra o passo para abrir no navegador.
+  if (!navigator.canShare) return semFoto(texto);
   try {
     const files = await Promise.all(lista.filter(x => x.img).map((x, k) => pegar(x.img).then(b => new File([b], `gabela-${k + 1}.jpg`, {type: b.type || "image/jpeg"}))));
-    if (!files.length || !navigator.canShare({files})) return texto();
+    if (!files.length || !navigator.canShare({files})) return semFoto(texto);
     await navigator.share({files});
   } catch (err) {
     if (err && err.name === "AbortError") return;
-    texto();
+    semFoto(texto);
   }
 }, true);
+// Painel quando o celular não deixa mandar foto: leva a cliente para o Chrome/Safari com as peças já marcadas.
+function linkComLista(){
+  let b = ""; try { b = btoa(unescape(encodeURIComponent(JSON.stringify(lista)))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); } catch (e) {}
+  return SITE + "?lista=" + b;
+}
+function semFoto(texto){
+  let p = document.getElementById("sem-foto");
+  if (!p) {
+    p = document.createElement("div"); p.id = "sem-foto";
+    p.style.cssText = "position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.6);display:grid;place-items:center;padding:16px";
+    document.body.appendChild(p);
+  }
+  const android = /android/i.test(navigator.userAgent);
+  const url = linkComLista();
+  const chrome = "intent://" + url.replace(/^https:\/\//, "") + "#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=" + encodeURIComponent(url) + ";end";
+  p.innerHTML = `<div style="background:#fff;color:#1B1720;border-radius:18px;padding:18px;max-width:420px;width:100%;display:grid;gap:12px;font-size:18px;line-height:1.35">
+    <b style="font-size:21px">📸 Falta só 1 passo para mandar as fotos</b>
+    <span>Aqui dentro o celular não deixa enviar foto. Abra o catálogo no navegador. As peças que você marcou já vão junto.</span>
+    ${android ? `<a class="btn" style="background:#1FA855;color:#fff" href="${chrome}">🌐 Abrir no Chrome</a>` : `<span style="background:#FFE4EF;border-radius:12px;padding:10px 12px">Toque nos <b>3 pontinhos ( ⋯ )</b> lá em cima e escolha <b>Abrir no navegador</b> (ou Safari).</span>`}
+    <button type="button" class="btn" id="sem-foto-copiar" style="background:#1B1720;color:#fff">🔗 Copiar o link do catálogo</button>
+    <button type="button" id="sem-foto-texto" style="font:inherit;font-size:15px;background:none;border:0;color:#5C5560;text-decoration:underline;padding:6px;cursor:pointer">Não consigo: mandar a lista em texto</button>
+    <button type="button" id="sem-foto-fechar" style="font:inherit;font-size:15px;background:none;border:0;color:#5C5560;padding:6px;cursor:pointer">✕ Fechar</button>
+  </div>`;
+  p.hidden = false;
+  p.querySelector("#sem-foto-fechar").onclick = () => { p.hidden = true; };
+  p.querySelector("#sem-foto-texto").onclick = () => { p.hidden = true; texto(); };
+  p.querySelector("#sem-foto-copiar").onclick = ev => {
+    const b = ev.currentTarget;
+    const ok = () => { b.textContent = "✓ Link copiado! Cole no navegador"; };
+    try { navigator.clipboard.writeText(url).then(ok, () => prompt("Copie o link:", url)); } catch (err) { prompt("Copie o link:", url); }
+  };
+}
+// Chegou do outro navegador com as peças marcadas no link (?lista=...): marca de novo aqui.
+(() => {
+  try {
+    const q = new URLSearchParams(location.search).get("lista"); if (!q) return;
+    const vindas = JSON.parse(decodeURIComponent(escape(atob(q.replace(/-/g, "+").replace(/_/g, "/")))));
+    if (Array.isArray(vindas)) vindas.forEach(x => { if (x && x.chave && !lista.some(y => y.chave === x.chave)) lista.push(x); });
+    guardar();
+    history.replaceState(null, "", location.pathname + location.hash);
+  } catch (e) {}
+})();
 // Site sempre na versão mais nova: se o celular abriu uma cópia antiga guardada, recarrega sozinho.
 if (!window.claude && /atacadogabela/.test(location.hostname)) {
   fetch("versao.txt?t=" + Date.now(), {cache: "no-store"}).then(r => r.ok ? r.text() : "").then(v => {
