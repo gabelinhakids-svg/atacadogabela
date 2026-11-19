@@ -1,0 +1,841 @@
+<!doctype html><html data-versao="20261119214214"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Catálogo Gabela Atacado</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka:wght@600;700&family=Nunito:wght@600;700;800;900&display=swap">
+<style id="estilo">
+/* Layout: vitrine escura estilo app de moda. Fundo grafite, fotos de ponta a ponta, preço em verde neon, botões lado a lado */
+:root{
+  --fundo:#141114; --cartao:#1F1A1F; --linha:#2E272E; --tinta:#FFFFFF; --tinta-2:#B9AEB5;
+  --rosa:#E8085A; --neon:#39FF88; --amarelo:#FFC21A; --azul:#4AA8FF;
+  --f:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--fundo);color:var(--tinta);font-family:var(--f);font-weight:700;font-size:17px;line-height:1.4}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--fundo)}
+.g{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.miolo{max-width:560px;margin:0 auto}
+.topo{padding-block:28px 6px}
+.marca{font-size:13px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:var(--rosa)}
+.topo h1{margin:6px 0 4px;font-size:48px;font-weight:900;line-height:.95;letter-spacing:-.01em}
+.titulo{display:flex;align-items:center;gap:12px}
+.boneca{width:64px;height:64px;border-radius:50%;flex:none;border:3px solid var(--rosa)}
+.data{font-size:15px;color:var(--tinta-2)}
+.folha{margin-top:16px;display:grid;gap:12px}
+.conds{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.conds::-webkit-scrollbar{display:none}
+.cond{background:var(--cartao);border:1px solid var(--linha);border-radius:16px;padding:12px 14px;display:grid;gap:2px;min-width:0}
+.cond b{font-size:19px;font-weight:900;line-height:1.1}
+.cond span{font-size:13px;color:var(--tinta-2);font-weight:800}
+.cond.destaque b{color:var(--neon)}
+.revende{border:2px solid var(--amarelo);border-radius:16px;padding:14px 16px;font-size:17px;color:var(--tinta-2);background:color-mix(in srgb,var(--amarelo) 8%,var(--cartao))}
+.atencao{display:block;width:max-content;margin-bottom:8px;background:var(--amarelo);color:#141114;font-weight:900;font-size:15px;letter-spacing:.08em;text-transform:uppercase;border-radius:8px;padding:4px 10px}
+.revende b{color:var(--tinta)}
+nav{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
+nav .passo{grid-column:1/-1;font-size:14px;color:var(--tinta-2);font-weight:900;text-transform:uppercase;letter-spacing:.08em}
+nav::-webkit-scrollbar{display:none}
+nav a{text-decoration:none;color:var(--tinta);background:var(--cartao);border:1px solid var(--linha);border-radius:14px;padding:12px 10px;font-weight:900;font-size:16px;text-align:center;line-height:1.15}
+
+.busca{margin-top:18px;display:grid;gap:10px;position:sticky;top:0;z-index:20;background:var(--fundo);padding:10px 0 12px}
+.busca .campo{display:flex;align-items:center;gap:8px;background:var(--cartao);border:2px solid var(--rosa);border-radius:16px;padding:4px 6px 4px 14px}
+.busca .campo span{font-size:20px}
+.busca input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:18px;font-weight:800;color:var(--tinta);padding:10px 0;outline:none}
+.busca input::placeholder{color:var(--tinta-2);font-weight:700}
+.busca #busca-limpar{border:0;background:var(--rosa);color:#fff;font:inherit;font-weight:900;font-size:15px;border-radius:12px;padding:9px 12px;cursor:pointer}
+.busca .pilulas{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.busca .pilulas::-webkit-scrollbar{display:none}
+.busca .pilulas button{flex:none;border:1px solid var(--linha);background:var(--cartao);color:var(--tinta);font:inherit;font-weight:900;font-size:15px;border-radius:999px;padding:8px 14px;cursor:pointer}
+.busca .pilulas button[aria-pressed="true"]{background:var(--rosa);border-color:var(--rosa);color:#fff}
+.busca .achou{font-size:15px;font-weight:900;color:var(--tinta-2)}
+.busca .achou:empty{display:none}
+.oculto{display:none!important}
+nav a:focus-visible,.btn:focus-visible{outline:3px solid var(--neon);outline-offset:2px}
+.grupo{padding-top:34px;scroll-margin-top:12px;display:grid;gap:22px}
+.grupo>h2{margin:0;font-size:34px;font-weight:900;line-height:1}
+.grupo>h2 small{display:block;font-size:14px;color:var(--tinta-2);font-weight:800;margin-top:8px}
+.sub{--c:var(--rosa);display:grid;gap:14px;background:var(--cartao);border:4px solid var(--c);border-radius:24px;padding:0 12px 18px;overflow:hidden;box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 18%,transparent)}
+.sub.azul{--c:var(--azul)} .sub.amarelo{--c:var(--amarelo)}
+.sub-cab{margin:0 -12px;padding:14px 16px!important;background:var(--c);border-bottom:0!important;color:#141114}
+.sub-cab h3,.sub-cab .tag,.sub-cab .preco b{color:#141114!important}
+.sub-cab .preco span{color:#141114;background:rgba(255,255,255,.55);border-radius:8px;padding:2px 6px}
+.sub-cab .preco i{background:#141114;color:var(--neon)}
+.divisor{display:flex;align-items:center;gap:10px;color:var(--tinta-2);font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;margin:6px 0}
+.divisor::before{content:"";flex:1;height:3px;border-radius:3px;background:repeating-linear-gradient(90deg,var(--linha) 0 10px,transparent 10px 18px)}
+.rotulo{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:900;color:var(--tinta-2);text-transform:uppercase;letter-spacing:.06em}
+.rotulo b{color:var(--tinta)}
+.voltar{display:block;text-align:center;color:var(--tinta-2);font-size:15px;font-weight:900;text-decoration:none;padding-top:4px}
+.sub-cab{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding:0 4px 12px;border-bottom:1px solid var(--linha)}
+.sub-cab h3{margin:0;font-size:22px;font-weight:900;line-height:1.1}
+.tag{display:inline-block;margin-top:6px;font-size:14px;font-weight:900;color:var(--tinta-2)}
+.sub.rosa h3{color:#FFD3E3} .sub.azul h3{color:#D3E9FF}
+.preco{text-align:right;flex:none;font-variant-numeric:tabular-nums}
+.preco b{display:block;font-size:24px;font-weight:900}
+.preco span{display:inline-flex;align-items:center;gap:6px;font-size:16px;font-weight:900;color:var(--neon)}
+.preco i{font-style:normal;background:var(--neon);color:#0b2a16;border-radius:6px;padding:1px 6px;font-size:12px}
+.midia{display:grid;gap:22px}
+.item{display:grid;gap:10px}
+.item img,.item video{width:100%;height:auto;max-width:100%;display:block;border-radius:14px;background:#000}
+/* Espaço da foto reservado antes de carregar: assim a página não pula quando a pessoa toca numa categoria. */
+.item>img,.trilho img{aspect-ratio:3/4;height:auto;object-fit:contain;background:#fff}
+.item video{aspect-ratio:9/16;height:auto;width:100%;object-fit:contain;background:#000}
+.vid{gap:10px}
+.mini{font:inherit;position:relative;justify-self:center;padding:0;border:0;background:#000;border-radius:16px;overflow:hidden;cursor:pointer;aspect-ratio:3/4;width:min(70%,260px)}
+.mini img{width:100%;height:100%;object-fit:cover;display:block;border-radius:0}
+.play{position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.92);color:#141114;display:grid;place-items:center;font-size:26px;padding-left:5px}
+.selo-v{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(0,0,0,.75));color:#fff;font-size:15px;font-weight:900;padding:22px 8px 10px;text-align:center}
+.vid-lado{display:grid;gap:8px;min-width:0}
+.vid-lado .rotulo{font-size:13px;flex-wrap:wrap}
+.toque{font-size:14px;color:var(--tinta-2);font-weight:800}
+.acoes1{display:grid;gap:8px}
+.acoes1 .btn{min-height:48px;font-size:15px;border-radius:12px}
+.tela{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.94);display:grid;grid-template-rows:auto 1fr;padding:calc(10px + env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
+.tela[hidden]{display:none}
+.fechar{justify-self:end;font:inherit;font-weight:900;font-size:18px;background:#fff;color:#141114;border:0;border-radius:999px;padding:10px 18px;cursor:pointer}
+.tela video{width:100%;height:100%;max-height:calc(100vh - 90px);object-fit:contain;align-self:center}
+.acoes{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.acoes .nota,.acoes .msg{grid-column:1/-1}
+.btn{font:inherit;font-weight:900;border:0;border-radius:14px;min-height:58px;padding:10px;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;cursor:pointer;text-decoration:none;font-size:17px;line-height:1.1;text-align:center}
+.btn svg{width:22px;height:22px;flex:none}
+.btn.comprar{background:var(--rosa);color:#fff}
+.btn.share{background:#fff;color:#141114}
+.nota{font-size:14px;color:var(--tinta-2);text-align:center;font-weight:800}
+.nota b{color:var(--neon)}
+.msg{font-size:14px;color:var(--tinta-2);text-align:center}
+.vazio{background:var(--fundo);border-radius:14px;padding:22px 12px;text-align:center;color:var(--tinta-2);font-size:15px;display:grid;gap:4px}
+.vazio span{font-size:30px}
+.final{display:grid;gap:14px;margin-top:34px}
+.car{position:relative}
+.trilho{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:14px;overscroll-behavior-x:contain}
+.trilho::-webkit-scrollbar{display:none}
+.trilho{background:#fff}
+.trilho img{flex:0 0 100%;width:100%;scroll-snap-align:center;border-radius:0!important;object-fit:contain;background:#fff!important}
+.seta{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.95);color:#141114;font:900 30px/1 Nunito,sans-serif;display:grid;place-items:center;box-shadow:0 2px 10px rgba(0,0,0,.35);cursor:pointer;padding:0 0 4px}
+.seta.esq{left:8px} .seta.dir{right:8px}
+.seta[disabled]{opacity:.3}
+.cont{position:absolute;top:10px;right:10px;background:rgba(20,17,20,.8);color:#fff;font-weight:900;font-size:14px;border-radius:999px;padding:4px 10px}
+.pontos{display:flex;justify-content:center;gap:8px;margin-top:10px}
+.pontos i{width:10px;height:10px;border-radius:50%;background:var(--linha)}
+.pontos i.on{background:var(--c);width:24px;border-radius:6px}
+.dica{text-align:center;font-size:14px;font-weight:800;color:var(--tinta-2);margin-top:4px}
+.mais{background:var(--amarelo);color:#1d1400;border-radius:20px;padding:20px 16px;text-align:center;display:grid;gap:8px}
+.mais .grande{font-size:24px;font-weight:900;line-height:1.15;text-wrap:balance}
+.mais p{margin:0;font-size:17px;font-weight:800}
+.mais .btn{background:#141114;color:#fff}
+.fim20{border:2px solid var(--neon);border-radius:20px;padding:20px 16px;text-align:center;display:grid;gap:6px}
+.fim20 .grande{font-size:26px;font-weight:900;line-height:1.1;color:var(--neon)}
+.fim20 p{margin:0;font-size:16px;font-weight:800}
+.entrega{border:2px solid var(--azul);border-radius:20px;padding:20px 16px;display:grid;gap:12px}
+.entrega .grande{font-size:24px;font-weight:900;line-height:1.1;color:var(--azul);text-align:center}
+.entrega div.l{display:flex;gap:12px;align-items:center;font-size:17px;font-weight:800}
+.entrega div.l span{font-size:28px;flex:none}
+.entrega div.l small{display:block;font-size:14px;color:var(--tinta-2);font-weight:800}
+footer{margin-top:24px;padding-bottom:110px;text-align:center;font-size:14px;color:var(--tinta-2);display:grid;gap:3px}
+footer b{color:var(--tinta)}
+.barra{position:fixed;left:0;right:0;bottom:0;z-index:6;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:rgba(20,17,20,.92);backdrop-filter:blur(8px)}
+.barra a{max-width:560px;margin:0 auto;background:var(--neon);color:#0b2a16;border-radius:999px}
+.subir{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(92px + env(safe-area-inset-bottom,0px));z-index:7;width:56px;height:56px;border-radius:50%;border:3px solid var(--fundo);background:#fff;color:#141114;font:900 26px/1 Nunito,sans-serif;display:grid;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.5);cursor:pointer;padding:0}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Modo edição (só a dona vê) */
+.ed-abrir{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:12px;z-index:15;font:inherit;font-weight:900;font-size:15px;background:#fff;color:#141114;border:0;border-radius:999px;padding:10px 16px;box-shadow:0 2px 12px rgba(0,0,0,.4);cursor:pointer}
+.ed-barra{position:fixed;left:0;right:0;bottom:0;z-index:15;background:#fff;color:#141114;padding:10px max(14px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));display:grid;gap:8px;box-shadow:0 -4px 16px rgba(0,0,0,.4)}
+.ed-status{font-size:14px;font-weight:800;text-align:center;max-width:560px;margin:0 auto}
+.ed-botoes{display:grid;grid-template-columns:1fr 2fr;gap:8px;max-width:560px;width:100%;margin:0 auto}
+.ed-botoes .btn{min-height:50px;font-size:16px}
+.ed-sair{background:#eee;color:#141114}
+.ed-salvar{background:var(--neon);color:#0b2a16}
+.ed{display:grid;gap:10px;background:#fff;color:#141114;border-radius:16px;padding:14px}
+.ed label{display:grid;gap:4px;font-size:14px;font-weight:900}
+.ed input,.ed select{font:inherit;font-size:17px;font-weight:700;padding:10px 12px;border:2px solid #ccc;border-radius:10px;width:100%;min-width:0;background:#fff;color:#141114}
+.ed-2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ed-tit{font-size:14px;font-weight:900;margin-top:4px}
+.ed-fotos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ed-f{display:grid;gap:4px}
+.ed-f img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:8px;background:#eee}
+.ed-f div{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.ed-f button,.ed-v button{font:inherit;font-weight:900;border:0;border-radius:8px;background:#eee;color:#141114;min-height:36px;cursor:pointer}
+.ed-v{display:flex;gap:10px;align-items:center;font-weight:900}
+.ed-v button{padding:0 12px}
+.ed-arq{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;overflow:hidden}
+.ed-add{position:relative;display:flex!important;align-items:center;justify-content:center;min-height:50px;border:2px dashed #999;border-radius:12px;font-size:16px!important;cursor:pointer}
+.ed-del{font:inherit;font-weight:900;font-size:15px;border:0;background:none;color:#c0003a;padding:8px;cursor:pointer}
+.ed-nova{font:inherit;font-weight:900;font-size:17px;min-height:56px;border:2px dashed var(--tinta-2);border-radius:16px;background:none;color:var(--tinta);cursor:pointer;width:100%;margin-top:14px}
+.mini video{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.ed-barra[hidden],.ed-abrir[hidden]{display:none}
+/* Nome da peça em caixa alta, letra arredondada */
+.sub-cab h3{font-family:"Fredoka",var(--f);font-weight:700;text-transform:uppercase;letter-spacing:.03em;font-size:21px;line-height:1.15;text-wrap:balance}
+/* Topo da caixa: nome ocupa a largura toda; embaixo, tamanho à esquerda e preço à direita (nada de palavras empilhadas) */
+.sub-cab{display:grid!important;gap:8px;align-items:stretch!important;justify-content:stretch!important}
+.rotulo{min-width:0;font-size:22px}
+.rotulo b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.sub-cab .linha{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.sub-cab .preco b{font-size:22px}
+.sub-cab .preco span{font-size:15px}
+.sub-cab .tag{margin-top:0;white-space:nowrap;line-height:1.3}
+/* Títulos e botões das categorias: letra moderna e alta, diferente da das peças, em maiúsculas, brancos */
+.grupo>h2{font-family:"Bebas Neue",var(--f);font-weight:400;text-transform:uppercase;letter-spacing:.04em;font-size:40px;line-height:1;text-wrap:balance;color:#fff;display:flex;align-items:center;gap:12px}
+.grupo{--c:var(--rosa)} .grupo.azul{--c:var(--azul)} .grupo.amarelo{--c:var(--amarelo)}
+.grupo>h2::before{content:"";width:8px;align-self:stretch;min-height:36px;border-radius:4px;background:var(--c);flex:none}
+.grupo>h2::after{content:"";flex:1;min-width:24px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--c),transparent)}
+nav a{font-family:"Bebas Neue",var(--f);font-weight:400;font-size:20px!important;letter-spacing:.03em!important;text-transform:uppercase;letter-spacing:.03em;font-size:15px;text-wrap:balance;display:flex;align-items:center;justify-content:center;min-height:52px}
+/* Tema claro */
+:root{--fundo:#FAF7F2;--cartao:#FFFFFF;--linha:#E4DFE3;--tinta:#1B1720;--tinta-2:#5C5560;--neon:#0B9A50;color-scheme:light}
+.grupo>h2{color:var(--tinta)}
+.sub.rosa h3,.sub.azul h3{color:var(--tinta)}
+.sub{box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 14%,transparent),0 6px 18px rgba(30,20,30,.08)}
+.preco i{color:#fff}
+.btn.share{background:#1B1720;color:#fff}
+.barra{background:color-mix(in srgb,var(--fundo) 92%,transparent);border-top:1px solid var(--linha)}
+.barra a{color:#fff}
+.ed-salvar{color:#fff}
+.subir{background:#1B1720;color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.revende{background:color-mix(in srgb,var(--amarelo) 12%,var(--cartao))}
+.sub-cab .preco i{color:#39FF88}
+body::before{background:var(--fundo)}
+.oferta20{margin-top:14px;display:flex;align-items:center;gap:12px;background:var(--neon);color:#fff;border-radius:16px;padding:12px 16px;font-size:17px;font-weight:800;line-height:1.25}
+.oferta20 b{font-family:"Bebas Neue",var(--f);font-weight:400;font-size:40px;line-height:.9;letter-spacing:.02em;flex:none}
+/* Cartões mais leves: cor só como detalhe, preço grande */
+.grupo{gap:16px;padding-top:30px}
+.sub{border:1px solid var(--linha);border-top:6px solid var(--c);border-radius:18px;padding:0 10px 14px;gap:12px;box-shadow:0 4px 16px rgba(40,30,20,.07)}
+.sub-cab{margin:0 -10px;padding:14px 14px 12px!important;background:var(--cartao);border-bottom:1px solid var(--linha)!important;color:var(--tinta)}
+.sub-cab h3,.sub-cab .preco b{color:var(--tinta)!important}
+.sub-cab h3{font-size:19px}
+.sub-cab .linha{align-items:flex-end}
+.sub-cab .tag{color:var(--tinta)!important;background:color-mix(in srgb,var(--c) 22%,#fff);border-radius:999px;padding:5px 12px;font-size:15px}
+.sub-cab .preco b{font-size:30px;line-height:1.05}
+.sub-cab .preco span{background:none;padding:0;color:var(--neon);font-size:22px;margin-top:2px}
+.sub-cab .preco i{background:var(--neon);color:#fff;font-size:13px;padding:2px 7px}
+.rotulo{display:none!important}
+.midia{gap:16px}
+.vazio{display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 10px;font-size:13px;background:none;border:1px dashed var(--linha);border-radius:10px}
+.vazio span{font-size:15px}
+.voltar{font-size:14px;padding-top:0}
+.divisor{margin:2px 0}
+/* Gostei + lista */
+.item{position:relative}
+.gostei{position:absolute;top:8px;left:8px;z-index:3;display:flex;align-items:center;gap:7px;font:inherit;font-weight:900;font-size:16px;line-height:1;color:#fff;background:rgba(20,17,20,.6);border:0;border-radius:999px;padding:4px 13px 4px 4px;cursor:pointer}
+.gostei::before{content:"";position:absolute;inset:-8px}
+.gostei b{width:28px;height:28px;border-radius:50%;border:2.5px solid #fff;display:grid;place-items:center;color:transparent;font-size:16px;line-height:1}
+.gostei[aria-pressed="true"]{background:var(--rosa)}
+.gostei[aria-pressed="true"] b{background:#fff;color:var(--rosa)}
+.btn.gostei{background:#fff;color:var(--rosa);border:2px solid var(--rosa)}
+.btn.gostei svg{width:24px;height:24px}
+.btn.gostei[aria-pressed="true"]{background:var(--rosa);color:#fff}
+.btn.gostei[aria-pressed="true"] svg{fill:currentColor}
+.acoes .msg:not(:empty){font-size:15px;font-weight:900;color:var(--neon);text-align:center}
+.lista-info{max-width:560px;margin:0 auto 8px;display:flex;justify-content:space-between;align-items:center;font-size:16px;font-weight:900;color:var(--rosa)}
+.lista-info button{font:inherit;font-size:14px;font-weight:800;background:none;border:0;color:var(--tinta-2);text-decoration:underline;padding:4px;cursor:pointer}
+
+.logo{display:block;width:min(240px,62%);height:auto;margin-bottom:6px}
+.conds{margin-top:14px}
+.cond.destaque b{color:var(--neon)}
+.preco i{font-style:normal}
+.item>img{aspect-ratio:auto}
+#mandar{white-space:nowrap;font-size:clamp(14px,4.3vw,17px);padding-inline:12px}
+.subir{bottom:calc(122px + env(safe-area-inset-bottom,0px))}
+/* Formato do grupo do WhatsApp: fundo de conversa, cada peça é uma postagem com foto grande e legenda embaixo */
+:root{--fundo:#EFE7DD;--bolha:#FFFFFF;--zap:#1FA855}
+#vitrine .grupo{gap:14px}
+.post{border:0!important;border-radius:12px!important;padding:5px!important;gap:0!important;background:var(--bolha)!important;box-shadow:0 1px 1.5px rgba(0,0,0,.14)!important}
+.post .midia{gap:10px}
+.post .item{gap:0}
+.post .item>img,.post .trilho{border-radius:9px}
+.leg{display:grid;gap:3px;padding:10px 8px 12px;font-size:17px}
+.leg h3{margin:0;font-family:var(--f)!important;font-weight:900;font-size:18px!important;line-height:1.25;text-transform:none!important;letter-spacing:0!important;color:var(--tinta)!important}
+.leg .tag{display:block;margin:0;padding:0;background:none!important;font-size:16px;font-weight:800;color:var(--tinta-2)!important;white-space:normal}
+.leg .preco{text-align:left;display:grid;gap:1px}
+.leg .preco b{font-size:24px;font-weight:900;color:var(--tinta)}
+.leg .preco span{font-size:18px;color:var(--neon);background:none;padding:0;margin:0}
+.leg .preco i{background:none!important;color:var(--neon)!important;padding:0!important;font-size:15px!important}
+.post .acoes{padding:0 3px 3px;gap:6px}
+.post .btn{min-height:52px;font-size:18px;border-radius:10px}
+.btn.enviar{background:var(--zap);color:#fff}
+.post .btn.share{background:var(--zap);color:#fff;grid-column:1/-1}
+.btn.share svg+svg{margin-left:-2px}
+.revende{border:2px solid #F7A8C6;background:#FFE4EF;font-size:16px;line-height:1.5;padding:12px 14px;box-shadow:0 1px 1.5px rgba(0,0,0,.10)}
+/* Natal (14/11): enfeite na entrada do catálogo */
+.natal{font-size:44px;line-height:1}
+.revende .passo{display:block;font-size:20px;line-height:1.4;padding:3px 0}
+.natal-faixa{display:inline-block;margin:6px 0 4px;background:#C8102E;color:#fff;font-weight:900;font-size:16px;border-radius:999px;padding:6px 14px;box-shadow:0 2px 0 #0B6B3A}
+</style>
+<header class="topo g" id="topo"><div class="miolo">
+  <img class="logo" src="midia/0806e1070f3f6f8d5cef6a22d7a3a481.png" alt="Gabela Atacado" width="900" height="384">
+  <div class="titulo"><h1>Catálogo</h1><span class="natal" aria-hidden="true">🎅🎄</span></div>
+  <div class="natal-faixa">✨ Clima de Natal na Gabela 🎁</div>
+  <div class="data" id="data">Atualizado hoje</div>
+  <div class="conds"><div class="cond"><b>Mínimo 4 itens</b><span>pode misturar as peças</span></div><div class="cond destaque"><b>💵 5% OFF</b><span>pagando no dinheiro</span></div></div>
+</div></header>
+<div class="g" id="corpo"><div class="miolo">
+  <div class="folha">
+    <div class="revende"><span class="passo">1️⃣ Gostou? Toque em <b>Consultar</b> na foto.</span><span class="passo">2️⃣ Toque no <b>botão verde</b> lá embaixo.</span></div>
+  </div>
+
+  <nav id="chips" aria-label="Categorias"></nav>
+  <div class="busca" role="search">
+    <label class="campo"><span aria-hidden="true">🔍</span><input id="busca" type="search" placeholder="Procurar: short, saia, calça..." autocomplete="off" enterkeyhint="search" aria-label="Procurar peça"><button type="button" id="busca-limpar" hidden="">Limpar</button></label>
+    <div class="pilulas" id="pilulas"></div>
+    <div class="achou" id="achou" role="status"></div>
+  </div>
+  <main id="vitrine"></main>
+
+  <div class="final">
+    <div class="mais">
+      <div class="grande">Além das fotos do catálogo, temos muitas outras opções!</div>
+      <p>Consulte no privado outros modelos e cores. Mande o tamanho e o tipo de peça que você procura.</p>
+      <a class="btn" href="https://wa.me/5551984509505?text=Oi!%20Vi%20o%20cat%C3%A1logo.%20Procuro%20(tipo%20de%20pe%C3%A7a)%3A%20%20%20Tamanho%3A%20" target="_blank" rel="noopener">💬 Consultar no privado</a>
+    </div>
+  </div>
+
+  <footer>
+    <div><b>Gabela Atacado</b> · mais de 20 anos de atacado</div>
+    <div>Rua Canários, 727 · Jardim Algarve · Alvorada/RS</div>
+    <div>@atacadogabela</div>
+  </footer>
+</div></div>
+<div class="tela" id="tela" hidden=""><button type="button" class="fechar" id="fechar">✕ Fechar</button><video id="player" controls="" playsinline=""></video></div>
+<div class="barra" id="barra"><div class="lista-info" id="lista-info" hidden=""><span id="lista-n"></span><button type="button" id="lista-limpar">Limpar</button></div><a class="btn" id="mandar" href="https://wa.me/5551984509505?text=Oi!%20Vi%20o%20cat%C3%A1logo%20e%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener">💬 Fazer meu pedido</a><button type="button" class="subir" id="subir" aria-label="Voltar para as categorias" hidden="">⬆</button></div>
+<script type="application/json" id="dados">{"atualizado":"2026-11-19","grupos":[{"nome":"Feminino","cats":[{"id":"blusas-plus-modelos","nome":"Blusas viscolycra (vários modelos)","tipo":"blusa plus size","tam":"Veste GG","preco":39.9,"cor":"rosa","fotos":["midia/b2d61e2169f37c6bd677d22bee4d7f4b.jpg","midia/21f42462e887a9780ddeff2d95d17792.jpg","midia/fe643c8c0cbda8317180b049653e805d.jpg","midia/e68c4da1e13b63565b7ea3df1732842d.jpg","midia/f7a723381f20a5d541ee4a52a59f6e32.jpg","midia/192a82b5801a64d95c4a82a4ca57cdfe.jpg","midia/035515987a0e2d3cdb2b8fc951baa0d2.jpg","midia/e4d78b74db41cfa3f044f69ed28d1716.jpg","midia/fa04e4334f902b998bb6b4a6e827dd96.jpg"],"video":null,"capa":null},{"id":"blusa-plus-estampada","nome":"Blusa plus estampada viscolycra ","tipo":"blusa plus size","tam":"Veste GG e G1","preco":29.9,"cor":"rosa","fotos":["midia/d39f36bd2a483b657426e71a5e84aa34.jpg","midia/f5b52a65fafb831d87afb19f6877e0aa.jpg","midia/34b476eac0df3dc66e1fc059d29319fb.jpg","midia/9bca832f4012cb5f3647896bd3cdfd51.jpg","midia/66cb5c0672fe72e4d45950cb2c53881f.jpg","midia/5366bf450f0a412589311d8601a483e1.jpg","midia/eb07d3afe6374c536419a09e92a5af9c.jpg"],"video":null,"capa":null},{"id":"blusa-sobreleg-plus-fenda","nome":"Blusa sobreleg com fenda (estampas e cores variadas)","tipo":"blusa plus size","tam":"único · veste M e G","preco":29.9,"cor":"rosa","fotos":["midia/1589065e887cd86ec9df854a5d098ab6.jpg","midia/eb798c3b403da74956cbc6f2b29a951d.jpg","midia/54674dd6aa4e9b1d5e0df15df1eaa7e8.jpg"],"video":null,"capa":null},{"id":"blusa-sobreleg-arredondada","nome":"Sobre legging arredondada (várias cores e estampas)","tipo":"blusa plus size","tam":"único · veste M e G","preco":29.9,"cor":"rosa","fotos":["midia/f3135195ea7ed3836ffdd53dae254427.jpg"],"video":null,"capa":null},{"id":"tshirts","nome":"T-shirt de algodão","tipo":"t-shirt","tam":"único · veste M e G","preco":29.9,"cor":"rosa","fotos":["midia/f10a0c9f0687ec3d232b690aa223cc8d.jpg","midia/bc6f1ec2ec20de90eac327a3e1c43738.jpg","midia/bfbfaef9a087749f4fe67bbd0ceb915c.jpg","midia/1e25e26cb3908307bf8505e9bbc337a1.jpg","midia/1480710ab42235a4dde614a8840f3ed5.jpg","midia/50b119f7785212d58126e650ba1e440e.jpg","midia/8b2faf3b4b23108a56adb95c16f89bc1.jpg","midia/565a4b980be1b150a3ca1d4d92dd4147.jpg","midia/7bb62566eb2af12659fb7b04b4dab542.jpg","midia/08fbe8806ee1b1a3896db985d6066216.jpg","midia/8bfedc23065d4041bcb4afa9849830a5.jpg","midia/cb4561bb7c9da1990c7c33139ed03782.jpg"],"video":null,"capa":null},{"id":"tshirt-viscolycra","nome":"T-shirt de viscolycra","tipo":"t-shirt viscolycra","tam":"GG · veste G","preco":29.9,"cor":"rosa","fotos":["midia/2afd30e4e84071eb98e530e47e04ed67.jpg"],"video":null,"capa":null},{"id":"regata-canelada","nome":"Regata canelada","tipo":"regata","tam":"único","preco":29.9,"cor":"rosa","fotos":["midia/834a7b05981504a332007521174c9a17.jpg"],"video":null,"capa":null},{"id":"regatinha-suplex","nome":"Regatinha de suplex (+ cores)","tipo":"regata","tam":"único","preco":29.9,"cor":"rosa","fotos":["midia/a415385a265fb0f739e0b34fff90b957.jpg"],"video":null,"capa":null},{"id":"regata-suplex-fina","nome":"Regata de suplex alça fina, com bojo","tipo":"regata","tam":"único","preco":29.9,"cor":"rosa","fotos":["midia/bded62fafbdfcdc29beb30cf846f4884.jpg"],"video":null,"capa":null},{"id":"regata-fitness","nome":"Regata fitness","tipo":"regata","tam":"P","preco":35,"cor":"rosa","fotos":["midia/02118c32bce8c0e2660dc0d63cc242cc.jpg"],"video":null,"capa":null},{"id":"blusa-dedeira","nome":"Blusa manga longa fitness com dedeira","tipo":"regata","tam":"G/GG","preco":49.9,"cor":"rosa","fotos":["midia/2ccc8ac5fc3ebd89c25bef400fbe582d.jpg"],"video":null,"capa":null},{"id":"bata-romantica","nome":"Blusa bata romântica de viscose","tipo":"regata","tam":"único","preco":39.9,"cor":"rosa","fotos":["midia/a44007de7bb86de447be70e46d317a91.jpg"],"video":null,"capa":null},{"id":"blusinha-renda-babado","nome":"Blusinha de renda alça fina com babados","tipo":"regata","tam":"único","preco":39.9,"cor":"rosa","fotos":["midia/0bdb606d67a0b4dce524bca5314c98db.jpg"],"video":null,"capa":null},{"id":"blusinha-plissada-frente-unica","nome":"Blusinha plissada frente única com babado","tipo":"regata","tam":"único","preco":39.9,"cor":"rosa","fotos":["midia/1bb8d9bc1168be8a28ac61b0850d0a0d.jpg"],"video":null,"capa":null},{"id":"cropped-marrant","nome":"Blusa em Marrant com babado","tipo":"regata","tam":"único","preco":39.9,"cor":"rosa","fotos":["midia/ac7c0838e9d6ba24faae1c8d48d74fcc.jpg","midia/e6cf551a0e5ce1b2f2772df2f4d1d6b6.jpg"],"video":null,"capa":null},{"id":"cropped-liso","nome":"Regata suplex com bojo","tipo":"regata","tam":"único","preco":29.9,"cor":"rosa","fotos":["midia/9d38f4b135216f39967cb09d3644517b.jpg"],"video":null,"capa":null},{"id":"regata-ribana","nome":"Blusa regata ribana","tipo":"regata","tam":"único","preco":29.9,"cor":"rosa","fotos":["midia/6ccf8bf8e8b0717dacdb378d9f72bccd.jpg"],"video":null,"capa":null},{"id":"cropped-canelado","nome":"Cropped canelado (várias cores)","tipo":"regata","tam":"único · veste M e G","preco":29.9,"cor":"rosa","fotos":["midia/a7ae69f91e4486bf19e9c4ebcc44b7f6.jpg","midia/2f9d156b92a00ee60398f318c31c2dc2.jpg"],"video":null,"capa":null},{"id":"regata-plus-estampada","nome":"Regata plus estampada (diversas cores e estampas)","tipo":"regata","tam":"Veste GG e G1 ","preco":29.9,"cor":"rosa","fotos":["midia/fbb00ded07b2d82dde5ef36060bde0a1.jpg"],"video":null,"capa":null},{"id":"top-zebra-poliamida","nome":"Top Zebra poliamida preto","tipo":"regata","tam":"Único, veste M e G","preco":29.9,"cor":"rosa","fotos":["midia/afb0d4e78e313e5811ed6f55cb57e4cc.jpg"],"video":null,"capa":null},{"id":"body-tule","nome":"Body de tule","tipo":"body","tam":"único","preco":29.9,"cor":"rosa","fotos":["midia/90d0559657b2c8f36bc9158fbacae603.jpg"],"video":null,"capa":null},{"id":"body-tule-trabalhado","nome":"Body de tule trabalhado","tipo":"body","tam":"único · veste MG","preco":39.9,"cor":"rosa","fotos":["midia/43938098e3102605af906ea50fd2c181.jpg"],"video":null,"capa":null},{"id":"body-liso","nome":"Body de suplex (várias cores)","tipo":"body","tam":"único","preco":29.9,"cor":"rosa","fotos":["midia/d9a4d1717d7536de53b6878009754f71.jpg"],"video":null,"capa":null},{"id":"pijama-plus","nome":"Pijama americano plus size de oncinha","tipo":"pijama","tam":"G2 e G3","preco":59.9,"cor":"rosa","fotos":["midia/245abbc0e20973b978dcb7cffa93b375.jpg"],"video":null,"capa":null},{"id":"pijama-malha-short","nome":"Pijama de malha com elastano","tipo":"pijama","tam":"P","preco":59.9,"cor":"rosa","fotos":["midia/2fcae770c9ebf0926172f4eb6e767e97.jpg"],"video":null,"capa":null},{"id":"pijama-coracoes","nome":"Pijama americano de corações","tipo":"pijama","tam":"P, M, G e GG","preco":59.9,"cor":"rosa","fotos":["midia/3731e5034b677e4e2140f8d5ead0a81a.jpg"],"video":null,"capa":null},{"id":"conjunto-alfaiataria","nome":"Conjunto assimétrico de alfaiataria","tipo":"conjunto-alfaiataria","tam":"M no vinho, G no bordô","preco":89.9,"cor":"rosa","fotos":["midia/2ef7b052876869c531fed43b9bb14d55.jpg"],"video":null,"capa":null},{"id":"vestido-viscolycra","nome":"Vestido longo de viscolycra","tipo":"vestido","tam":"único · veste M e G","preco":59.9,"cor":"rosa","fotos":["midia/afd918fbdb4370318bbf1025b0587303.jpg","midia/34bcfa33be0d26f620ed89d7291cf3aa.jpg"],"video":null,"capa":null},{"id":"vestido-longo-alca-recorte","nome":"Vestido longo alça fina com recorte","tipo":"vestido","tam":"único","preco":79.9,"cor":"rosa","fotos":["midia/76adee63ce93b840615b4f95c8506488.jpg"],"video":null,"capa":null},{"id":"vestido-longo-decote-v","nome":"Vestido longo decote V","tipo":"vestido","tam":"único","preco":79.9,"cor":"rosa","fotos":["midia/d374824ea84c0268dee106ab466bc355.jpg"],"video":null,"capa":null},{"id":"vestido-longo-fenda","nome":"Vestido longo justo com fenda","tipo":"vestido","tam":"único","preco":79.9,"cor":"rosa","fotos":["midia/f2f006799ab48a63dd7c70544e5b4a05.jpg"],"video":null,"capa":null},{"id":"vestido-anarruga","nome":"Vestido longo ombro a ombro em anarruga","tipo":"vestido","tam":"único","preco":59.9,"cor":"rosa","fotos":["midia/feb7a8a44459205e4ca14ac457a1803b.jpg"],"video":null,"capa":null},{"id":"vestido-midi-gola-v-plus","nome":"Vestido mídi gola V plus (preto e azul-marinho)","tipo":"vestido","tam":"Média até 48/50","preco":59.9,"cor":"rosa","fotos":["midia/85b563cf129593ed83e9ba0c650b525b.jpg","midia/cb638a2e5aa19bd1f0379b7358d06646.jpg"],"video":null,"capa":null},{"id":"vestido-longo-plus","nome":"Vestido longo plus (marrom café e preto)","tipo":"vestido","tam":"Média 48/50","preco":69.9,"cor":"rosa","fotos":["midia/dfdf845c3ec3df43d1a7c7e14c26a470.jpg","midia/f8bf13240d3a307370c0be67b05101fd.jpg"],"video":null,"capa":null},{"id":"vestido-moletinho-plus","nome":"Vestido de moletinho plus preto e café ","tipo":"vestido","tam":"Média 48/50","preco":59.9,"cor":"rosa","fotos":["midia/9c97953303251adb7768f88a399e257e.jpg","midia/49326d5ed72901f9fb508c29134a363e.jpg"],"video":null,"capa":null},{"id":"vestido-longo-estampado","nome":"Vestido longo estampado (+ estampa)","tipo":"vestido","tam":"único","preco":79.9,"cor":"rosa","fotos":["midia/3c6bbe33af9f4e02cbb136bc74c08ae2.jpg","midia/3f89d5dd594b1f342108b9ac5f439a22.jpg"],"video":"midia/a77eeb18a6911198159e34ab4cdc9a11.mp4","capa":"midia/c547a7426f1798c5f1f20b2de06ace07.jpg"},{"id":"vestido-viscolinho-grande","nome":"Vestido viscolinho","tipo":"vestido","tam":"Único, veste M e G","preco":79.9,"cor":"rosa","fotos":["midia/fa4ab3cfcc57a54ad204c6e605eedde7.jpg","midia/215180007abc90c7306be92ed1e1a2b2.jpg"],"video":null,"capa":null},{"id":"vestido-viscolinho","nome":"Vestido viscolinho","tipo":"vestido","tam":"único · veste M e G","preco":79.9,"cor":"rosa","fotos":["midia/43e01d1b5d12812e96f8464612616b34.jpg"],"video":null,"capa":null},{"id":"vestido-longo-viscolycra-babado","nome":"Vestido longo viscolycra (verde e preto)","tipo":"vestido","tam":"único · veste M e G (até 44)","preco":59.9,"cor":"rosa","fotos":["midia/7a3cf23ce7fc84400ca20a4c8e8b29f9.jpg"],"video":null,"capa":null},{"id":"vestido-longo-viscolycra-amarracao","nome":"Vestido longo viscolycra com amarração nas costas (preto e vermelho)","tipo":"vestido","tam":"único · veste M e G (até 44)","preco":59.9,"cor":"rosa","fotos":["midia/43bce7814f7eb961bc75951c5955b373.jpg"],"video":null,"capa":null},{"id":"vestido-longo-viscolycra-ombro","nome":"Vestido longo viscolycra ombro a ombro","tipo":"vestido","tam":"único · veste M e G (até 44)","preco":59.9,"cor":"rosa","fotos":["midia/0e5ad7a10b7b893f43dac2a100946f88.jpg","midia/bae0e172a7a7d97f7601361311f2b97c.jpg"],"video":null,"capa":null},{"id":"vestido-curto-plus-viscolycra","nome":"Vestido curto plus de alcinha viscolycra (preto e marrom)","tipo":"vestido","tam":"GG · veste em média 46","preco":59.9,"cor":"rosa","fotos":["midia/c5a127a88f2a3d3a79e34e4b9fd1c118.jpg","midia/ce2d0d5374842d3674761785d35d4c2a.jpg"],"video":null,"capa":null},{"id":"vestido-plus-camadas","nome":"Vestido curto plus em camadas viscolycra (preto, vinho e marrom)","tipo":"vestido","tam":"GG · veste em média 46","preco":59.9,"cor":"rosa","fotos":["midia/184218167b14e890d8c957923bc446b2.jpg","midia/026ba63c51fff1fa2a5e561855cca199.jpg"],"video":null,"capa":null},{"id":"vestido-babado-vimabel","nome":"Vestido plus com babado","tipo":"vestido","tam":"G1 veste 46/48","preco":59.9,"cor":"rosa","fotos":["midia/1894d02e05ced6bb163406d89acd1050.jpg","midia/ebd88316488eb5c253d49c2e671d9c83.jpg"],"video":null,"capa":null},{"id":"calca-pantalona","nome":"Calça pantalona com cordão","tipo":"calça","tam":"P, M e G","preco":69.9,"cor":"rosa","fotos":["midia/4f8165c8f95ee5f0bfd8a58f97a4f565.jpg"],"video":null,"capa":null},{"id":"calca-montaria-cinto","nome":"Calça com cinto","tipo":"calça","tam":"P ao G","preco":69.9,"cor":"rosa","fotos":["midia/e1987b62e0bce3d280b1d991e042eeb0.jpg"],"video":null,"capa":null},{"id":"calca-couro-botoes","nome":"Calça de corino com botões","tipo":"calça","tam":"M e G ","preco":69.9,"cor":"rosa","fotos":["midia/408f82cbe4b245d4439529c6ca4a33ea.jpg"],"video":null,"capa":null},{"id":"calca-marrant","nome":"Calça Marrant","tipo":"calça","tam":"M","preco":69.9,"cor":"rosa","fotos":["midia/96abe80cce18949de6bb03d9767273db.jpg"],"video":null,"capa":null},{"id":"calca-visco-poliamida","nome":"Calça viscose","tipo":"calça","tam":"P ao GG","preco":69.9,"cor":"rosa","fotos":["midia/d500a4094f4a786b4117ff29c1bc6d57.jpg"],"video":null,"capa":null},{"id":"calca-linho-grosso","nome":"Calça pantalona de linho grosso","tipo":"calça","tam":"P ao G","preco":69.9,"cor":"rosa","fotos":["midia/366b79473120bb89d38e987b790d1367.jpg"],"video":null,"capa":null},{"id":"calca-imita-jeans","nome":"Calça imita jeans com botões no bolso","tipo":"calça","tam":"P, M e GG","preco":69.9,"cor":"rosa","fotos":["midia/737b79f9f97314a28e9d9bab7514235a.jpg"],"video":null,"capa":null},{"id":"calca-jeans-skinny","nome":"Calça jeans skinny","tipo":"calça","tam":"","preco":69.9,"cor":"rosa","fotos":["midia/6415131beb9f0b09b11487f37e1a5e2a.jpg","midia/9cb7e1f140cc46a3949a371ad6be2d9b.jpg","midia/55e94498d6a06754867001d53e6bc314.jpg","midia/d05f229387f13ccbae88bad3cf737310.jpg","midia/171d373d276afd1a47505f711fe19fae.jpg"],"video":null,"capa":null},{"id":"calca-jeans-skinny-plus","nome":"Calça jeans skinny plus size","tipo":"calça","tam":"","preco":89.9,"cor":"rosa","fotos":["midia/e509a7da4bc3e133b53fd902838783a0.jpg","midia/2ddb474abbeb0513bffe68a058434138.jpg"],"video":null,"capa":null},{"id":"calca-jeans-flare","nome":"Calça jeans flare","tipo":"calça","tam":"","preco":89.9,"cor":"rosa","fotos":["midia/94878cea70e2c805ba1aab0232494d88.jpg","midia/0b0858229aa8193655bb2ee785662fd7.jpg","midia/b44df4e61436c44d7a9908f06c598f2f.jpg","midia/ca10781cefa66e75742318e87f3fd091.jpg","midia/fc43085edae885a67f6fb06b174487e9.jpg","midia/31c080dbd89686a4dc0db73cf8361e37.jpg"],"video":null,"capa":null},{"id":"calca-jeans-wide-leg","nome":"Calça jeans wide leg","tipo":"calça","tam":"","preco":89.9,"cor":"rosa","fotos":["midia/b17c87873dea5cba5288bf8a8ad1565f.jpg","midia/d8b9a1b44de5b2dcb75ab08937723d35.jpg","midia/56d935eb72ece82ef1ff24aeedd03c63.jpg","midia/8c56a3a1d22dc4dbea2d6cba378a38d0.jpg"],"video":null,"capa":null},{"id":"calca-resinada-flare","nome":"Calça resinada flare","tipo":"calça","tam":"","preco":79.9,"cor":"rosa","fotos":["midia/63a419d59a8c33bb232159fb56fba8b1.jpg","midia/a7472a5e6d10b0a9b9006f91e13efc3e.jpg"],"video":null,"capa":null},{"id":"calca-pantalona-duna","nome":"Calça pantalona em duna vermelha","tipo":"calça","tam":"único","preco":59.9,"cor":"rosa","fotos":["midia/3a8be43442b0beb75b0b6e9067fdda25.jpg"],"video":null,"capa":null},{"id":"calca-pantalona-bege","nome":"Calça Alfaiataria","tipo":"calça","tam":"M e G","preco":69.9,"cor":"rosa","fotos":["midia/43573078f1889171e63c1d8512e75b02.jpg"],"video":null,"capa":null},{"id":"calca-lipo","nome":"Calça lipo","tipo":"calça","tam":"M, G e GG","preco":59.9,"cor":"rosa","fotos":["midia/549c25ea328e13d8618327967f8bb98f.jpg"],"video":null,"capa":null},{"id":"calca-lipo-plus","nome":"Calça lipo plus size","tipo":"calça","tam":"G1","preco":69.9,"cor":"rosa","fotos":["midia/691ed5f876eddc1616e7fd248a537d12.jpg"],"video":null,"capa":null},{"id":"legging-bolso","nome":"Legging suplex poliamida com bolsos laterais","tipo":"calça","tam":"G e GG","preco":59.9,"cor":"rosa","fotos":["midia/f82928cf876b653c91113a87e5069dca.jpg"],"video":null,"capa":null},{"id":"legging-flare-suplex","nome":"Legging flare suplex poliamida","tipo":"calça","tam":"M ao GG","preco":59.9,"cor":"rosa","fotos":["midia/21aa33b1ab39396ad54828ad7960b10b.jpg"],"video":null,"capa":null},{"id":"legging-suplex-grosso","nome":"Legging de suplex grosso","tipo":"calça","tam":"M, GG e G1 ","preco":49.9,"cor":"rosa","fotos":["midia/8cdcbad379e838dc6a8d9af6a93acf90.jpg"],"video":null,"capa":null},{"id":"legging-canelada-termica","nome":"Legging canelada térmica","tipo":"calça","tam":"Único ","preco":49.9,"cor":"rosa","fotos":["midia/4938bc23e0fdb6e1ad495d7836ba1302.jpg","midia/321349fe0cbe562a28eb95cee0c060df.jpg"],"video":null,"capa":null},{"id":"legging-termica","nome":"Legging térmica","tipo":"calça","tam":"M e G1","preco":39.9,"cor":"rosa","fotos":["midia/1cd0d7c8ca09db9c5e19052a75171faa.jpg"],"video":null,"capa":null},{"id":"legging-termica-canelada-bolso","nome":"Legging térmica canelada","tipo":"calça","tam":"GG","preco":69.9,"cor":"rosa","fotos":["midia/3606a6ee6d3db5c203394e81ead3fec7.jpg","midia/7fc48f9d374faeb32939b10966ebac0a.jpg","midia/9681b70e9296aae44a76312a33e23a6f.jpg"],"video":null,"capa":null},{"id":"legging-flare-termica","nome":"Legging flare térmica","tipo":"calça","tam":"GG","preco":59.9,"cor":"rosa","fotos":["midia/e50b766e2b06b10647483a0eb8cf03fd.jpg"],"video":null,"capa":null},{"id":"legging-pezinho-termica","nome":"Legging térmica com pezinho","tipo":"calça","tam":"M","preco":49.9,"cor":"rosa","fotos":["midia/5ab54865f5a83bc8a0a1813cc76fa7eb.jpg"],"video":null,"capa":null},{"id":"calca-jeans-skinny-escura","nome":"Calça jeans skinny Faixa Rosa ","tipo":"calça","tam":"34 ao 46","preco":69.9,"cor":"rosa","fotos":["midia/1205d9f1fd30cd1fd5f0528dbdb1f5da.jpg","midia/297cb35b030d2f459d2fc0154f47d369.jpg","midia/1d5bb247f21ccc2174566e9369c36de9.jpg","midia/24e5e2c8e4a9b9fd8d91ba0564366f44.jpg","midia/6895d15a45e22ace85cde5d71dea064d.jpg","midia/5596e28806a282268e732c8b42562a67.jpg"],"video":null,"capa":null},{"id":"conjunto-fitness","nome":"Conjunto fitness canelado","tipo":"conjunto","tam":"P/M e G/GG","preco":99.9,"cor":"rosa","fotos":["midia/f9547dcd53474dc7bfbec7ada3f349ce.jpg"],"video":null,"capa":null},{"id":"conjunto-top-short","nome":"Conjunto fitness top e short","tipo":"conjunto","tam":"P/M","preco":89.9,"cor":"rosa","fotos":["midia/c0c233e35e29b7cd5998742ec2a87cd5.jpg"],"video":"midia/59512fe2808928f5ae2ce52c61155bf3.mp4","capa":"midia/c0c233e35e29b7cd5998742ec2a87cd5.jpg"},{"id":"macacao-fitness","nome":"Macacão fitness","tipo":"conjunto","tam":"G/GG","preco":119.9,"cor":"rosa","fotos":["midia/8ba20f79a185ff4848f84d70062c8543.jpg"],"video":null,"capa":null},{"id":"conjunto-moletinho","nome":"Conjunto de moletinho com cotton","tipo":"conjunto","tam":"único","preco":99.9,"cor":"rosa","fotos":["midia/c55b761311e48565aab3e53c388dc861.jpg"],"video":null,"capa":null},{"id":"conjunto-moletom-leve","nome":"Conjunto de moletinho leve","tipo":"conjunto","tam":"M (veste 42 a 44)","preco":99.9,"cor":"rosa","fotos":["midia/cc4bd0195277aec8fc612d1b36b91295.jpg"],"video":null,"capa":null},{"id":"conjunto-moletom-bolsos","nome":"Conjunto de moletinho leve com bolsos","tipo":"conjunto","tam":"M (veste 40/42)","preco":99.9,"cor":"rosa","fotos":["midia/dc8891dbcfd3bd9f2bd35c6ebf83e849.jpg"],"video":null,"capa":null},{"id":"macaquinho-duna","nome":"Macaquinho em Duna decote V transpassado","tipo":"conjunto","tam":"único","preco":59.9,"cor":"rosa","fotos":["midia/93e716c6ddb4bc617d4fe1c6bc7c50b1.jpg"],"video":null,"capa":null},{"id":"macaquinho-duna-frente-unica","nome":"Macaquinho em Duna frente única","tipo":"conjunto","tam":"único","preco":59.9,"cor":"rosa","fotos":["midia/155a19ddf663868a846958adc35cab62.jpg"],"video":null,"capa":null},{"id":"macaquinho-duna-laco","nome":"Macaquinho em Duna alça fina com laço","tipo":"conjunto","tam":"único","preco":59.9,"cor":"rosa","fotos":["midia/227c4907e45728fd55cb76b5dc46be13.jpg"],"video":null,"capa":null},{"id":"conjunto-plus-size","nome":"Conjunto plus size","tipo":"conjunto","tam":"G1 e G3","preco":69.9,"cor":"rosa","fotos":["midia/3f4f311d5f832b592979200766b9afca.jpg"],"video":null,"capa":null},{"id":"macaquinho-estampado","nome":"Macaquinho (estampas marinho e verde)","tipo":"conjunto","tam":"único","preco":59.9,"cor":"rosa","fotos":["midia/1333e087aeb92b938a0185c9ff8545b1.jpg","midia/74d005186469e10e1721159907d1ce90.jpg"],"video":null,"capa":null},{"id":"conjunto-fitness-top-shorts-bolso","nome":"Conjunto fitness top + shorts com bolso (preto)","tipo":"conjunto","tam":"G e GG","preco":69.9,"cor":"rosa","fotos":["midia/20ca705cd9a14dcce87eafb6add3b4a8.jpg"],"video":null,"capa":null},{"id":"macacao-plus-viscolycra","nome":"Macacão plus size viscolycra","tipo":"conjunto","tam":"plus size · veste GG","preco":69.9,"cor":"rosa","fotos":["midia/371b189bc2a0f23986783447ecfb4e4a.jpg","midia/b47179cc8164c8bbab5c062fe8a0e588.jpg"],"video":null,"capa":null},{"id":"short-alfaiataria-cinto","nome":"Short alfaiataria com cinto","tipo":"short","tam":"M marrom ","preco":49.9,"cor":"rosa","fotos":["midia/c77cda1a3c9824478db4c0958fb5b4f7.jpg"],"video":null,"capa":null},{"id":"short-cinto-preto-marrom","nome":"Short alfaiataria com cinto","tipo":"short","tam":"M marrom ","preco":49.9,"cor":"rosa","fotos":["midia/075bdcea50a41c28222756a74971385c.jpg"],"video":null,"capa":null},{"id":"short-courino","nome":"Short de courino","tipo":"short","tam":"G","preco":49.9,"cor":"rosa","fotos":["midia/c001735f686cdcfb9e9db8897d49f88c.jpg"],"video":null,"capa":null},{"id":"short-courino-cinto","nome":"Short de courino com cinto","tipo":"short","tam":"M","preco":49.9,"cor":"rosa","fotos":["midia/010e8a754e99be2308cd4196a75c6eb9.jpg"],"video":null,"capa":null},{"id":"short-jeans","nome":"Short jeans com e sem elastano","tipo":"short","tam":"","preco":69.9,"cor":"rosa","fotos":["midia/2de419c5fb08c91d24f376affa4b15d4.jpg","midia/2da94871732414815afe581c29922f62.jpg","midia/0747cc5e4dc3241223c1c121615dfc0f.jpg","midia/3eb9b623c97e0b0cc838d754512fa17f.jpg"],"video":null,"capa":null},{"id":"short-jeans-plus","nome":"Short jeans plus size","tipo":"short","tam":"50","preco":69.9,"cor":"rosa","fotos":["midia/e49b3d3275ac9aea23a1d6fc8ff644bf.jpg"],"video":null,"capa":null},{"id":"saia-jeans","nome":"Saia jeans com e sem elastano","tipo":"saia","tam":"","preco":69.9,"cor":"rosa","fotos":["midia/ba655a774110d6127e0a7ed58074e977.jpg","midia/1daf404b2b080cd895d8da0dc0655953.jpg","midia/8044a7d5e33345c807b5f5a37add490a.jpg","midia/2a0c742ca5f896811a75cd0b85450c40.jpg","midia/1d53dfe7fd6ed14d1b5a44036d58de71.jpg","midia/a365a54db3fd392fe08d3270850aa05d.jpg","midia/d41593b60aaeb064908e1996b72861a6.jpg"],"video":null,"capa":null},{"id":"bermuda-plus-suplex","nome":"Bermuda plus size suplex poliamida","tipo":"short","tam":"G1 (veste 48/50)","preco":49.9,"cor":"rosa","fotos":["midia/7e8757566dd4bd6fc6735e7468701a1f.jpg"],"video":null,"capa":null},{"id":"short-alfaiataria-cinto-liso","nome":"Short alfaiataria com cinto","tipo":"short","tam":"M, G e GG","preco":49.9,"cor":"rosa","fotos":["midia/b5765d517e827a88d94603d110a220c7.jpg"],"video":null,"capa":null},{"id":"short-alfaiataria-fivela-c","nome":"Short de alfaiataria com cinto","tipo":"short","tam":"M e G","preco":49.9,"cor":"rosa","fotos":["midia/14b5b04603201ce1ab31923d4422fd63.jpg"],"video":null,"capa":null},{"id":"short-plus-alfaiataria","nome":"Short alfaiataria","tipo":"short","tam":"GG","preco":49.9,"cor":"rosa","fotos":["midia/ce8b562e2ef990eeb1d1f47d34ae81b2.jpg"],"video":null,"capa":null},{"id":"short-jeans-feminino","nome":"Short jeans Faixa Rosa com elastano ","tipo":"short","tam":"34 ao 46","preco":69.9,"cor":"rosa","fotos":["midia/24d47b19c4f949c8aaff42eb3cab1b18.jpg","midia/38cc8366355ff5079d74d1fe23be2e4d.jpg","midia/ca275f98cbcad9e66cb6a08b1987ca51.jpg","midia/9c8ab1ffe671a0eab95835b3cc115005.jpg","midia/0907750ad9bfcae6428f1c94ebe3e1e7.jpg","midia/e63132463851e83b94b870894d71c2c9.jpg","midia/c9596f54353ef54803d5394188612b95.jpg","midia/160e5423fed7ac00fdcb1021aec0b933.jpg"],"video":null,"capa":null},{"id":"shorts-fitness-bolso","nome":"Shorts fitness com bolso","tipo":"short","tam":"G e GG","preco":39.9,"cor":"rosa","fotos":["midia/d1978189c1ed6c505e64f9a32d2e869d.jpg"],"video":null,"capa":null},{"id":"shorts-fitness-bolso-plus","nome":"Shorts fitness plus com bolso","tipo":"short","tam":"G1, G2 e G3","preco":49.9,"cor":"rosa","fotos":["midia/7bf9d12c3c6edc61ab80c3a18e7859da.jpg"],"video":null,"capa":null},{"id":"shorts-viscolycra-plus","nome":"Shorts viscolycra plus size (preto, marrom e vinho)","tipo":"short","tam":"G1, G2 e G3","preco":29.9,"cor":"rosa","fotos":["midia/2ed022efea43c68c4b6a26c669e41518.jpg"],"video":null,"capa":null}]},{"nome":"Masculino","cats":[{"id":"calca-masc-elastano","nome":"Calça com elastano","tipo":"calça masculina","tam":"M, G e GG","preco":39.9,"cor":"rosa","fotos":["midia/255f6b182511f349d1c7259eb291904d.jpg"],"video":null,"capa":null},{"id":"calca-jogger","nome":"Calça jogger","tipo":"calça masculina","tam":"M ao GG","preco":49.9,"cor":"rosa","fotos":["midia/13be00dc45720eb569b092d90da7bacd.jpg"],"video":null,"capa":null},{"id":"regata-masc","nome":"Regata (várias cores)","tipo":"regata masculina","tam":"G ao G1 ","preco":29.9,"cor":"rosa","fotos":["midia/690bef79182eab62cf53694adc1132c9.jpg"],"video":null,"capa":null},{"id":"camiseta-peruana","nome":"Camiseta peruana (várias cores)","tipo":"camiseta masculina","tam":"P ao GG","preco":39.9,"cor":"rosa","fotos":["midia/1127562cf7a52f7737134fba63eb8d9a.jpg","midia/43c1d478373c9025170c251aa48ed78d.jpg","midia/18b3da8eb3d25296bd12c40b82a09c09.jpg"],"video":"midia/e34e74f4c4ea7362b2fcc75a8662dd8b.mp4","capa":"midia/6eae08c9c5b4aaa618c139e53e3a580e.jpg"},{"id":"camiseta-peruana-plus","nome":"Camiseta peruana plus","tipo":"camiseta masculina","tam":"G1","preco":49.9,"cor":"rosa","fotos":["midia/498c78a4765695bdbb42c8ac5f199ec0.jpg"],"video":null,"capa":null},{"id":"calca-jeans-masc","nome":"Calça jeans tradicional","tipo":"calça","tam":"40 ao 48","preco":45.9,"cor":"rosa","fotos":["midia/24b6fd1389859f509910d3f07ecb4af4.jpg"],"video":null,"capa":null},{"id":"calca-jeans-masc-plus","nome":"Calça jeans plus","tipo":"calça masculina plus","tam":"50 ao 56","preco":49.9,"cor":"rosa","fotos":["midia/f0e0066fd76cdce36f98be532b10f4c9.jpg"],"video":null,"capa":null},{"id":"polo-masc","nome":"Camiseta polo","tipo":"polo","tam":"M ao GG","preco":29.9,"cor":"rosa","fotos":["midia/066b103b8ed54ed069423ec7dcec3d8f.jpg"],"video":null,"capa":null},{"id":"polo-tradicional-g1","nome":"Camiseta polo plus ","tipo":"polo","tam":"G1","preco":39.9,"cor":"rosa","fotos":["midia/c8bf8cfd8c8d9edd076d251125f4ea91.jpg"],"video":null,"capa":null},{"id":"camiseta-tradicional","nome":"Camiseta tradicional (várias cores)","tipo":"camiseta masculina","tam":"M ao G3","preco":29.9,"cor":"rosa","fotos":["midia/128529e9072db1cbc1f966b32505182a.jpg","midia/34cf777658bc126eff6b85f66dbb27be.jpg"],"video":null,"capa":null},{"id":"camiseta-dry-fit","nome":"Camiseta Dryfit","tipo":"camiseta masculina","tam":"M, G e GG","preco":29.9,"cor":"rosa","fotos":["midia/f5a09817bf051b3cba5b80c9ca91ac6a.jpg"],"video":null,"capa":null},{"id":"bermuda-jeans-masc","nome":"Bermuda jeans (várias lavagens)","tipo":"bermuda jeans","tam":"","preco":42.9,"cor":"rosa","fotos":["midia/fadcc9d04be15d48ff2cac210d294de8.jpg"],"video":null,"capa":null},{"id":"bermuda-jeans-plus","nome":"Bermuda jeans plus","tipo":"bermuda jeans","tam":"50 e 52","preco":49.9,"cor":"rosa","fotos":["midia/acb5576c7766c5ac8c65f25b3b37fdb8.jpg"],"video":null,"capa":null},{"id":"bermuda-moletom-ziper","nome":"Bermuda de moletom com zíper lateral","tipo":"bermuda","tam":"","preco":39.9,"cor":"rosa","fotos":["midia/67e518f1ba3e2f2c51f11eca71519c67.jpg"],"video":null,"capa":null},{"id":"bermuda-moletom-cordao","nome":"Bermuda de moletom","tipo":"bermuda","tam":"M ao GG","preco":35,"cor":"azul","fotos":["midia/7a89aaca55ec5fc34f0a2ca7ea4b2eb8.jpg"],"video":null,"capa":null},{"id":"bermuda-cordao-bolsos","nome":"Bermuda com elastano e bolsos ","tipo":"bermuda","tam":"P, M, G e GG","preco":39.9,"cor":"azul","fotos":["midia/f8d5f2b408c5b55fdadcee9aa78ec711.jpg"],"video":null,"capa":null},{"id":"moletom-canguru","nome":"Moletom canguru três cabos","tipo":"moletom","tam":"","preco":69.9,"cor":"rosa","fotos":["midia/6a0ad7421166a0f7f091883fb19b0528.jpg"],"video":null,"capa":null},{"id":"calca-moletom","nome":"Calça de moletom três cabos","tipo":"calça masculina","tam":"","preco":49.9,"cor":"rosa","fotos":["midia/c7fed2be4561ad9ff4133580f39457ca.jpg"],"video":null,"capa":null},{"id":"cueca-boxer","nome":"Cueca boxer de algodão","tipo":"cueca","tam":"M, G e GG","preco":19.9,"cor":"azul","fotos":["midia/b9a7b198eae14f20e57e5ffe1eb24146.jpg"],"video":null,"capa":null},{"id":"meias-12-pares","nome":"Meias, pacote com 12 pares","tipo":"meia","tam":"","preco":59.9,"cor":"azul","fotos":["midia/73deabda1876455c0f5e374b6599cc58.jpg"],"video":null,"capa":null}]},{"nome":"Tênis","cats":[{"id":"tenis","nome":"Tênis (vários modelos)","tipo":"tênis","tam":"","preco":79.9,"cor":"rosa","fotos":["midia/ceda55c6d002a99a2acd5ca99815238a.jpg","midia/d905c68e1dfd544711bf38528ae43663.jpg","midia/675576031b28b67831a8411e43394413.jpg","midia/3654c3eeb53a9d53a9bce8420c4787df.jpg","midia/794ac02f509cc31873d8af2308474246.jpg","midia/ba8a6b19baf40230b7f64bca08d95a2c.jpg","midia/21308017963b5692a07e40ff948ac04c.jpg","midia/64dc7860e63b94dd605d3e01a47736e0.jpg","midia/3f5f4196ef41a57281e8f3136fbf8ec2.jpg","midia/50e042f448515f3fef632659f6408b8c.jpg","midia/a15963d6867546b54a7aa9ba65c4d01d.jpg","midia/a4a2a2e472a2a646fab5950f3f316440.jpg","midia/5f23fd36cdb443478931fe717738fb8c.jpg","midia/5da901f98dd34ecc4627bb5db966fa78.jpg"],"video":null,"capa":null},{"id":"papetes-beira-rio","nome":"Papetes Beira Rio originais","tipo":"papete","tam":"34 ao 39 · Ótima qualidade, acompanha a caixa","preco":69.9,"cor":"rosa","fotos":["midia/6e86750bda212e1e15bfaf272eb4b74f.jpg","midia/879271ce2493ee3e2fc50565a9a53401.jpg","midia/69f37afae7c6acec152001077ab0736e.jpg"],"video":null,"capa":null}]},{"nome":"Bolsas","cats":[{"id":"bolsas-89","nome":"Bolsas de R$ 89,90","tipo":"bolsa","tam":"Várias cores e modelos","preco":89.9,"cor":"rosa","fotos":["midia/c29e1d3bdea1328f344e35c682dd5e24.jpg","midia/3ada6ea002a01696c4b554e54bf05faa.jpg","midia/60803ca4e5e67de99f4a6c29aa0809df.jpg","midia/19695b829e6f0b0aabc69a467740d1d8.jpg","midia/72cdb040b0534404751e9f6d23bc75f7.jpg","midia/d75b3b8373748e9a8b6c25d6f3ef88aa.jpg","midia/3822fc62c075c427988354247133a76a.jpg","midia/47609f1ccea3ef06b17759331e3e1060.jpg","midia/f7400fe43d4ce5a5bbd583d61d8e299f.jpg","midia/faf22f7affa109a52a65973da8bfbf33.jpg","midia/5986cf1686c8a352005e67a256894f28.jpg","midia/d5ca36c6b4118f9ef2f6c7d06b68d8be.jpg","midia/213e33e6e710e2be2441572461a160bd.jpg"],"video":"midia/badcc234d98ba44fc15e2f30302d435a.mp4","capa":"midia/7adbc5cffc08afe7cc65f8508bd94fa8.jpg"},{"id":"bolsas-69","nome":"Bolsas","tipo":"bolsa","tam":"Várias cores e modelos","preco":69.9,"cor":"rosa","fotos":["midia/1591ab22375df5e679c29112f5b6094d.jpg","midia/bc5a59a14c3f4cec204267c80905d54a.jpg"],"video":null,"capa":null}]}]}</script>
+<script id="app">
+// O catálogo inteiro vem do bloco "dados": categorias, peças, preços, fotos e vídeos.
+// preco: null = ainda sem valor definido (mostra "Consulte").
+const DADOS = JSON.parse(document.getElementById("dados").textContent);
+
+// Partes fixas da página, guardadas antes de desenhar: o modo edição publica a página inteira de novo com os dados novos.
+const MOLDE = {
+  estilo: document.getElementById("estilo").outerHTML,
+  topo: document.getElementById("topo").outerHTML,
+  corpo: document.getElementById("corpo").outerHTML,
+  tela: document.getElementById("tela").outerHTML,
+  barra: document.getElementById("barra").outerHTML,
+  app: document.currentScript.textContent,
+};
+
+const ZAP = "5551984509505";
+const ICON_WA = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.2-.2-.4-.3z"/></svg>';
+const ICON_CORACAO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.3 7.8 3.6 4 7.2 4c2.1 0 3.6 1.2 4.8 2.8C13.2 5.2 14.7 4 16.8 4c3.6 0 5.9 3.8 4.5 7.3-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg>';
+const ICON_IG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor" stroke="none"/></svg>';
+const ICON_SHARE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>';
+const real = v => "R$ " + v.toFixed(2).replace(".", ",");
+const off = v => Math.round(v * 95) / 100;
+const tamTxt = c => c.tam ? (/ano|cor|par/.test(c.tam) ? c.tam : "Tam. " + c.tam) : "Tamanhos: consulte";
+const slug = s => s.toLowerCase().normalize("NFD").replace(/[^a-z0-9]+/g, "-");
+const esc = s => String(s ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+let editando = false;
+// Palavras com hífen (pisca-luzes) não quebram no meio.
+const inteiro = s => esc(s).replace(/(\S+-\S+)/g, '<span style="white-space:nowrap">$1</span>');
+
+// Como um grupo: fotos uma embaixo da outra. Peças do mesmo tipo (ex.: "blusa plus size") ficam juntas,
+// na ordem em que o tipo apareceu pela primeira vez. O tipo não aparece para a cliente.
+const tipoDe = c => (c.tipo || "").trim().toLowerCase();
+function ordenados(){
+  return DADOS.grupos.map(g => {
+    const ordem = [];
+    g.cats.forEach(c => { if (!ordem.includes(tipoDe(c))) ordem.push(tipoDe(c)); });
+    return {g, cats: g.cats.slice().sort((a, b) => ordem.indexOf(tipoDe(a)) - ordem.indexOf(tipoDe(b)))};
+  });
+}
+
+// Dois botões curtos: "Enviar" abre direto a conversa com a Gabela; "Compartilhar" abre o menu do celular para mandar a foto sem preço às clientes ou postar nas redes.
+const textoPeca = c => `Oi! Tenho interesse nesta peça: ${c.nome}` + (c.preco == null ? "" : `, ${real(c.preco)}`) + (c.tam ? ` (${tamTxt(c).replace(" · ", ", ")})` : "");
+// Igual à Gabelinha: com o endereço do site em SITE, vai o link daquela foto, que aparece como prévia na conversa.
+// Enquanto não há domínio, vai o nome da peça, o preço e qual foto a pessoa estava vendo.
+function linkEnviar(c, tipo, src){
+  const fotos = c.fotos || [], video = tipo === "video";
+  const qual = video ? " (vídeo)" : fotos.length > 1 ? ` (foto ${fotos.indexOf(src) + 1} de ${fotos.length})` : "";
+  const base = video ? (c.capa || fotos[0]) : src;
+  const id = (String(base || "").match(/[0-9a-f]{32}/) || [])[0];
+  const txt = SITE && id ? SITE + "f/" + id + ".html" : textoPeca(c) + qual;
+  return `https://wa.me/${ZAP}?text=${encodeURIComponent(txt)}`;
+}
+function botoes(c, tipo, src){
+  return `<div class="acoes"><button type="button" class="btn share" data-foto="${esc(src)}" data-tipo="${tipo}">${ICON_WA}${ICON_IG}Compartilhar</button>
+    <div class="msg" role="status"></div></div>`;
+}
+// Bolinha em cima da foto: a cliente toca nas peças que quer e no fim manda todas de uma vez.
+const marca = (c, tipo) => `<button type="button" class="gostei" aria-pressed="false" data-cat="${esc(c.id)}" data-tipo="${tipo}"><b>✓</b><span>Consultar</span></button>`;
+function legenda(c){
+  const preco = c.preco == null ? `<div class="preco"><b>Consulte o valor</b></div>`
+    : `<div class="preco"><b>${real(c.preco)}</b><span>💵 ${real(off(c.preco))} <i>no dinheiro</i></span></div>`;
+  return `<div class="leg"><h3>${inteiro(c.nome)}</h3><span class="tag">${esc(tamTxt(c)).replace(" · ", ", ")}</span>${preco}</div>`;
+}
+
+function blocoFotos(c, leg = ""){
+  const fotos = c.fotos || [];
+  if (!fotos.length) return `<div class="vazio"><span>📷</span>Foto chegando em breve</div>`;
+  const imagem = fotos.length === 1 ? `<img src="${esc(fotos[0])}" alt="" loading="lazy">`
+    : `<div class="car"><div class="trilho">${fotos.map(f => `<img src="${esc(f)}" alt="" loading="lazy">`).join("")}</div>
+      <button type="button" class="seta esq" data-passo="-1" aria-label="Foto anterior" disabled>‹</button>
+      <button type="button" class="seta dir" data-passo="1" aria-label="Próxima foto">›</button>
+      <span class="cont">1 de ${fotos.length}</span></div>
+      <div class="pontos">${fotos.map((f, i) => `<i class="${i ? "" : "on"}"></i>`).join("")}</div>
+      <div class="dica">Toque na setinha para ver mais ${fotos.length - 1 > 1 ? fotos.length - 1 + " fotos" : "1 foto"}</div>`;
+  return `<div class="item"><div class="rotulo" aria-label="Foto">📷</div>${marca(c, "foto")}${imagem}${leg}${botoes(c, "foto", fotos[0])}</div>`;
+}
+
+function blocoVideo(c){
+  if (!c.video) return "";
+  // Vídeo em tamanho médio; abre grande só quando a pessoa toca.
+  const capa = c.capa ? `<img src="${esc(c.capa)}" alt="">` : `<video src="${esc(c.video)}#t=0.5" preload="metadata" muted playsinline></video>`;
+  return `<div class="item vid"><div class="rotulo" aria-label="Vídeo">🎬</div>${marca(c, "video")}
+    <button type="button" class="mini" data-video="${esc(c.video)}" aria-label="Assistir vídeo de ${esc(c.nome)}">${capa}<span class="play">▶</span><span class="selo-v">Toque para assistir</span></button>
+    ${botoes(c, "video", c.video)}</div>`;
+}
+
+function editor(c){
+  const cores = [["rosa","Rosa"],["azul","Azul"],["amarelo","Amarelo"]];
+  return `<div class="ed" data-cat="${esc(c.id)}">
+    <label>Nome da peça<input data-campo="nome" value="${esc(c.nome)}"></label>
+    <label>Tipo (só para juntar as parecidas, a cliente não vê)<input data-campo="tipo" list="tipos" value="${esc(c.tipo)}" placeholder="ex: blusa plus size"></label>
+    <datalist id="tipos">${[...new Set(DADOS.grupos.flatMap(g => g.cats).map(x => x.tipo).filter(Boolean))].map(t => `<option value="${esc(t)}">`).join("")}</datalist>
+    <div class="ed-2"><label>Tamanhos<input data-campo="tam" value="${esc(c.tam)}" placeholder="ex: 2 ao 16"></label>
+      <label>Preço<input data-campo="preco" inputmode="decimal" value="${c.preco == null ? "" : c.preco.toFixed(2).replace(".", ",")}" placeholder="vazio = Consulte"></label></div>
+    <label>Cor da caixa<select data-campo="cor">${cores.map(([v, t]) => `<option value="${v}"${c.cor === v ? " selected" : ""}>${t}</option>`).join("")}</select></label>
+    <div class="ed-tit">Fotos (a primeira é a capa)</div>
+    <div class="ed-fotos">${(c.fotos || []).map((f, i) => `<div class="ed-f"><img src="${esc(f)}" alt="">
+      <div><button type="button" data-ed="esq" data-i="${i}" aria-label="Mover para a esquerda">◀</button><button type="button" data-ed="tirar-foto" data-i="${i}" aria-label="Tirar foto">✕</button><button type="button" data-ed="dir" data-i="${i}" aria-label="Mover para a direita">▶</button></div></div>`).join("")}</div>
+    <label class="ed-add">＋ Adicionar fotos<input type="file" accept="image/*" multiple data-ed="add-fotos" class="ed-arq"></label>
+    <div class="ed-tit">Vídeo</div>
+    ${c.video ? `<div class="ed-v">🎬 Tem vídeo <button type="button" data-ed="tirar-video">✕ Tirar vídeo</button></div>` : ""}
+    <label class="ed-add">${c.video ? "Trocar vídeo" : "＋ Adicionar vídeo"}<input type="file" accept="video/*" data-ed="add-video" class="ed-arq"></label>
+    <button type="button" class="ed-del" data-ed="tirar-peca">🗑 Tirar esta peça do catálogo</button>
+  </div>`;
+}
+
+// Busca: escreve "short" (ou toca num botãozinho) e só aparecem as peças daquele tipo.
+const PILULAS = ["Calças","Shorts","Bermudas","Saias","Vestidos","Regatas","T-shirts","Conjuntos","Bodies","Pijamas","Plus size","Masculino","Tênis","Bolsas"];
+const semAcento = s => (s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+const raiz = w => w.endsWith("oes") ? w.slice(0, -3) + "ao" : w.endsWith("ies") ? w.slice(0, -3) + "y" : (w.length > 3 && w.endsWith("s")) ? w.slice(0, -1) : w;
+function filtrar(){
+  const campo = document.getElementById("busca");
+  const q = semAcento(campo.value).trim();
+  const palavras = q.split(/\s+/).filter(Boolean).map(raiz);
+  let n = 0;
+  // Se a palavra é o nome da peça (ex.: "shorts"), mostra só as peças que SÃO aquilo (não conjunto com short).
+  const todas = DADOS.grupos.flatMap(x => x.cats);
+  const primeira = c => raiz(semAcento(c.nome).split(/[^a-z0-9-]+/).filter(Boolean)[0] || "");
+  const exato = palavras.length === 1 && todas.some(c => primeira(c) === palavras[0]);
+  document.querySelectorAll("#vitrine .grupo").forEach(sec => {
+    const g = semAcento(sec.querySelector("h2")?.textContent);
+    let vis = 0;
+    sec.querySelectorAll("article.post").forEach(a => {
+      const c = DADOS.grupos.flatMap(x => x.cats).find(x => x.id === a.id);
+      const txt = semAcento([c?.nome, c?.tipo, g].join(" ")).replace(/-/g, " ");
+      const ok = !palavras.length || (exato ? c && primeira(c) === palavras[0] : palavras.every(p => txt.includes(p) || txt.includes(p.replace(/-/g, " "))));
+      a.classList.toggle("oculto", !ok); if (ok) vis++;
+    });
+    sec.classList.toggle("oculto", !!palavras.length && !vis);
+    n += vis;
+  });
+  document.getElementById("busca-limpar").hidden = !q;
+  document.getElementById("achou").textContent = q ? (n ? `${n} ${n === 1 ? "peça encontrada" : "peças encontradas"}` : "Nada encontrado. Tenta outra palavra ou consulta no privado.") : "";
+  document.querySelectorAll("#pilulas button").forEach(b => b.setAttribute("aria-pressed", semAcento(b.textContent) === q ? "true" : "false"));
+}
+function montarBusca(){
+  const pil = document.getElementById("pilulas");
+  pil.innerHTML = PILULAS.map(t => `<button type="button" aria-pressed="false">${t}</button>`).join("");
+  const campo = document.getElementById("busca");
+  let to; campo.addEventListener("input", () => { clearTimeout(to); to = setTimeout(filtrar, 150); });
+  campo.addEventListener("keydown", e => { if (e.key === "Enter") { campo.blur(); irBusca(); } });
+  const irBusca = () => { const b = document.querySelector(".busca"); scrollTo({top: b.getBoundingClientRect().top + scrollY - 4, behavior: "smooth"}); };
+  pil.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    campo.value = b.getAttribute("aria-pressed") === "true" ? "" : b.textContent;
+    filtrar(); irBusca();
+  });
+  document.getElementById("busca-limpar").addEventListener("click", () => { campo.value = ""; filtrar(); campo.focus(); });
+}
+
+function desenhar(){
+  const lista = ordenados();
+  setTimeout(() => typeof verTudo === "function" && verTudo());
+  document.getElementById("chips").innerHTML = '<div class="passo">Toque para ir direto ou role para ver tudo</div>' +
+    lista.map(x => `<a href="#${slug(x.g.nome)}">${esc(x.g.nome)}</a>`).join("");
+  // Cor da faixa do título: menina e menino juntos fica amarelo; senão a cor que mais aparece.
+  const corGrupo = cats => {
+    const n = {};
+    cats.forEach(c => n[c.cor || "rosa"] = (n[c.cor || "rosa"] || 0) + 1);
+    if (!cats.length) return "azul";
+    if (n.rosa && n.azul) return "amarelo";
+    return Object.keys(n).sort((a, b) => n[b] - n[a])[0] || "rosa";
+  };
+  document.getElementById("vitrine").innerHTML = lista.map(x => `<section class="grupo ${corGrupo(x.cats)}" id="${slug(x.g.nome)}">
+    <h2>${esc(x.g.nome)}</h2>` + (x.cats.length || editando ? "" : `<div class="vazio"><span>🛍️</span>Peças chegando em breve</div>`) +
+    (editando ? `<div class="ed ed-grupo" data-grupo="${DADOS.grupos.indexOf(x.g)}"><label>Nome da categoria<input data-campo="grupo" value="${esc(x.g.nome)}"></label></div>` : "") +
+    x.cats.map((c, n) => {
+      return `<article class="sub post ${esc(c.cor)}" id="${esc(c.id)}">
+        ${editando ? editor(c) : ""}
+        <div class="midia">${blocoFotos(c, legenda(c))}${blocoVideo(c)}</div></article>`;
+    }).join("") +
+    (editando ? `<button type="button" class="ed-nova" data-ed="nova-peca" data-grupo="${DADOS.grupos.indexOf(x.g)}">＋ Nova peça em ${esc(x.g.nome)}</button>` : "") +
+    `</section>`).join("") +
+    "";
+  document.querySelectorAll(".car .trilho").forEach(t => {
+    fotoAtual(t.parentElement);
+    let to; t.addEventListener("scroll", () => { clearTimeout(to); to = setTimeout(() => fotoAtual(t.parentElement), 60); });
+  });
+  if (document.getElementById("busca")) filtrar();
+  const d = DADOS.atualizado ? new Date(DADOS.atualizado + "T12:00:00") : new Date();
+  document.getElementById("data").textContent = "Atualizado " + d.toLocaleDateString("pt-BR", {weekday: "long", day: "2-digit", month: "2-digit"});
+}
+
+// Carrossel: setas passam as fotos; o botão de compartilhar acompanha a foto que está na tela.
+function fotoAtual(car){
+  const t = car.querySelector(".trilho"), n = t.children.length;
+  const i = Math.round(t.scrollLeft / t.clientWidth);
+  const item = car.closest(".item");
+  car.querySelector(".esq").disabled = i === 0;
+  car.querySelector(".dir").disabled = i === n - 1;
+  car.querySelector(".cont").textContent = `${i + 1} de ${n}`;
+  item.querySelectorAll(".pontos i").forEach((p, k) => p.classList.toggle("on", k === i));
+  item.querySelectorAll("[data-foto]").forEach(b => b.dataset.foto = t.children[i].getAttribute("src"));
+  const env = item.querySelector(".enviar"), peca = env && DADOS.grupos.flatMap(g => g.cats).find(x => x.id === env.dataset.cat);
+  if (peca) env.href = linkEnviar(peca, env.dataset.tipo, env.dataset.foto);
+  verGostei(item.querySelector(".gostei"));
+}
+
+const vitrine = document.getElementById("vitrine");
+vitrine.addEventListener("click", e => {
+  const s = e.target.closest(".seta"); if (!s) return;
+  const t = s.parentElement.querySelector(".trilho");
+  t.scrollBy({left: t.clientWidth * Number(s.dataset.passo), behavior: "smooth"});
+});
+
+// Compartilhar: abre a lista do celular (WhatsApp, Facebook, Instagram...) com a foto limpa, sem preço.
+// O arquivo começa a carregar no toque (pointerdown), para o menu abrir ainda dentro do toque no iPhone.
+const arquivos = new Map();
+const pegar = src => { if (!arquivos.has(src)) arquivos.set(src, fetch(src).then(r => r.blob())); return arquivos.get(src); };
+vitrine.addEventListener("pointerdown", e => { const bt = e.target.closest(".share"); if (bt) pegar(bt.dataset.foto).catch(() => {}); });
+vitrine.addEventListener("click", async e => {
+  const bt = e.target.closest(".share"); if (!bt) return;
+  const msg = bt.parentElement.querySelector(".msg");
+  msg.textContent = "";
+  try {
+    const b = await pegar(bt.dataset.foto);
+    const video = bt.dataset.tipo === "video";
+    const f = new File([b], video ? "gabela-video.mp4" : "gabela-foto.jpg", {type: b.type || (video ? "video/mp4" : "image/jpeg")});
+    if (!(navigator.canShare && navigator.canShare({files: [f]}))) throw new Error("sem-share");
+    await navigator.share({files: [f]});
+  } catch (err) {
+    if (err && err.name === "AbortError") return;
+    arquivos.delete(bt.dataset.foto);
+    msg.textContent = /claude\.ai|claudeusercontent/.test(location.href) || window.claude
+      ? "Neste link o botão não abre o menu. No endereço oficial ele funciona. Por enquanto: toque e segure na foto."
+      : "Este aparelho não abriu o menu de compartilhar. Toque e segure na foto para salvar.";
+  }
+});
+
+const tela = document.getElementById("tela"), player = document.getElementById("player");
+vitrine.addEventListener("click", e => {
+  const m = e.target.closest(".mini"); if (!m) return;
+  player.src = m.dataset.video; tela.hidden = false; player.play().catch(() => {});
+});
+function fecharTela(){ player.pause(); player.removeAttribute("src"); player.load(); tela.hidden = true; }
+document.getElementById("fechar").addEventListener("click", fecharTela);
+tela.addEventListener("click", e => { if (e.target === tela) fecharTela(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !tela.hidden) fecharTela(); });
+
+// "Gostei": a cliente vai marcando as peças (cada foto ou vídeo) e no fim manda tudo numa mensagem só para a Gabela.
+// Sem valor total e sem carrinho: a cor e o tamanho a Gabela combina no WhatsApp. A lista fica guardada no celular.
+// Endereço do site com a barra no fim (ex.: "https://exemplo.com.br/"). Vazio = a mensagem vai só com o texto.
+const SITE = "https://atacadogabela.com.br/catalogo.html";
+let lista = [];
+try { lista = JSON.parse(localStorage.getItem("gostei-gabela") || "[]"); } catch (e) {}
+const guardar = () => { try { localStorage.setItem("gostei-gabela", JSON.stringify(lista)); } catch (e) {} };
+function chaveDe(bt){
+  const item = bt.closest(".item"), c = DADOS.grupos.flatMap(g => g.cats).find(x => x.id === bt.dataset.cat);
+  const src = item.querySelector(".share").dataset.foto;
+  const fotos = (c && c.fotos) || [];
+  const video = bt.dataset.tipo === "video";
+  const img = video ? ((c && (c.capa || fotos[0])) || "") : src;
+  return {chave: bt.dataset.cat + "|" + src, id: bt.dataset.cat, nome: c ? c.nome : "", img,
+    qual: video ? "vídeo" : fotos.length > 1 ? `foto ${fotos.indexOf(src) + 1} de ${fotos.length}` : "foto"};
+}
+function verGostei(bt){
+  if (!bt) return;
+  const sim = lista.some(x => x.chave === chaveDe(bt).chave);
+  bt.setAttribute("aria-pressed", sim);
+  bt.querySelector("span").textContent = sim ? "Marcada" : "Consultar";
+}
+const linkFoto = x => { const id = (String(x.img || "").match(/[0-9a-f]{32}/) || [])[0]; return SITE && id ? SITE + "f/" + id + ".html" : SITE ? SITE + "#" + x.id : ""; };
+const textoLista = () => "Oi! Quero consultar estas peças do catálogo:\n" + lista.map((x, k) => `${k + 1}) ${x.nome} (${x.qual})${linkFoto(x) ? "\n" + linkFoto(x) : ""}`).join("\n");
+function verBarra(){
+  const n = lista.length, a = document.getElementById("mandar");
+  document.getElementById("lista-info").hidden = !n;
+  document.getElementById("lista-n").textContent = n === 1 ? "✓ 1 foto marcada" : `✓ ${n} fotos marcadas`;
+  a.href = "https://wa.me/" + ZAP + "?text=" + encodeURIComponent(n ? textoLista() : "Oi! Vi o catálogo e quero fazer um pedido.");
+  a.textContent = n ? (n === 1 ? "💬 Consultar 1 foto com a Gabela" : `💬 Consultar ${n} fotos com a Gabela`) : "💬 Fazer meu pedido";
+  a.classList.toggle("cheio", !!n);
+}
+const verTudo = () => { document.querySelectorAll(".gostei").forEach(verGostei); verBarra(); };
+vitrine.addEventListener("click", e => {
+  const bt = e.target.closest(".gostei"); if (!bt) return;
+  const x = chaveDe(bt), k = lista.findIndex(y => y.chave === x.chave);
+  if (k >= 0) lista.splice(k, 1);
+  else { lista.push(x); if (x.img) pegar(x.img).catch(() => {}); }
+  guardar(); verTudo();
+});
+document.getElementById("lista-limpar").addEventListener("click", () => {
+  lista = []; guardar(); verTudo(); document.querySelectorAll(".acoes .msg").forEach(m => m.textContent = "");
+});
+// Consultar: abre DIRETO a conversa com o WhatsApp do atacado (5551984509505), com a lista das peças marcadas
+// e o link de cada foto (aparece a prévia da foto na conversa). A cliente não precisa ter o número salvo.
+// Nunca abre a lista de contatos do celular: vai sempre direto para a conversa da Gabela.
+// 14/11 (Gabi): como no início, as fotos marcadas vão como FOTO de verdade (menu de compartilhar do celular:
+// a cliente escolhe WhatsApp e a conversa da Gabela). Assim a Gabi responde em cima de cada foto.
+// Sem fotos marcadas, ou se o celular não tiver o menu, abre direto a conversa com texto.
+document.getElementById("mandar").addEventListener("click", async e => {
+  e.preventDefault(); e.stopImmediatePropagation();
+  const texto = () => { location.href = "https://wa.me/" + ZAP + "?text=" + encodeURIComponent(lista.length ? textoLista() : "Oi! Vi o catálogo e quero fazer um pedido."); };
+  if (!lista.length || window.claude) return texto();
+  // 19/11 (Gabi): a consulta tem que chegar SEMPRE em foto. Se o celular não deixar mandar foto daqui
+  // (ex.: catálogo aberto dentro do Instagram/Facebook), NÃO manda texto sozinho: mostra o passo para abrir no navegador.
+  if (!navigator.canShare) return semFoto(texto);
+  try {
+    const files = await Promise.all(lista.filter(x => x.img).map((x, k) => pegar(x.img).then(b => new File([b], `gabela-${k + 1}.jpg`, {type: b.type || "image/jpeg"}))));
+    if (!files.length || !navigator.canShare({files})) return semFoto(texto);
+    await navigator.share({files});
+  } catch (err) {
+    if (err && err.name === "AbortError") return;
+    semFoto(texto);
+  }
+}, true);
+// Painel quando o celular não deixa mandar foto: leva a cliente para o Chrome/Safari com as peças já marcadas.
+function linkComLista(){
+  let b = ""; try { b = btoa(unescape(encodeURIComponent(JSON.stringify(lista)))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); } catch (e) {}
+  return SITE + "?lista=" + b;
+}
+function semFoto(texto){
+  let p = document.getElementById("sem-foto");
+  if (!p) {
+    p = document.createElement("div"); p.id = "sem-foto";
+    p.style.cssText = "position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.6);display:grid;place-items:center;padding:16px";
+    document.body.appendChild(p);
+  }
+  const android = /android/i.test(navigator.userAgent);
+  const url = linkComLista();
+  const chrome = "intent://" + url.replace(/^https:\/\//, "") + "#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=" + encodeURIComponent(url) + ";end";
+  p.innerHTML = `<div style="background:#fff;color:#1B1720;border-radius:18px;padding:18px;max-width:420px;width:100%;display:grid;gap:12px;font-size:18px;line-height:1.35">
+    <b style="font-size:21px">📸 Falta só 1 passo para mandar as fotos</b>
+    <span>Aqui dentro o celular não deixa enviar foto. Abra o catálogo no navegador. As peças que você marcou já vão junto.</span>
+    ${android ? `<a class="btn" style="background:#1FA855;color:#fff" href="${chrome}">🌐 Abrir no Chrome</a>` : `<span style="background:#FFE4EF;border-radius:12px;padding:10px 12px">Toque nos <b>3 pontinhos ( ⋯ )</b> lá em cima e escolha <b>Abrir no navegador</b> (ou Safari).</span>`}
+    <button type="button" class="btn" id="sem-foto-copiar" style="background:#1B1720;color:#fff">🔗 Copiar o link do catálogo</button>
+    <button type="button" id="sem-foto-texto" style="font:inherit;font-size:15px;background:none;border:0;color:#5C5560;text-decoration:underline;padding:6px;cursor:pointer">Não consigo: mandar a lista em texto</button>
+    <button type="button" id="sem-foto-fechar" style="font:inherit;font-size:15px;background:none;border:0;color:#5C5560;padding:6px;cursor:pointer">✕ Fechar</button>
+  </div>`;
+  p.hidden = false;
+  p.querySelector("#sem-foto-fechar").onclick = () => { p.hidden = true; };
+  p.querySelector("#sem-foto-texto").onclick = () => { p.hidden = true; texto(); };
+  p.querySelector("#sem-foto-copiar").onclick = ev => {
+    const b = ev.currentTarget;
+    const ok = () => { b.textContent = "✓ Link copiado! Cole no navegador"; };
+    try { navigator.clipboard.writeText(url).then(ok, () => prompt("Copie o link:", url)); } catch (err) { prompt("Copie o link:", url); }
+  };
+}
+// Chegou do outro navegador com as peças marcadas no link (?lista=...): marca de novo aqui.
+(() => {
+  try {
+    const q = new URLSearchParams(location.search).get("lista"); if (!q) return;
+    const vindas = JSON.parse(decodeURIComponent(escape(atob(q.replace(/-/g, "+").replace(/_/g, "/")))));
+    if (Array.isArray(vindas)) vindas.forEach(x => { if (x && x.chave && !lista.some(y => y.chave === x.chave)) lista.push(x); });
+    guardar();
+    history.replaceState(null, "", location.pathname + location.hash);
+  } catch (e) {}
+})();
+// Site sempre na versão mais nova: se o celular abriu uma cópia antiga guardada, recarrega sozinho.
+if (!window.claude && /atacadogabela/.test(location.hostname)) {
+  fetch("versao.txt?t=" + Date.now(), {cache: "no-store"}).then(r => r.ok ? r.text() : "").then(v => {
+    v = v.trim(); const atual = document.documentElement.dataset.versao || "";
+    if (v && atual && v !== atual) { try { if (sessionStorage.getItem("recarregou") === v) return; sessionStorage.setItem("recarregou", v); } catch (e) {} location.replace(location.pathname + "?v=" + Date.now() + location.hash); }
+  }).catch(() => {});
+}
+addEventListener("storage", e => { if (e.key === "gostei-gabela") { try { lista = JSON.parse(e.newValue || "[]"); } catch (err) {} verTudo(); } });
+
+montarBusca();
+desenhar();
+verTudo();
+lista.forEach(x => x.img && pegar(x.img).catch(() => {}));
+
+// Setinha para voltar às categorias: aparece depois que a pessoa desce a tela.
+const subir = document.getElementById("subir");
+const verSubir = () => { subir.hidden = scrollY < document.getElementById("chips").getBoundingClientRect().bottom + scrollY; };
+addEventListener("scroll", verSubir, {passive: true}); verSubir();
+subir.addEventListener("click", () => irPara(document.getElementById("chips")));
+
+// Toque numa categoria: vai direto e continua acertando a posição enquanto fotos e vídeos carregam.
+let fixar = null;
+function irPara(alvo){
+  if (!alvo) return;
+  clearInterval(fixar);
+  const acertar = () => {
+    const y = alvo.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(alvo).scrollMarginTop) || 0);
+    if (Math.abs(scrollY - y) > 2) scrollTo({top: y, behavior: "instant"});
+  };
+  acertar();
+  let n = 0; fixar = setInterval(() => { acertar(); if (++n > 40) clearInterval(fixar); }, 100);
+}
+["touchstart", "wheel", "keydown"].forEach(ev => addEventListener(ev, e => { if (!e.target.closest?.('a[href^="#"], #subir')) clearInterval(fixar); }, {passive: true}));
+// Link com #peça (vindo da mensagem do WhatsApp): abre direto naquela peça.
+if (location.hash) irPara(document.getElementById(decodeURIComponent(location.hash.slice(1))));
+document.addEventListener("click", e => {
+  const a = e.target.closest('a[href^="#"]'); if (!a) return;
+  const alvo = document.getElementById(decodeURIComponent(a.getAttribute("href").slice(1)));
+  if (!alvo) return;
+  e.preventDefault(); irPara(alvo);
+});
+
+// ---------- Modo edição: só aparece para quem pode editar o link (a dona). As clientes nunca veem. ----------
+const RESET = ':root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}';
+function paginaCompleta(){
+  const json = JSON.stringify(DADOS).replace(/</g, "\\u003c");
+  return '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>' + RESET + '</style></head><body>\n' + [
+    '<title>Catálogo Gabela Atacado</title>',
+    '<meta name="claude:viewport-fit-sides" content="cover">',
+    '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka:wght@600;700&family=Nunito:wght@600;700;800;900&display=swap">',
+    MOLDE.estilo, MOLDE.topo, MOLDE.corpo, MOLDE.tela, MOLDE.barra,
+    '<script type="application/json" id="dados">' + json + '<\/script>',
+    '<script id="app">' + MOLDE.app + '<\/script>',
+  ].join("\n") + '\n</body></html>';
+}
+
+let artifact = null, assets = null, mudou = false;
+const painel = document.createElement("div");
+painel.className = "ed-barra"; painel.hidden = true;
+painel.innerHTML = `<div class="ed-status" role="status"></div>
+  <div class="ed-botoes"><button type="button" class="btn ed-sair">Cancelar</button><button type="button" class="btn ed-salvar">💾 Salvar e publicar</button></div>`;
+const abrir = document.createElement("button");
+abrir.type = "button"; abrir.className = "ed-abrir"; abrir.textContent = "✏️ Editar catálogo"; abrir.hidden = true;
+document.body.append(abrir, painel);
+const aviso = t => { painel.querySelector(".ed-status").textContent = t; };
+
+(async () => {
+  if (!window.claude || !window.claude.use) return;
+  const [a, u] = await Promise.all([claude.use("artifact"), claude.use("user")]);
+  if (!a || !u || !(await u.canEdit())) return;
+  artifact = a; assets = await claude.use("assets");
+  abrir.hidden = false;
+})();
+
+abrir.addEventListener("click", () => {
+  editando = true; abrir.hidden = true; painel.hidden = false;
+  document.getElementById("barra").hidden = true;
+  aviso(assets ? "Mude o que quiser. Nada aparece para as clientes até você tocar em Salvar." : "Fotos e vídeos não podem ser enviados nesta tela, mas preços e textos sim.");
+  desenhar();
+});
+painel.querySelector(".ed-sair").addEventListener("click", () => {
+  location.reload();
+});
+painel.querySelector(".ed-salvar").addEventListener("click", async e => {
+  const bt = e.currentTarget; bt.disabled = true;
+  DADOS.atualizado = new Date().toLocaleDateString("sv-SE");
+  aviso("Publicando...");
+  mudou = false;
+  try {
+    await artifact.publish(paginaCompleta());
+    aviso("Salvo! O catálogo já está atualizado.");
+  } catch (err) {
+    bt.disabled = false; mudou = true;
+    const c = err && err.code;
+    aviso(c === "conflict" ? "O catálogo foi mudado em outro lugar. A página vai recarregar; faça a mudança de novo."
+      : c === "too_large" ? "Ficou grande demais para salvar. Tire alguma foto ou vídeo e tente de novo."
+      : c === "not_writer" || c === "not_granted" ? "Este acesso não pode salvar o catálogo."
+      : "Não deu para salvar agora. Tente de novo em instantes.");
+  }
+});
+
+const acharCat = id => { for (const g of DADOS.grupos) { const c = g.cats.find(x => x.id === id); if (c) return {g, c}; } return {}; };
+
+vitrine.addEventListener("input", e => {
+  const campo = e.target.dataset && e.target.dataset.campo; if (!campo) return;
+  mudou = true;
+  if (campo === "grupo") { DADOS.grupos[e.target.closest(".ed-grupo").dataset.grupo].nome = e.target.value; return; }
+  const {c} = acharCat(e.target.closest(".ed").dataset.cat); if (!c) return;
+  if (campo === "preco") {
+    const v = parseFloat(e.target.value.replace(/[^\d,.]/g, "").replace(",", "."));
+    c.preco = isNaN(v) ? null : Math.round(v * 100) / 100;
+  } else c[campo] = e.target.value;
+  const art = e.target.closest(".sub");
+  art.querySelector("h3").textContent = c.nome;
+  art.querySelector(".tag").textContent = tamTxt(c).replace(" · ", ", ");
+  art.querySelector(".preco").innerHTML = c.preco == null ? "<b>Consulte o valor</b>" : `<b>${real(c.preco)}</b><span>💵 ${real(off(c.preco))} <i>no dinheiro</i></span>`;
+});
+// Ao sair do campo, redesenha (reordena por preço, troca a cor) e volta para a mesma peça.
+vitrine.addEventListener("change", async e => {
+  const campo = e.target.dataset && e.target.dataset.campo;
+  if (campo) { const id = e.target.closest(".sub")?.id; desenhar(); if (id) document.getElementById(id)?.scrollIntoView({block: "start"}); return; }
+  const acao = e.target.dataset && e.target.dataset.ed; if (!acao) return;
+  const {c} = acharCat(e.target.closest(".ed").dataset.cat); if (!c) return;
+  const arquivos = [...e.target.files]; if (!arquivos.length) return;
+  if (!assets) { aviso("Fotos e vídeos não podem ser enviados nesta tela."); return; }
+  try {
+    if (acao === "add-fotos") {
+      for (const [k, f] of arquivos.entries()) {
+        aviso(`Enviando foto ${k + 1} de ${arquivos.length}...`);
+        const r = await assets.upload(await reduzir(f));
+        c.fotos = (c.fotos || []).concat(r.url);
+      }
+    } else if (acao === "add-video") {
+      const f = arquivos[0];
+      if (f.size > 20 * 1024 * 1024) { aviso("Esse vídeo passa de 20 MB. Grave um vídeo mais curto (até uns 15 segundos) ou mande pelo chat que eu ajusto."); return; }
+      aviso("Enviando vídeo... pode levar um minutinho.");
+      const r = await assets.upload(f);
+      c.video = r.url; c.capa = null;
+    }
+    mudou = true;
+    aviso("Pronto. Toque em Salvar e publicar quando terminar.");
+    desenhar(); document.getElementById(c.id)?.scrollIntoView({block: "start"});
+  } catch (err) {
+    const code = err && err.code;
+    aviso(code === "too_large" ? "Arquivo grande demais (máximo 20 MB)."
+      : code === "unsupported_type" ? "Esse tipo de arquivo não é aceito. Mande pelo chat que eu ajusto."
+      : code === "quota_or_state" ? "Acabou o espaço para arquivos do catálogo. Me avise pelo chat."
+      : "Não deu para enviar agora. Tente de novo." + (code ? " (" + code + ")" : ""));
+  }
+});
+
+vitrine.addEventListener("click", e => {
+  const b = e.target.closest("button[data-ed]"); if (!b) return;
+  const acao = b.dataset.ed;
+  if (acao === "nova-peca") {
+    const g = DADOS.grupos[b.dataset.grupo]; g.cats.push(novaPeca(g.nome === "Masculino" ? "azul" : "rosa"));
+  } else {
+    const {g, c} = acharCat(b.closest(".ed").dataset.cat); if (!c) return;
+    const i = Number(b.dataset.i);
+    if (acao === "tirar-peca") { g.cats.splice(g.cats.indexOf(c), 1); }
+    else if (acao === "tirar-foto") c.fotos.splice(i, 1);
+    else if (acao === "esq" && i > 0) [c.fotos[i - 1], c.fotos[i]] = [c.fotos[i], c.fotos[i - 1]];
+    else if (acao === "dir" && i < c.fotos.length - 1) [c.fotos[i + 1], c.fotos[i]] = [c.fotos[i], c.fotos[i + 1]];
+    else if (acao === "tirar-video") { c.video = null; c.capa = null; }
+    else return;
+  }
+  mudou = true;
+  const id = b.closest(".sub")?.id; desenhar();
+  if (id && document.getElementById(id)) document.getElementById(id).scrollIntoView({block: "start"});
+});
+
+function novaPeca(cor){
+  return {id: "p" + Date.now().toString(36), nome: "Nova peça", tipo: "", tam: "", preco: null, cor, fotos: [], video: null, capa: null};
+}
+
+// Foto do celular fica com no máximo 1600 px: carrega rápido e não perde qualidade na tela.
+async function reduzir(f){
+  // Diminui a foto pra no máximo 1600 px. Se o celular não deixar, manda a foto original.
+  try {
+    let img;
+    try { img = await createImageBitmap(f); }
+    catch (e) {
+      img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = URL.createObjectURL(f); });
+    }
+    const w = img.width || img.naturalWidth, hh = img.height || img.naturalHeight;
+    const k = Math.min(1, 1600 / Math.max(w, hh));
+    const cv = document.createElement("canvas");
+    cv.width = Math.round(w * k); cv.height = Math.round(hh * k);
+    cv.getContext("2d").drawImage(img, 0, 0, cv.width, cv.height);
+    const b = await new Promise(ok => cv.toBlob(ok, "image/jpeg", 0.88));
+    if (b && b.size > 1000) return b;
+  } catch (e) {}
+  return f;
+}
+
+window.addEventListener("beforeunload", e => { if (mudou && editando) e.preventDefault(); });
+</script>
+</body></html>
