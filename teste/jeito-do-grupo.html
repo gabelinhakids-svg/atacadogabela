@@ -7,12 +7,12 @@ html{scroll-behavior:smooth}
 body{margin:0;background:var(--fundo) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' fill='none' stroke='%23d6cfc4' stroke-width='1.6' stroke-linecap='round'%3E%3Ccircle cx='24' cy='24' r='9'/%3E%3Cpath d='M70 20l6 12 13 2-9 9 2 13-12-6-12 6 2-13-9-9 13-2z'/%3E%3Cpath d='M130 30c-6-8-18-2-12 8l12 12 12-12c6-10-6-16-12-8z'/%3E%3Crect x='14' y='70' width='22' height='34' rx='4'/%3E%3Cpath d='M60 86c10-10 24-10 34 0M66 94c6-6 16-6 22 0'/%3E%3Ccircle cx='77' cy='101' r='2'/%3E%3Cpath d='M118 80h26v18h-14l-8 7v-7h-4z'/%3E%3Cpath d='M20 132l10 10 18-20'/%3E%3Ccircle cx='86' cy='138' r='12'/%3E%3Cpath d='M81 136h0M91 136h0M80 142c3 4 9 4 12 0'/%3E%3Cpath d='M128 124l14 14M142 124l-14 14'/%3E%3C/svg%3E") repeat;color:var(--txt);font:18px/1.35 "Segoe UI",Roboto,Helvetica,Arial,system-ui,sans-serif}
 header{position:sticky;top:0;z-index:5}
 .barra{background:var(--verde);color:#fff;display:flex;align-items:center;gap:10px;padding:8px 12px 8px 6px;min-height:60px}
-.volta{font-size:26px;line-height:1;padding:4px 2px;opacity:.95}
-.av{width:42px;height:42px;border-radius:50%;background:#fff;color:var(--rosa);display:grid;place-items:center;font-weight:800;font-size:19px;flex:none}
+.volta{display:grid;padding:2px}
+.av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#F06AA6,#D6377D);color:#fff;display:grid;place-items:center;font-weight:800;font-size:19px;flex:none}
 .nm{flex:1;min-width:0}
 .nome{font-weight:600;font-size:19px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .st{font-size:13.5px;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ics{display:flex;gap:18px;font-size:20px;opacity:.95}
+.ics{display:flex;gap:20px}
 .fixada{background:#fff;display:flex;gap:10px;align-items:center;padding:8px 14px;border-bottom:1px solid #e9edef;font-size:15.5px;color:var(--sub)}
 .fixada .pin{font-size:16px}
 .fixada div{overflow-x:auto;white-space:nowrap;scrollbar-width:none}
@@ -36,18 +36,19 @@ main{max-width:620px;margin:0 auto;padding:6px 10px 96px}
 .enc:focus-visible{outline:3px solid var(--verde);outline-offset:2px}
 .rodape{position:fixed;left:0;right:0;bottom:0;padding:6px 8px 10px;display:flex;gap:6px;align-items:flex-end;background:transparent;z-index:6;max-width:620px;margin:0 auto}
 .campo{flex:1;background:#fff;border-radius:26px;min-height:50px;display:flex;align-items:center;gap:12px;padding:0 16px;color:#8696a0;font-size:18px;text-decoration:none;box-shadow:0 1px .5px #0b141a21}
-.campo .e{font-size:22px}.campo .t{flex:1}
+.campo .e{display:grid}.campo .t{flex:1}
 .mic{width:50px;height:50px;border-radius:50%;background:var(--verde);display:grid;place-items:center;flex:none;box-shadow:0 1px .5px #0b141a21}
 .fim{text-align:center;margin:18px auto;max-width:92%;background:#fffffff2;border-radius:8px;padding:10px;color:#54656F;font-size:16px}
 </style></head><body>
 <header>
-<div class="barra"><span class="volta" aria-hidden="true">←</span><div class="av">G</div><div class="nm"><div class="nome">Gabela Atacado 💖</div><div class="st">231 fotos · tudo que temos na loja</div></div><div class="ics" aria-hidden="true"><span>📹</span><span>📞</span><span>⋮</span></div></div>
+<div class="barra"><span class="volta"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="#fff" d="M20 11H7.8l5.6-5.6L12 4l-8 8 8 8 1.4-1.4L7.8 13H20z"/></svg></span><div class="av">G</div><div class="nm"><div class="nome">Gabela VIP 💖</div><div class="st">Gabi, Carol, Bia, Lina, Márcia, Vanessa, Você</div></div><div class="ics"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="#fff" d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11z"/></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="#fff" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="#fff" d="M12 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0 6a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg></div></div>
 <div class="fixada"><span class="pin">📌</span><div><a href="#s0">👗 Feminino</a> · <a href="#s1">👕 Masculino</a> · <a href="#s2">👟 Tênis</a> · <a href="#s3">👜 Bolsas</a></div></div>
 </header>
 <main>
-<div class="cripto">Gostou de uma peça? Toque na <b>setinha ➦</b> do lado da foto e escolha a <b>Gabela</b>.</div>
+<div class="chip">HOJE</div>
+<div class="cripto">🔒 Gostou de uma peça? Toque na <b>setinha ➦</b> do lado da foto e escolha a <b>Gabela</b>.</div>
 <div class="chip" id="s0">👗 FEMININO</div>
-<div class="linha prim"><div class="bolha"><div class="autor">Gabela Atacado <span>~ Loja</span></div><img src="../midia/b2d61e2169f37c6bd677d22bee4d7f4b.jpg" alt="Blusas viscolycra (vários modelos)" loading="lazy" width="600" height="800"><p class="leg">🔥 Blusas viscolycra (vários modelos)
+<div class="linha prim"><div class="bolha"><div class="autor">Gabela Atacado</div><img src="../midia/b2d61e2169f37c6bd677d22bee4d7f4b.jpg" alt="Blusas viscolycra (vários modelos)" loading="lazy" width="600" height="800"><p class="leg">🔥 Blusas viscolycra (vários modelos)
 📏 Tam Veste GG
 💰 Valor $39,90 ou (💵 $37,90 no dinheiro)<span class="hora">08:00</span></p></div><button class="enc" data-f="../midia/b2d61e2169f37c6bd677d22bee4d7f4b.jpg" aria-label="Encaminhar esta foto para a Gabela"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#fff" d="M13.5 7.2V3.8a.6.6 0 0 1 1-.45l7 6.6a.6.6 0 0 1 0 .9l-7 6.6a.6.6 0 0 1-1-.45v-3.3c-4.9 0-8.2 1.5-10.7 4.9-.3.4-.9.15-.8-.3 1-5.2 4.3-10.3 11.5-11.1z"/></svg></button></div>
 <div class="linha"><div class="bolha"><img src="../midia/21f42462e887a9780ddeff2d95d17792.jpg" alt="Blusas viscolycra (vários modelos)" loading="lazy" width="600" height="800"><p class="leg">🔥 Blusas viscolycra (vários modelos)
@@ -576,7 +577,7 @@ main{max-width:620px;margin:0 auto;padding:6px 10px 96px}
 📏 Tam G1, G2 e G3
 💰 Valor $29,90 ou (💵 $28,40 no dinheiro)<span class="hora">10:55</span></p></div><button class="enc" data-f="../midia/2ed022efea43c68c4b6a26c669e41518.jpg" aria-label="Encaminhar esta foto para a Gabela"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#fff" d="M13.5 7.2V3.8a.6.6 0 0 1 1-.45l7 6.6a.6.6 0 0 1 0 .9l-7 6.6a.6.6 0 0 1-1-.45v-3.3c-4.9 0-8.2 1.5-10.7 4.9-.3.4-.9.15-.8-.3 1-5.2 4.3-10.3 11.5-11.1z"/></svg></button></div>
 <div class="chip" id="s1">👕 MASCULINO</div>
-<div class="linha prim"><div class="bolha"><div class="autor">Gabela Atacado <span>~ Loja</span></div><img src="../midia/255f6b182511f349d1c7259eb291904d.jpg" alt="Calça com elastano" loading="lazy" width="600" height="800"><p class="leg">🔥 Calça com elastano
+<div class="linha prim"><div class="bolha"><div class="autor">Gabela Atacado</div><img src="../midia/255f6b182511f349d1c7259eb291904d.jpg" alt="Calça com elastano" loading="lazy" width="600" height="800"><p class="leg">🔥 Calça com elastano
 📏 Tam M, G e GG
 💰 Valor $39,90 ou (💵 $37,90 no dinheiro)<span class="hora">10:56</span></p></div><button class="enc" data-f="../midia/255f6b182511f349d1c7259eb291904d.jpg" aria-label="Encaminhar esta foto para a Gabela"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#fff" d="M13.5 7.2V3.8a.6.6 0 0 1 1-.45l7 6.6a.6.6 0 0 1 0 .9l-7 6.6a.6.6 0 0 1-1-.45v-3.3c-4.9 0-8.2 1.5-10.7 4.9-.3.4-.9.15-.8-.3 1-5.2 4.3-10.3 11.5-11.1z"/></svg></button></div>
 <div class="linha"><div class="bolha"><img src="../midia/13be00dc45720eb569b092d90da7bacd.jpg" alt="Calça jogger" loading="lazy" width="600" height="800"><p class="leg">🔥 Calça jogger
@@ -646,7 +647,7 @@ main{max-width:620px;margin:0 auto;padding:6px 10px 96px}
 📏 Tam 
 💰 Valor $59,90 ou (💵 $56,90 no dinheiro)<span class="hora">11:18</span></p></div><button class="enc" data-f="../midia/73deabda1876455c0f5e374b6599cc58.jpg" aria-label="Encaminhar esta foto para a Gabela"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#fff" d="M13.5 7.2V3.8a.6.6 0 0 1 1-.45l7 6.6a.6.6 0 0 1 0 .9l-7 6.6a.6.6 0 0 1-1-.45v-3.3c-4.9 0-8.2 1.5-10.7 4.9-.3.4-.9.15-.8-.3 1-5.2 4.3-10.3 11.5-11.1z"/></svg></button></div>
 <div class="chip" id="s2">👟 TÊNIS</div>
-<div class="linha prim"><div class="bolha"><div class="autor">Gabela Atacado <span>~ Loja</span></div><img src="../midia/ceda55c6d002a99a2acd5ca99815238a.jpg" alt="Tênis (vários modelos)" loading="lazy" width="600" height="800"><p class="leg">🔥 Tênis (vários modelos)
+<div class="linha prim"><div class="bolha"><div class="autor">Gabela Atacado</div><img src="../midia/ceda55c6d002a99a2acd5ca99815238a.jpg" alt="Tênis (vários modelos)" loading="lazy" width="600" height="800"><p class="leg">🔥 Tênis (vários modelos)
 📏 Tam 
 💰 Valor $79,90 ou (💵 $75,90 no dinheiro)<span class="hora">11:19</span></p></div><button class="enc" data-f="../midia/ceda55c6d002a99a2acd5ca99815238a.jpg" aria-label="Encaminhar esta foto para a Gabela"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#fff" d="M13.5 7.2V3.8a.6.6 0 0 1 1-.45l7 6.6a.6.6 0 0 1 0 .9l-7 6.6a.6.6 0 0 1-1-.45v-3.3c-4.9 0-8.2 1.5-10.7 4.9-.3.4-.9.15-.8-.3 1-5.2 4.3-10.3 11.5-11.1z"/></svg></button></div>
 <div class="linha"><div class="bolha"><img src="../midia/d905c68e1dfd544711bf38528ae43663.jpg" alt="Tênis (vários modelos)" loading="lazy" width="600" height="800"><p class="leg">🔥 Tênis (vários modelos)
@@ -698,7 +699,7 @@ main{max-width:620px;margin:0 auto;padding:6px 10px 96px}
 📏 Tam 34 ao 39 (Ótima qualidade, acompanha a caixa)
 💰 Valor $69,90 ou (💵 $66,40 no dinheiro)<span class="hora">11:35</span></p></div><button class="enc" data-f="../midia/69f37afae7c6acec152001077ab0736e.jpg" aria-label="Encaminhar esta foto para a Gabela"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#fff" d="M13.5 7.2V3.8a.6.6 0 0 1 1-.45l7 6.6a.6.6 0 0 1 0 .9l-7 6.6a.6.6 0 0 1-1-.45v-3.3c-4.9 0-8.2 1.5-10.7 4.9-.3.4-.9.15-.8-.3 1-5.2 4.3-10.3 11.5-11.1z"/></svg></button></div>
 <div class="chip" id="s3">👜 BOLSAS</div>
-<div class="linha prim"><div class="bolha"><div class="autor">Gabela Atacado <span>~ Loja</span></div><img src="../midia/c29e1d3bdea1328f344e35c682dd5e24.jpg" alt="Bolsas de R$ 89,90" loading="lazy" width="600" height="800"><p class="leg">🔥 Bolsas de R$ 89,90
+<div class="linha prim"><div class="bolha"><div class="autor">Gabela Atacado</div><img src="../midia/c29e1d3bdea1328f344e35c682dd5e24.jpg" alt="Bolsas de R$ 89,90" loading="lazy" width="600" height="800"><p class="leg">🔥 Bolsas de R$ 89,90
 📏 Tam Várias cores e modelos
 💰 Valor $89,90 ou (💵 $85,40 no dinheiro)<span class="hora">11:36</span></p></div><button class="enc" data-f="../midia/c29e1d3bdea1328f344e35c682dd5e24.jpg" aria-label="Encaminhar esta foto para a Gabela"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#fff" d="M13.5 7.2V3.8a.6.6 0 0 1 1-.45l7 6.6a.6.6 0 0 1 0 .9l-7 6.6a.6.6 0 0 1-1-.45v-3.3c-4.9 0-8.2 1.5-10.7 4.9-.3.4-.9.15-.8-.3 1-5.2 4.3-10.3 11.5-11.1z"/></svg></button></div>
 <div class="linha"><div class="bolha"><img src="../midia/3ada6ea002a01696c4b554e54bf05faa.jpg" alt="Bolsas de R$ 89,90" loading="lazy" width="600" height="800"><p class="leg">🔥 Bolsas de R$ 89,90
@@ -745,7 +746,7 @@ main{max-width:620px;margin:0 auto;padding:6px 10px 96px}
 💰 Valor $69,90 ou (💵 $66,40 no dinheiro)<span class="hora">11:50</span></p></div><button class="enc" data-f="../midia/bc5a59a14c3f4cec204267c80905d54a.jpg" aria-label="Encaminhar esta foto para a Gabela"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#fff" d="M13.5 7.2V3.8a.6.6 0 0 1 1-.45l7 6.6a.6.6 0 0 1 0 .9l-7 6.6a.6.6 0 0 1-1-.45v-3.3c-4.9 0-8.2 1.5-10.7 4.9-.3.4-.9.15-.8-.3 1-5.2 4.3-10.3 11.5-11.1z"/></svg></button></div>
 <div class="fim">Viu tudo? 😍 Escreve pra gente aqui embaixo 👇</div>
 </main>
-<div class="rodape"><a class="campo" href="https://wa.me/5551984509505" target="_blank"><span class="e">🙂</span><span class="t">Mensagem</span><span class="e">📎</span><span class="e">📷</span></a><a class="mic" href="https://wa.me/5551984509505" target="_blank" aria-label="Falar com a Gabela"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="#fff" d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5.3-3a5.3 5.3 0 0 1-10.6 0H5a7 7 0 0 0 6 6.9V21h2v-2.1a7 7 0 0 0 6-6.9z"/></svg></a></div>
+<div class="rodape"><a class="campo" href="https://wa.me/5551984509505" target="_blank"><span class="e"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="#54656F" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18.2a8.2 8.2 0 1 1 0-16.4 8.2 8.2 0 0 1 0 16.4zM8.5 11a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm7 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM12 17.5c2.3 0 4.3-1.5 5-3.5H7c.7 2 2.7 3.5 5 3.5z"/></svg></span><span class="t">Mensagem</span><span class="e"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="#54656F" d="M16.5 6v11.5a4 4 0 0 1-8 0V5a2.5 2.5 0 0 1 5 0v10.5a1 1 0 0 1-2 0V6H10v9.5a2.5 2.5 0 0 0 5 0V5a4 4 0 0 0-8 0v12.5a5.5 5.5 0 0 0 11 0V6z"/></svg></span><span class="e"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="#54656F" d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4zM9 2 7.2 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-3.2L15 2z"/></svg></span></a><a class="mic" href="https://wa.me/5551984509505" target="_blank" aria-label="Falar com a Gabela"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="#fff" d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5.3-3a5.3 5.3 0 0 1-10.6 0H5a7 7 0 0 0 6 6.9V21h2v-2.1a7 7 0 0 0 6-6.9z"/></svg></a></div>
 <script>
 var NUM='5551984509505';
 document.querySelectorAll('.enc').forEach(function(b){b.addEventListener('click',async function(){
