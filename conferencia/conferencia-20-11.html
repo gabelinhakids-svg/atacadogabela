@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Conferência 20/11</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#F7F2EE;--card:#fff;--fg:#2B2226;--muted:#6E5F66;--accent:#E6007E;--line:#EADCE2;--ok:#1E8E4E;--bad:#C62828}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:16px 12px 40px;-webkit-text-size-adjust:100%}
+.wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+header{background:var(--accent);color:#fff;border-radius:14px;padding:16px}
+header h1{margin:0;font-size:1.4rem}
+header p{margin:4px 0 0}
+.total{font-size:1.25rem;font-weight:800}
+.resumo{background:#fff;border:2px solid var(--line);border-radius:12px;padding:10px 14px;font-weight:700}
+.dica{margin:0;color:var(--muted);font-size:.95rem}
+.post{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.faixa{background:var(--accent);color:#fff;padding:14px;font-size:1.55rem;font-weight:900;line-height:1.15}
+.faixa small{display:block;font-size:1.1rem;font-weight:700;margin-top:4px;color:#fff;opacity:.95}
+.foto{position:relative}
+.foto img{width:100%;display:block;background:#eee}
+.selo{position:absolute;top:10px;left:10px;background:rgba(230,0,126,.94);color:#fff;font-weight:900;font-size:1.35rem;padding:8px 14px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.corpo{padding:14px;display:flex;flex-direction:column;gap:8px}
+.corpo h2{margin:0;font-size:1.3rem}
+.corpo p{margin:0}
+.valor{font-weight:800;color:var(--accent)}
+.valor small{display:block;font-weight:600;font-size:.8rem;color:var(--muted)}
+.edval{display:none;gap:8px;align-items:center;flex-wrap:wrap}
+.edval.on{display:flex}
+.edval input{font:inherit;font-size:1.2rem;width:120px;padding:10px;border:2px solid var(--accent);border-radius:10px}
+.edval button,.envia button{background:var(--accent);color:#fff;border:0;border-radius:12px;padding:12px 16px}
+.edb{background:#fff;color:var(--fg);border:2px dashed var(--line);border-radius:12px;padding:10px 12px;text-align:left;width:100%;font-weight:700}
+.edb small{display:block;font-weight:600;color:var(--muted);white-space:pre-wrap}
+.edd{display:none;flex-direction:column;gap:8px}
+.edd.on{display:flex}
+.edd textarea{font:inherit;font-size:16px;min-height:80px;padding:10px;border:2px solid var(--accent);border-radius:10px;width:100%}
+.edd button{background:var(--accent);color:#fff;border:0;border-radius:12px;padding:12px 16px}
+.forn{margin:0 0 -6px;}
+.forn~.forn,.post+.forn{margin-top:26px}
+.forn{background:var(--fg);color:#fff;border-radius:14px;padding:18px 16px;border-left:10px solid var(--accent)}
+.forn h2{margin:0;font-size:1.5rem;line-height:1.2}
+.forn p{margin:2px 0 0;font-weight:700}
+.envia{background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.envia p{margin:0;color:var(--muted);font-size:.95rem}
+.envia .wa{background:#1E8E4E}
+.prov{font-size:.8rem;color:var(--muted)}
+button{font:inherit;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.conf{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.conf button.cat{padding:8px;font-size:.8rem;line-height:1.1;min-width:64px}
+.conf button.cat.on{background:#7B2CBF;border-color:#7B2CBF;color:#fff}
+.conf button{background:#fff;color:var(--fg);border:2px solid var(--line);border-radius:12px;padding:14px 6px}
+.conf button.sim.on{background:var(--ok);border-color:var(--ok);color:#fff}
+.conf button.nao.on{background:var(--bad);border-color:var(--bad);color:#fff}
+.falta{display:none;gap:10px;align-items:center;flex-wrap:wrap}
+.falta.on{display:flex}
+.falta input{font:inherit;font-size:1.2rem;width:100px;padding:10px;border:2px solid var(--bad);border-radius:10px}
+.car{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;background:#eee}
+.car::-webkit-scrollbar{display:none}
+.car>*{flex:0 0 100%;width:100%;scroll-snap-align:center;display:block;object-fit:contain;background:#eee;max-height:80vh}
+.cnt{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.6);color:#fff;font-weight:800;font-size:.9rem;padding:4px 10px;border-radius:20px;pointer-events:none}
+.rola{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);color:#fff;font-size:.85rem;font-weight:700;padding:4px 12px;border-radius:20px;pointer-events:none}
+.forn .nota{background:#fff;color:var(--fg);border-radius:12px;padding:10px 12px;margin-top:10px;font-weight:400;font-size:.95rem}.forn .nota p{margin:2px 0 6px;color:var(--muted)}.forn .nota ul{margin:0;padding:0;list-style:none;columns:2;column-gap:14px}.forn .nota li{padding:2px 0;break-inside:avoid}.forn .nota li b{display:inline-block;min-width:26px;color:var(--accent)}
+</style></head><body>
+<div class="wrap">
+<div id="lista" style="display:flex;flex-direction:column;gap:22px"></div>
+<div class="envia">
+<button type="button" class="wa" id="envWa">📤 Enviar lista pelo WhatsApp</button><button type="button" id="envCp">Copiar lista</button></div>
+</div>
+<script>
+var PECAS=[
+ {"nome": "Conjunto blusa + shorts", "qtd": 24, "det": "", "tam": "Tamanho único, veste do 40 ao 44", "cores": "preto", "valor": "", "fotos": ["img/olinda-18-11-1-a.jpg", "img/olinda-18-11-1-b.jpg"], "forn": 0},
+ {"nome": "Macacão pantacourt manga curta com amarração", "qtd": 24, "det": "", "tam": "Tamanho único", "cores": "preto e cores a confirmar", "valor": "59,90", "fotos": ["img/olinda-18-11-2-a.jpg"], "forn": 0},
+ {"nome": "Macacão regata", "qtd": 12, "det": "Vem preto e estampado (estampas marcadas na última foto)", "tam": "Tamanho único", "cores": "preto e estampado: verde, onça e marinho (a confirmar)", "valor": "59,90", "fotos": ["img/olinda-18-11-3-a.jpg", "img/olinda-18-11-3-b.jpg", "img/olinda-18-11-3-c.jpg", "img/olinda-18-11-3-d.jpg", "img/olinda-18-11-3-e.jpg", "img/olinda-18-11-3-f.jpg"], "forn": 0},
+ {"nome": "Vestido mídi regata com fenda", "qtd": 24, "det": "12 no Tamanho único (veste M e G) + 12 no plus Tamanho GG", "tam": "Tamanho único veste M e G · plus Tamanho GG", "cores": "preto e marrom", "valor": "59,90", "fotos": ["img/olinda-18-11-4-a.jpg", "img/olinda-18-11-4-b.jpg", "img/olinda-18-11-4-c.jpg"], "forn": 0},
+ {"nome": "Shortinho", "qtd": 30, "det": "", "tam": "Tamanho único, veste do 40 ao 44", "cores": "preto, marrom, marinho e mais 2 cores a confirmar", "valor": "29,90", "fotos": ["img/olinda-18-11-5-a.jpg"], "forn": 0},
+ {"nome": "Bolsa Alo com porta-garrafa", "qtd": 0, "det": "", "tam": "Tamanho único", "cores": "marinho, cinza e preta", "valor": "89,90", "fotos": ["img/bolsasemgeral-19-11-1-a.jpg", "img/bolsasemgeral-19-11-1-b.jpg", "img/bolsasemgeral-19-11-1-c.jpg"], "forn": 1},
+ {"nome": "Bolsa sacola Alo com bolso na frente", "qtd": 0, "det": "", "tam": "Tamanho único", "cores": "marrom, verde oliva e preta", "valor": "89,90", "fotos": ["img/bolsasemgeral-19-11-2-a.jpg", "img/bolsasemgeral-19-11-2-b.jpg", "img/bolsasemgeral-19-11-2-c.jpg"], "forn": 1},
+ {"nome": "Bolsa Alo tipo saco (pequena)", "qtd": 0, "det": "", "tam": "Tamanho único", "cores": "bege, rosa e preta", "valor": "89,90", "fotos": ["img/bolsasemgeral-19-11-3-a.jpg", "img/bolsasemgeral-19-11-3-b.jpg", "img/bolsasemgeral-19-11-3-c.jpg"], "forn": 1},
+ {"nome": "Bolsa de viagem Alo grande", "qtd": 0, "det": "", "tam": "Tamanho único", "cores": "preta e caramelo", "valor": "89,90", "fotos": ["img/bolsasemgeral-19-11-4-a.jpg", "img/bolsasemgeral-19-11-4-b.jpg"], "forn": 1},
+ {"nome": "Bolsa Alo matelassê", "qtd": 0, "det": "", "tam": "Tamanho único", "cores": "marinho", "valor": "89,90", "fotos": ["img/bolsasemgeral-19-11-5-a.jpg"], "forn": 1},
+ {"nome": "Bolsa de viagem Kipling", "qtd": 0, "det": "", "tam": "Tamanho único", "cores": "preta e azul", "valor": "89,90", "fotos": ["img/bolsasemgeral-19-11-6-a.jpg", "img/bolsasemgeral-19-11-6-b.jpg"], "forn": 1},
+ {"nome": "Bolsa sacola Kipling", "qtd": 0, "det": "", "tam": "Tamanho único", "cores": "marrom e preta", "valor": "89,90", "fotos": ["img/bolsasemgeral-19-11-7-a.jpg", "img/bolsasemgeral-19-11-7-b.jpg"], "forn": 1},
+ {"nome": "Bolsa esportiva T60", "qtd": 0, "det": "", "tam": "Tamanho único", "cores": "preta", "valor": "89,90", "fotos": ["img/bolsasemgeral-19-11-8-a.jpg"], "forn": 1},
+ {"nome": "Bolsa saco Adidas", "qtd": 0, "det": "", "tam": "Tamanho único", "cores": "preta", "valor": "89,90", "fotos": ["img/bolsasemgeral-19-11-9-a.jpg"], "forn": 1},
+ {"nome": "Bolsa saco mix (Nike, Alo e Adidas)", "qtd": 0, "det": "", "tam": "Tamanho único", "cores": "preta e marrom, sortidas", "valor": "89,90", "fotos": ["img/bolsasemgeral-19-11-10-a.jpg", "img/bolsasemgeral-19-11-10-b.jpg", "img/bolsasemgeral-19-11-10-c.jpg"], "forn": 1},
+ {"nome": "Mochila Kipling", "qtd": 0, "det": "", "tam": "Tamanho único", "cores": "preta e marinho", "valor": "89,90", "fotos": ["img/bolsasemgeral-19-11-11-a.jpg", "img/bolsasemgeral-19-11-11-b.jpg"], "forn": 1},
+ {"nome": "Pijama babydoll manga curta", "qtd": 30, "det": "", "tam": "G e GG", "cores": "planetas bege e laços verde · verificar cores", "valor": "49,90", "fotos": ["img/fran-19-11-1-a.jpg", "img/fran-19-11-1-b.jpg"], "forn": 2},
+ {"nome": "Pijama de alcinha", "qtd": 45, "det": "", "tam": "G e GG", "cores": "poá marinho, laços rosa e planetas preto · verificar cores", "valor": "49,90", "fotos": ["img/fran-19-11-2-a.jpg", "img/fran-19-11-2-b.jpg", "img/fran-19-11-2-c.jpg"], "forn": 2},
+ {"nome": "Shorts plus size com cinto", "qtd": 24, "det": "", "tam": "G2 e G3", "cores": "marrom e caramelo · verificar cores", "valor": "49,90", "fotos": ["img/fran-19-11-3-a.jpg"], "forn": 2},
+ {"nome": "Shorts viscolycra", "qtd": 30, "det": "", "tam": "G e GG", "cores": "marrom · verificar cores", "valor": "29,90", "fotos": ["img/fran-19-11-4-a.jpg"], "forn": 2},
+ {"nome": "Calça viscolycra soltinha", "qtd": 30, "det": "", "tam": "G, GG e G1", "cores": "marrom · verificar cores", "valor": "49,90", "fotos": ["img/fran-19-11-5-a.jpg"], "forn": 2},
+ {"nome": "Conjunto alfaiataria", "qtd": 12, "det": "", "tam": "verificar tamanho", "cores": "preto · verificar cores", "valor": "79,90", "fotos": ["img/fran-19-11-6-a.jpg"], "forn": 2},
+ {"nome": "Macaquinho plus size", "qtd": 12, "det": "", "tam": "Tamanho GG", "cores": "vinho, marinho, preto, marrom e verde · verificar cores", "valor": "79,90", "fotos": ["img/fran-19-11-7-a.jpg"], "forn": 2},
+ {"nome": "Macaquinho plus size", "qtd": 12, "det": "", "tam": "Tamanho GG", "cores": "azul, rosa, off-white, preto e verde menta · verificar cores", "valor": "79,90", "fotos": ["img/fran-19-11-8-a.jpg"], "forn": 2},
+ {"nome": "Macaquinho plus size", "qtd": 12, "det": "", "tam": "Tamanho GG", "cores": "preto, azul, bege, verde e vermelho · verificar cores", "valor": "79,90", "fotos": ["img/fran-19-11-9-a.jpg"], "forn": 2},
+ {"nome": "Blusa plus size alongada com fenda", "qtd": 15, "det": "", "tam": "verificar tamanho", "cores": "preto, marinho, marrom e escuras variadas (mais preto) · verificar cores", "valor": "39,90", "fotos": ["img/jadefashion-19-11-1-a.jpg"], "forn": 3},
+ {"nome": "Blusa plus size básica", "qtd": 15, "det": "", "tam": "verificar tamanho", "cores": "preto, verde escuro, cinza e escuras · verificar cores", "valor": "39,90", "fotos": ["img/jadefashion-19-11-2-a.jpg"], "forn": 3},
+ {"nome": "Shorts moletinho plus size com bolso", "qtd": 30, "det": "10 G1 · 10 G2 · 10 G3", "tam": "G1, G2 e G3", "cores": "preto, marrom e marinho (mais preto) · verificar cores", "valor": "49,90", "fotos": ["img/jadefashion-19-11-3-a.jpg", "img/jadefashion-19-11-3-b.jpg"], "forn": 3},
+ {"nome": "Regata plus size estampada", "qtd": 15, "det": "", "tam": "verificar tamanho", "cores": "cores escuras · verificar cores", "valor": "", "fotos": ["img/jadefashion-19-11-4-a.jpg"], "forn": 3},
+ {"nome": "Blusa plus size com viés no ombro", "qtd": 15, "det": "", "tam": "verificar tamanho", "cores": "escuras, mais preto · verificar cores", "valor": "39,90", "fotos": ["img/jadefashion-19-11-5-a.jpg"], "forn": 3},
+ {"nome": "Blusa plus size estampada", "qtd": 30, "det": "", "tam": "verificar tamanho", "cores": "cores médias e escuras · verificar cores", "valor": "39,90", "fotos": ["img/jadefashion-19-11-6-a.jpg"], "forn": 3},
+ {"nome": "Conjunto plus size blusa e shorts com listra", "qtd": 30, "det": "No pedido eram 10 G1 · 10 G2 · 10 G3. Verificar quantidade: os 3 conjuntos juntos têm que somar 68", "tam": "G1, G2 e G3", "cores": "preto, verde e chumbo (mais preto) · verificar cores", "valor": "", "fotos": ["img/jadefashion-19-11-7-a.jpg", "img/jadefashion-19-11-7-b.jpg"], "ver": 1, "forn": 3},
+ {"nome": "Conjunto plus size blusa e shorts com bolso", "qtd": 30, "det": "No pedido eram 10 G1 · 10 G2 · 10 G3. Verificar quantidade: os 3 conjuntos juntos têm que somar 68", "tam": "G1, G2 e G3", "cores": "preto, marrom e marinho (mais preto) · verificar cores", "valor": "", "fotos": ["img/jadefashion-19-11-8-a.jpg"], "ver": 1, "forn": 3},
+ {"nome": "Conjunto plus size blusa e shorts com faixa lateral", "qtd": 20, "det": "No pedido eram 10 G1 · 10 G2. Verificar quantidade: os 3 conjuntos juntos têm que somar 68", "tam": "G1 e G2", "cores": "preto, marrom e marinho · verificar cores", "valor": "", "fotos": ["img/jadefashion-19-11-9-a.jpg"], "ver": 1, "forn": 3}
+];
+var FORN=[{"nome": "Olinda", "data": "chega 20/11", "slug": "olinda-18-11", "qtd": 114, "aviso": ""}, {"nome": "Bolsas em Geral", "data": "chega 20/11", "slug": "bolsasemgeral-19-11", "qtd": 112, "aviso": "<div class=\"nota\"><b>📋 Lista da nota (112 peças)</b><p>Confiram as quantidades por aqui; as fotos embaixo são só os modelos.</p><ul><li><b>12</b> Sacola Alo</li><li><b>12</b> Kipling comprida</li><li><b>12</b> Alo bolsa</li><li><b>11</b> Alo PP</li><li><b>6</b> T60</li><li><b>10</b> Kipling</li><li><b>10</b> Adidas saco</li><li><b>10</b> Mochila Kipling</li><li><b>6</b> Alo comprido</li><li><b>10</b> Alo</li><li><b>13</b> Saco mix</li></ul></div>"}, {"nome": "Fran", "data": "chega 20/11", "slug": "fran-19-11", "qtd": 207, "aviso": ""}, {"nome": "Jade Fashion Plus Size", "data": "chega 20/11", "slug": "jadefashion-19-11", "qtd": 188, "aviso": "<div class=\"nota\">⚠️ Conjuntos (7, 8 e 9): pela cobrança vêm <b>68 conjuntos no total</b>, e não 80 como no pedido. Conferir quantos vieram de cada modelo.</div>"}];
+var CONT={};PECAS.forEach(function(p){p.slug=FORN[p.forn].slug;p.li=CONT[p.forn]=(CONT[p.forn]||0);CONT[p.forn]++;p.n=p.li+1});
+var TOTAL=FORN.reduce(function(t,f){return t+f.qtd},0);
+
+function fmt(n){return n.toFixed(2).replace('.',',')}
+function num(v){var n=parseFloat(String(v||'').replace(/\s|\$|R/g,'').replace(/\./g,'').replace(',','.'));return isNaN(n)?null:n}
+function valorDe(p,i){return num(p.valor)}
+function textoValor(n){return n==null?'Valor: aguardando a Gabi':'Valor $'+fmt(n)+' ou 💵 $'+fmt(Math.round(n*95)/100)+' à vista (5% desc.)'}
+function ler(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function temOk(s){return !!s&&s.indexOf('ok')>=0}
+function temF(s){return !!s&&s.indexOf('falta')>=0}
+function marca(k,o,f){gravar(k,o&&f?'ok+falta':o?'ok':f?'falta':null)}
+function gravar(k,v){try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}}
+function resumo(){var ok=0,f=0,cheg=0;PECAS.forEach(function(p,i){var s=ler('conf-'+p.slug+'-'+p.li);if(temOk(s))ok++;if(!temF(s)&&temOk(s))cheg+=p.qtd;if(temF(s)){f++;cheg+=Math.max(0,p.qtd-(parseInt(ler('conf-'+p.slug+'-'+p.li+'-n')||'0',10)||0))}});
+ var R=document.getElementById('resumo');if(R)R.textContent='✅ '+ok+' no catálogo · ❌ '+f+' faltou · '+cheg+' de '+TOTAL+' peças chegaram'}
+function midia(p,def){var f=p.fotos||[def];if(f.length<2)return '<img src="'+f[0]+'" alt="">';
+ return '<div class="car">'+f.map(function(u){return /\.mp4$/.test(u)?'<video src="'+u+'" poster="'+u.replace('vid/','img/').replace('.mp4','.jpg')+'" muted playsinline loop controls preload="none"></video>':'<img src="'+u+'" alt="" loading="lazy">'}).join('')+'</div><span class="cnt">1/'+f.length+'</span><span class="rola">⇠ arraste pro lado ⇢</span>'}
+function carro(a){var c=a.querySelector('.car'),cn=a.querySelector('.cnt');if(c&&cn)c.addEventListener('scroll',function(){cn.textContent=(Math.round(c.scrollLeft/c.clientWidth)+1)+'/'+c.children.length;var r=a.querySelector('.rola');if(r)r.style.display='none'},{passive:true})}
+var L=document.getElementById('lista');
+PECAS.forEach(function(p,i){
+ if(i===0||PECAS[i-1].forn!==p.forn){var fh=document.createElement('div');fh.className='forn';fh.innerHTML='<h2></h2><p></p>'+FORN[p.forn].aviso;fh.querySelector('h2').textContent='📦 FARDO '+FORN[p.forn].nome.toUpperCase();fh.querySelector('p').textContent=FORN[p.forn].qtd+' peças · '+FORN[p.forn].data;L.appendChild(fh)}
+ var k='conf-'+p.slug+'-'+p.li;
+ var a=document.createElement('article');a.className='post';
+ a.innerHTML='<div class="faixa">'+p.n+') '+(p.ver?'PEDIDO '+p.qtd+' PEÇAS – '+(p.tam||'tamanho único'):p.qtd?'VEM '+p.qtd+' PEÇAS – '+(p.tam||'tamanho único'):'MODELO '+p.n)+(p.det?'<small>'+p.det+'</small>':'')+'</div>'+
+ '<div class="foto">'+midia(p,'img/'+p.slug+'-'+p.n+'.jpg?v=4')+'</div>'+
+ '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> '+(p.tam||'tamanho único')+'</p><p><b>🎨 Cores:</b> '+p.cores+'</p>'+
+ '<p class="valor"></p>'+
+ '<button type="button" class="edb">✏️ Edição detalhes<small></small></button>'+
+ '<div class="edd"><textarea placeholder="Ex.: o nome é Blusa Plus GG, veio só GG, veio azul em vez de preto"></textarea><button type="button" class="salvad">Salvar</button></div>'+
+ ''+
+ '<div class="conf"><button type="button" class="sim">✅ OK · Catálogo</button><button type="button" class="nao">❌ Faltou</button></div>'+
+ '<div class="falta"><span>Quantas faltaram?</span><input type="number" inputmode="numeric" min="0" placeholder="0"></div></div>';
+ a.querySelector('h2').textContent=p.nome;
+ var sim=a.querySelector('.sim'),nao=a.querySelector('.nao'),f=a.querySelector('.falta'),inp=f.querySelector('input');
+ function pintar(){var s=ler(k);sim.classList.toggle('on',temOk(s));nao.classList.toggle('on',temF(s));f.classList.toggle('on',temF(s));inp.value=ler(k+'-n')||'';resumo()}
+ sim.onclick=function(){var s=ler(k);marca(k,!temOk(s),temF(s));pintar()};
+ nao.onclick=function(){var s=ler(k);marca(k,temOk(s),!temF(s));pintar();if(temF(ler(k)))inp.focus()};
+ inp.oninput=function(){gravar(k+'-n',inp.value);resumo()};
+ a.querySelector('.valor').textContent=textoValor(num(p.valor));
+var eb=a.querySelector('.edb'),ed2=a.querySelector('.edd'),ta=ed2.querySelector('textarea'),dk='det-'+p.slug+'-'+p.li;
+ function pd(){var t=ler(dk)||'';eb.querySelector('small').textContent=t?t:'toque pra escrever o que mudar (nome, tamanho, cor...)'}
+ eb.onclick=function(){ed2.classList.toggle('on');ta.value=ler(dk)||'';if(ed2.classList.contains('on'))ta.focus()};
+ ed2.querySelector('.salvad').onclick=function(){var t=ta.value.trim();gravar(dk,t||null);ed2.classList.remove('on');pd()};
+ pd();pintar();L.appendChild(a);carro(a);
+});
+function listaValores(){var t='Conferência 20/11';FORN.forEach(function(F,j){var c=[],fl=[],al=[];PECAS.forEach(function(p,i){if(p.forn!==j)return;var n=valorDe(p,i);var k2='conf-'+p.slug+'-'+p.li,st=ler(k2),dt=ler('det-'+p.slug+'-'+p.li);if(dt)al.push(p.n+') '+p.nome+': '+dt);if(temF(st))fl.push(p.n+') '+p.nome+': faltaram '+(parseInt(ler('conf-'+p.slug+'-'+p.li+'-n')||'0',10)||0)+' de '+p.qtd);if(temOk(st))c.push(p.n+') '+p.nome+' ('+(p.tam||'tamanho único')+')'+(temF(st)?' – chegaram '+Math.max(0,p.qtd-(parseInt(ler(k2+'-n')||'0',10)||0))+' de '+p.qtd:'')+(n==null?'':' $'+fmt(n)))});
+ t+='\n\n📦 FARDO '+F.nome.toUpperCase()+' ('+F.data+')';t+='\n✅ OK, colocar no catálogo:'+(c.length?'\n'+c.join('\n'):' nenhuma');t+='\n❌ Faltou:'+(fl.length?'\n'+fl.join('\n'):' nada');if(al.length)t+='\n✏️ Alterações:\n'+al.join('\n')});return t}
+document.getElementById('envWa').onclick=function(){location.href='https://wa.me/?text='+encodeURIComponent(listaValores())};
+document.getElementById('envCp').onclick=function(){var b=this,t=listaValores();function ok(){b.textContent='Copiado ✓';setTimeout(function(){b.textContent='Copiar lista'},2000)}
+ try{navigator.clipboard.writeText(t).then(ok,function(){fb()})}catch(e){fb()}
+ function fb(){var x=document.createElement('textarea');x.value=t;x.setAttribute('readonly','');x.style.position='fixed';x.style.opacity='0';document.body.appendChild(x);x.select();x.setSelectionRange(0,99999);try{document.execCommand('copy');ok()}catch(e){}document.body.removeChild(x)}};
+</script>
+</body></html>
