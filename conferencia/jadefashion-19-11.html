@@ -62,6 +62,7 @@ button{font:inherit;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:t
 <h1>Fornecedor: Jade Fashion Plus Size</h1>
 <p class="total">chega sexta 20/11 · <span id="tot"></span></p>
 </header>
+<div class="resumo">⚠️ Conjuntos (7, 8 e 9): pela cobrança vêm <b>68 conjuntos no total</b>, e não 80 como no pedido. Conferir quantos vieram de cada modelo.</div>
 <div id="lista" style="display:flex;flex-direction:column;gap:22px"></div>
 <div class="envia">
 <button type="button" class="wa" id="envWa">📤 Enviar lista pelo WhatsApp</button><button type="button" id="envCp">Copiar lista</button></div>
@@ -74,11 +75,11 @@ var PECAS=[
  {nome:"Regata plus size estampada",qtd:15,det:"",tam:"verificar tamanho",cores:"cores escuras · verificar cores",valor:"",fotos:["img/jadefashion-19-11-4-a.jpg"]},
  {nome:"Blusa plus size com viés no ombro",qtd:15,det:"",tam:"verificar tamanho",cores:"escuras, mais preto · verificar cores",valor:"39,90",fotos:["img/jadefashion-19-11-5-a.jpg"]},
  {nome:"Blusa plus size estampada",qtd:30,det:"",tam:"verificar tamanho",cores:"cores médias e escuras · verificar cores",valor:"39,90",fotos:["img/jadefashion-19-11-6-a.jpg"]},
- {nome:"Conjunto plus size blusa e shorts com listra",qtd:30,det:"10 G1 · 10 G2 · 10 G3",tam:"G1, G2 e G3",cores:"preto, verde e chumbo (mais preto) · verificar cores",valor:"",fotos:["img/jadefashion-19-11-7-a.jpg","img/jadefashion-19-11-7-b.jpg"]},
- {nome:"Conjunto plus size blusa e shorts com bolso",qtd:30,det:"10 G1 · 10 G2 · 10 G3",tam:"G1, G2 e G3",cores:"preto, marrom e marinho (mais preto) · verificar cores",valor:"",fotos:["img/jadefashion-19-11-8-a.jpg"]},
- {nome:"Conjunto plus size blusa e shorts com faixa lateral",qtd:20,det:"10 G1 · 10 G2",tam:"G1 e G2",cores:"preto, marrom e marinho · verificar cores",valor:"",fotos:["img/jadefashion-19-11-9-a.jpg"]}
+ {nome:"Conjunto plus size blusa e shorts com listra",qtd:30,ver:1,det:"No pedido eram 10 G1 · 10 G2 · 10 G3. Verificar quantidade: os 3 conjuntos juntos têm que somar 68",tam:"G1, G2 e G3",cores:"preto, verde e chumbo (mais preto) · verificar cores",valor:"",fotos:["img/jadefashion-19-11-7-a.jpg","img/jadefashion-19-11-7-b.jpg"]},
+ {nome:"Conjunto plus size blusa e shorts com bolso",qtd:30,ver:1,det:"No pedido eram 10 G1 · 10 G2 · 10 G3. Verificar quantidade: os 3 conjuntos juntos têm que somar 68",tam:"G1, G2 e G3",cores:"preto, marrom e marinho (mais preto) · verificar cores",valor:"",fotos:["img/jadefashion-19-11-8-a.jpg"]},
+ {nome:"Conjunto plus size blusa e shorts com faixa lateral",qtd:20,ver:1,det:"No pedido eram 10 G1 · 10 G2. Verificar quantidade: os 3 conjuntos juntos têm que somar 68",tam:"G1 e G2",cores:"preto, marrom e marinho · verificar cores",valor:"",fotos:["img/jadefashion-19-11-9-a.jpg"]}
 ];
-var TOTAL=PECAS.reduce(function(t,p){return t+p.qtd},0);
+var TOTAL=188;
 function fmt(n){return n.toFixed(2).replace('.',',')}
 function num(v){var n=parseFloat(String(v||'').replace(/\s|\$|R/g,'').replace(/\./g,'').replace(',','.'));return isNaN(n)?null:n}
 function valorDe(p,i){return num(p.valor)}
@@ -98,7 +99,7 @@ var L=document.getElementById('lista');
 PECAS.forEach(function(p,i){
  var k='conf-jadefashion-19-11-'+i;
  var a=document.createElement('article');a.className='post';
- a.innerHTML='<div class="faixa">'+(i+1)+') '+(p.qtd?'VEM '+p.qtd+' PEÇAS':'QUANTIDADE A CONFIRMAR')+' – '+(p.tam||'tamanho único')+(p.det?'<small>'+p.det+'</small>':'')+'</div>'+
+ a.innerHTML='<div class="faixa">'+(i+1)+') '+(p.ver?'PEDIDO '+p.qtd+' PEÇAS':p.qtd?'VEM '+p.qtd+' PEÇAS':'QUANTIDADE A CONFIRMAR')+' – '+(p.tam||'tamanho único')+(p.det?'<small>'+p.det+'</small>':'')+'</div>'+
  '<div class="foto">'+midia(p)+'</div>'+
  '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> '+(p.tam||'tamanho único')+'</p><p><b>🎨 Cores:</b> '+p.cores+'</p>'+
  '<p class="valor"></p>'+
