@@ -921,8 +921,10 @@ body.selecionando .zap{display:none}
 <div class="admins">Somente <b>admins</b> podem enviar mensagens</div>
 <script>
 (function(){var h=new Date(Date.now()-3*3600e3).toISOString().slice(0,10);
-document.querySelectorAll('.selo[data-dia]').forEach(function(e){if(e.dataset.dia!==h)e.parentNode.removeChild(e)});
-var n=0;document.querySelectorAll('.nov[data-dia]').forEach(function(e){if(e.dataset.dia!==h){e.parentNode.removeChild(e)}else{n++}});
+/* 20/11 Gabi: novidade fica no topo no dia que chega e no dia seguinte (até o fim do dia) */
+function vale(d){var t=new Date(d+'T12:00:00Z');t.setUTCDate(t.getUTCDate()+1);return d===h||t.toISOString().slice(0,10)===h}
+document.querySelectorAll('.selo[data-dia]').forEach(function(e){if(!vale(e.dataset.dia)){e.parentNode.removeChild(e)}else if(e.dataset.dia!==h){e.textContent='🆕 NOVIDADE'}});
+var n=0;document.querySelectorAll('.nov[data-dia]').forEach(function(e){if(!vale(e.dataset.dia)){e.parentNode.removeChild(e)}else{n++}});
 if(!n){['novidades','menunov'].forEach(function(i){var e=document.getElementById(i);if(e)e.parentNode.removeChild(e)})}
 else{var f=document.querySelector('.nov');if(f&&!f.classList.contains('prim')){f.classList.add('prim');var b=f.querySelector('.bolha');if(b&&!b.querySelector('.autor')){}}}})();
 if(/[?&]lista=/.test(location.search)){location.replace('/catalogo.html'+location.search+location.hash)}
