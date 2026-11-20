@@ -93,6 +93,15 @@ body.selecionando .zap{display:none}
 .vi{position:relative;max-width:620px;margin:0 auto 8px}
 .vi img{margin:0!important}
 .venc{position:absolute;right:12px;bottom:12px;width:52px;height:52px;border-radius:50%;border:0;background:#25D366;color:#fff;font-size:26px;cursor:pointer;box-shadow:0 2px 8px #0006}
+.mfoto{position:fixed;inset:0;z-index:30;background:#0006;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:none}
+.mfoto.on{display:block}
+.mfoto .mc{position:absolute;width:250px;display:flex;flex-direction:column;gap:10px}
+.mfoto .mc img{width:150px;border-radius:14px;box-shadow:0 4px 18px #0005;align-self:center}
+.mfoto .ml{background:#f2f2f2f5;border-radius:14px;overflow:hidden;box-shadow:0 6px 24px #0004}
+.mfoto .ml button{display:flex;align-items:center;gap:16px;width:100%;border:0;border-bottom:1px solid #d6d6d6;background:none;font:inherit;font-size:19px;color:#333;padding:14px 18px;text-align:left;cursor:pointer}
+.mfoto .ml button:last-child{border-bottom:0}
+.mfoto .ml svg{width:24px;height:24px;flex:none}
+.vi img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 .enc{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:#0b141a52;display:grid;place-items:center;cursor:pointer;padding:0}
 .enc:active,.enc.ok{background:var(--verde2)}
 .enc:focus-visible{outline:3px solid var(--verde);outline-offset:2px}
@@ -747,6 +756,7 @@ body.selecionando .zap{display:none}
 <a class="zap" href="https://wa.me/5551984509505?text=Ol%C3%A1%2C%20Gabela!%20Vim%20pelo%20grupo%20de%20vendas." target="_blank" rel="noopener"><svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><path fill="#fff" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6c-2 0-4-.5-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.6 10.6 0 1 1 16 26.6z"/><path fill="#fff" d="M11.6 9.4c-.3-.6-.6-.6-.9-.6h-.8c-.3 0-.7.1-1 .5-.4.4-1.4 1.3-1.4 3.2s1.4 3.7 1.6 4c.2.3 2.7 4.3 6.6 5.8 3.3 1.3 3.9 1 4.6.9.7-.1 2.3-.9 2.6-1.9.3-.9.3-1.7.2-1.9-.1-.2-.4-.3-.8-.5l-2.7-1.3c-.4-.1-.6-.2-.9.2l-1.2 1.5c-.2.3-.4.3-.8.1-.4-.2-1.6-.6-3.1-1.9-1.1-1-1.9-2.3-2.1-2.7-.2-.4 0-.6.2-.8l.6-.7.4-.6c.1-.3.1-.5 0-.7l-1.3-3.1z"/></svg>Fale com o atacado</a>
 <div class="ver" id="ver"><div class="vt"><button type="button" id="vfecha" aria-label="Fechar">✕</button><span id="vtit"></span></div><div class="vf" id="vf"></div></div>
 <div class="esc" id="esc"><div class="cx"><div class="tp"><span id="esct"></span><button type="button" id="escx" aria-label="Fechar">✕</button></div><p class="sb">Escolha as fotos que quer encaminhar</p><div class="g" id="escg"></div><button type="button" class="ok" id="escok" disabled>Toque nas fotos que quer mandar</button></div></div>
+<div class="mfoto" id="mfoto"><div class="mc"><img id="mprev" alt=""><div class="ml"><button type="button" id="menc"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#555" d="M13.5 7.2V3.8a.6.6 0 0 1 1-.45l7 6.6a.6.6 0 0 1 0 .9l-7 6.6a.6.6 0 0 1-1-.45v-3.3c-4.9 0-8.2 1.5-10.7 4.9-.3.4-.9.15-.8-.3 1-5.2 4.3-10.3 11.5-11.1z"/></svg>Encaminhar</button><button type="button" id="msal"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#555" d="M11 3h2v9.2l3.3-3.3 1.4 1.4L12 16l-5.7-5.7 1.4-1.4 3.3 3.3zM5 15h2v4h10v-4h2v4a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"/></svg>Salvar</button><button type="button" id="msel"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#555" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.5 14.5-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4z"/></svg>Selecionar</button></div></div></div>
 <div class="admins">Somente <b>admins</b> podem enviar mensagens</div>
 <script>
 (function(){var h=new Date(Date.now()-3*3600e3).toISOString().slice(0,10);
@@ -790,7 +800,7 @@ function atualizar(){var n=document.querySelectorAll('.cel.marcada').length;docu
 function marcar(c){c.classList.toggle('marcada');if(!modo){modo=true;document.body.classList.add('selecionando')}atualizar();if(navigator.vibrate)try{navigator.vibrate(30)}catch(e){}}
 document.querySelectorAll('.bolha').forEach(function(bo){
   var l=bo.closest('.linha'),alvo=null;
-  bo.addEventListener('pointerdown',function(e){ini=[e.clientX,e.clientY];alvo=e.target.closest('.cel')||bo.querySelector('.cel');clearTimeout(timer);timer=setTimeout(function(){timer=null;acabouDeMarcar=true;if(alvo&&!alvo.classList.contains('marcada'))marcar(alvo)},450)});
+  bo.addEventListener('pointerdown',function(e){ini=[e.clientX,e.clientY];alvo=e.target.closest('.cel')||bo.querySelector('.cel');clearTimeout(timer);var px=e.clientX,py=e.clientY;timer=setTimeout(function(){timer=null;acabouDeMarcar=true;if(!alvo)return;if(modo){if(!alvo.classList.contains('marcada'))marcar(alvo)}else{menuFoto(px,py,srcDe(alvo),alvo)}},450)});
   bo.addEventListener('pointermove',function(e){if(timer&&ini&&(Math.abs(e.clientX-ini[0])>10||Math.abs(e.clientY-ini[1])>10)){clearTimeout(timer);timer=null}});
   ['pointerup','pointercancel','pointerleave'].forEach(function(ev){bo.addEventListener(ev,function(){if(timer){clearTimeout(timer);timer=null}})});
   bo.addEventListener('click',function(e){if(acabouDeMarcar){acabouDeMarcar=false;return}var c=e.target.closest('.cel');
@@ -800,13 +810,30 @@ document.querySelectorAll('.bolha').forEach(function(bo){
 /* foto grande: cada foto tem sua setinha para mandar só ela */
 function abrir(l,i){var fs=l.dataset.fs.split('|');var v=document.getElementById('ver'),f=document.getElementById('vf');
 f.innerHTML='';fs.forEach(function(x){var w=document.createElement('div');w.className='vi';w.innerHTML='<img alt="" src="'+x+'"><button type="button" class="venc" aria-label="Encaminhar esta foto">➦</button>';
-  w.querySelector('button').addEventListener('click',function(){enviar([x])});f.appendChild(w)});
+  w.querySelector('button').addEventListener('click',function(){enviar([x])});segurar(w.querySelector('img'),function(px,py){menuFoto(px,py,x,null)});f.appendChild(w)});
 document.getElementById('vtit').textContent=l.querySelector('img').alt;v.classList.add('on');document.body.style.overflow='hidden';
 var alvo=f.children[i]||f.children[0];setTimeout(function(){f.scrollTop=alvo.offsetTop},30);
 try{history.pushState({ver:1},'')}catch(e){}}
 function fechar(){document.getElementById('ver').classList.remove('on');document.body.style.overflow=''}
 document.getElementById('vfecha').addEventListener('click',function(){if(history.state&&history.state.ver){history.back()}else{fechar()}});
 window.addEventListener('popstate',fechar);
+/* 20/11 Gabi: segurar o dedo numa foto abre o menu igual ao WhatsApp (Encaminhar / Salvar / Selecionar) */
+function segurar(el,fn){var t=null,o=null;
+  el.addEventListener('pointerdown',function(e){o=[e.clientX,e.clientY];clearTimeout(t);t=setTimeout(function(){t=null;fn(o[0],o[1])},450)});
+  el.addEventListener('pointermove',function(e){if(t&&o&&(Math.abs(e.clientX-o[0])>10||Math.abs(e.clientY-o[1])>10)){clearTimeout(t);t=null}});
+  ['pointerup','pointercancel','pointerleave'].forEach(function(ev){el.addEventListener(ev,function(){if(t){clearTimeout(t);t=null}})});
+  el.addEventListener('contextmenu',function(e){e.preventDefault()});}
+var menuSrc=null,menuCel=null;
+function menuFoto(x,y,src,cel){menuSrc=src;menuCel=cel;var m=document.getElementById('mfoto'),c=m.querySelector('.mc');
+  document.getElementById('mprev').src=src;document.getElementById('msel').style.display=cel?'':'none';
+  m.classList.add('on');var w=c.offsetWidth,h=c.offsetHeight;
+  var L=Math.min(Math.max(12,x-w/2),innerWidth-w-12),T=Math.min(Math.max(12,y-40),innerHeight-h-12);
+  c.style.left=L+'px';c.style.top=T+'px';if(navigator.vibrate)try{navigator.vibrate(30)}catch(e){}}
+function fechaMenu(){document.getElementById('mfoto').classList.remove('on')}
+document.getElementById('mfoto').addEventListener('click',function(e){if(e.target.id==='mfoto')fechaMenu()});
+document.getElementById('menc').addEventListener('click',function(){fechaMenu();enviar([menuSrc])});
+document.getElementById('msal').addEventListener('click',function(){fechaMenu();var a=document.createElement('a');a.href=menuSrc;a.download='gabela-'+(menuSrc.split('/').pop());document.body.appendChild(a);a.click();document.body.removeChild(a)});
+document.getElementById('msel').addEventListener('click',function(){fechaMenu();if(menuCel&&!menuCel.classList.contains('marcada'))marcar(menuCel)});
 document.getElementById('sair').addEventListener('click',function(){document.querySelectorAll('.cel.marcada').forEach(function(c){c.classList.toggle('marcada',false)});atualizar()});
 document.getElementById('mandar').addEventListener('click',async function(){
   var cs=[].slice.call(document.querySelectorAll('.cel.marcada'));if(!cs.length)return;
