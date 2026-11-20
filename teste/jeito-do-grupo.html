@@ -790,10 +790,10 @@ async function enviar(linhas){
   var txt='Oi Gabela! Quero '+(linhas.length>1?'estas peças:\n\n':'esta peça:\n')+legs.map(function(l,i){return (linhas.length>1?(i+1)+') ':'')+l}).join('\n\n');
   try{
     var files=await Promise.all(srcs.map(async function(s,i){var r=await fetch(s);var bl=await r.blob();return new File([bl],'gabela-'+(i+1)+'.jpg',{type:bl.type||'image/jpeg'})}));
-    if(navigator.canShare&&navigator.canShare({files:files})){await navigator.share({files:files,text:txt});return true}
+    if(navigator.canShare&&navigator.canShare({files:files})){await navigator.share({files:files});return true}
   }catch(e){if(e&&e.name==='AbortError')return false}
   var links=srcs.map(function(s){return new URL(s,location.href).href}).join('\n');
-  window.open('https://wa.me/'+NUM+'?text='+encodeURIComponent(txt+'\n\n'+links),'_blank');return true;
+  window.open('https://wa.me/'+NUM+'?text='+encodeURIComponent(links),'_blank');return true;
 }
 document.querySelectorAll('.enc').forEach(function(b){b.addEventListener('click',function(){
   b.classList.add('ok');setTimeout(function(){b.classList.remove('ok')},1500);enviar([b.closest('.linha')]);
