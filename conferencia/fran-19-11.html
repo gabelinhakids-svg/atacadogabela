@@ -71,12 +71,12 @@ var PECAS=[
  {nome:"Pijama babydoll manga curta",qtd:30,det:"",tam:"G e GG",cores:"planetas bege e laços verde · verificar cores",valor:"49,90",fotos:["img/fran-19-11-1-a.jpg","img/fran-19-11-1-b.jpg"]},
  {nome:"Pijama de alcinha",qtd:45,det:"",tam:"G e GG",cores:"poá marinho, laços rosa e planetas preto · verificar cores",valor:"49,90",fotos:["img/fran-19-11-2-a.jpg","img/fran-19-11-2-b.jpg","img/fran-19-11-2-c.jpg"]},
  {nome:"Shorts plus size com cinto",qtd:24,det:"",tam:"G2 e G3",cores:"marrom e caramelo · verificar cores",valor:"49,90",fotos:["img/fran-19-11-3-a.jpg"]},
- {nome:"Shorts viscolycra",qtd:30,det:"",tam:"Tamanho único",cores:"azul-marinho, cinza e preto",valor:"29,90",fotos:["img/fran-19-11-4-a.jpg"]},
- {nome:"Calça viscolycra soltinha",qtd:30,det:"",tam:"Tam único veste M e G (marrom) e Tam GG (preto, marrom, azul-marinho e verde)",cores:"marrom, preto, azul-marinho e verde",valor:"49,90",fotos:["img/fran-19-11-5-a.jpg"]},
- {nome:"Conjunto alfaiataria",qtd:12,det:"",tam:"G1 e G2",cores:"preto",valor:"79,90",fotos:["img/fran-19-11-6-a.jpg"]},
- {nome:"Macaquinho plus size",qtd:12,det:"",tam:"G1 e G2",cores:"preto, bordô e marrom café",valor:"79,90",fotos:["img/fran-19-11-7-a.jpg"]},
- {nome:"Macaquinho plus size",qtd:12,det:"",tam:"G2 (preto) e G3 (preto, bordô e marrom)",cores:"preto, bordô e marrom",valor:"79,90",fotos:["img/fran-19-11-8-a.jpg"]},
- {nome:"Macaquinho plus size",qtd:12,det:"",tam:"G2 (preto, bordô, verde-escuro e marrom café) e G3 (preto)",cores:"preto, bordô, verde-escuro e marrom café",valor:"79,90",fotos:["img/fran-19-11-9-a.jpg"]}
+ {nome:"Shorts viscolycra",qtd:30,det:"",tam:"Tamanho único (azul-marinho, cinza e preto)",cores:"",valor:"29,90",fotos:["img/fran-19-11-4-a.jpg"]},
+ {nome:"Calça viscolycra soltinha",qtd:30,det:"",tam:"Tam único veste M e G (marrom) e Tam GG (preto, marrom, azul-marinho e verde)",cores:"",valor:"49,90",fotos:["img/fran-19-11-5-a.jpg"]},
+ {nome:"Conjunto alfaiataria",qtd:12,det:"",tam:"G1 e G2 (preto)",cores:"",valor:"79,90",fotos:["img/fran-19-11-6-a.jpg"]},
+ {nome:"Macaquinho plus size",qtd:12,det:"",tam:"G1 e G2 (preto, bordô e marrom café)",cores:"",valor:"79,90",fotos:["img/fran-19-11-7-a.jpg"]},
+ {nome:"Macaquinho plus size",qtd:12,det:"",tam:"G2 (preto) e G3 (preto, bordô e marrom)",cores:"",valor:"79,90",fotos:["img/fran-19-11-8-a.jpg"]},
+ {nome:"Macaquinho plus size",qtd:12,det:"",tam:"G2 (preto, bordô, verde-escuro e marrom café) e G3 (preto)",cores:"",valor:"79,90",fotos:["img/fran-19-11-9-a.jpg"]}
 ];
 var TOTAL=PECAS.reduce(function(t,p){return t+p.qtd},0);
 function fmt(n){return n.toFixed(2).replace('.',',')}
@@ -100,7 +100,7 @@ PECAS.forEach(function(p,i){
  var a=document.createElement('article');a.className='post';
  a.innerHTML='<div class="faixa">'+(i+1)+') '+(p.qtd?'VEM '+p.qtd+' PEÇAS':'QUANTIDADE A CONFIRMAR')+' – '+(p.tam||'tamanho único')+(p.det?'<small>'+p.det+'</small>':'')+'</div>'+
  '<div class="foto">'+midia(p)+'</div>'+
- '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> '+(p.tam||'tamanho único')+'</p><p><b>🎨 Cores:</b> '+p.cores+'</p>'+
+ '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> '+(p.tam||'tamanho único')+'</p>'+(p.cores?'<p><b>🎨 Cores:</b> '+p.cores+'</p>':'')+
  '<p class="valor"></p>'+
  '<button type="button" class="edb">✏️ Edição detalhes<small></small></button>'+
  '<div class="edd"><textarea placeholder="Ex.: o nome é Blusa Plus GG, veio só GG, veio azul em vez de preto"></textarea><button type="button" class="salvad">Salvar</button></div>'+
