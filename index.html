@@ -800,7 +800,7 @@ function atualizar(){var n=document.querySelectorAll('.cel.marcada').length;docu
 function marcar(c){c.classList.toggle('marcada');if(!modo){modo=true;document.body.classList.add('selecionando')}atualizar();if(navigator.vibrate)try{navigator.vibrate(30)}catch(e){}}
 document.querySelectorAll('.bolha').forEach(function(bo){
   var l=bo.closest('.linha'),alvo=null;
-  bo.addEventListener('pointerdown',function(e){ini=[e.clientX,e.clientY];alvo=e.target.closest('.cel')||bo.querySelector('.cel');clearTimeout(timer);var px=e.clientX,py=e.clientY;timer=setTimeout(function(){timer=null;acabouDeMarcar=true;if(!alvo)return;if(modo){if(!alvo.classList.contains('marcada'))marcar(alvo)}else{menuFoto(px,py,srcDe(alvo),alvo)}},450)});
+  bo.addEventListener('pointerdown',function(e){ini=[e.clientX,e.clientY];alvo=e.target.closest('.cel')||bo.querySelector('.cel');clearTimeout(timer);timer=setTimeout(function(){timer=null;acabouDeMarcar=true;if(alvo&&!alvo.classList.contains('marcada'))marcar(alvo)},450)});
   bo.addEventListener('pointermove',function(e){if(timer&&ini&&(Math.abs(e.clientX-ini[0])>10||Math.abs(e.clientY-ini[1])>10)){clearTimeout(timer);timer=null}});
   ['pointerup','pointercancel','pointerleave'].forEach(function(ev){bo.addEventListener(ev,function(){if(timer){clearTimeout(timer);timer=null}})});
   bo.addEventListener('click',function(e){if(acabouDeMarcar){acabouDeMarcar=false;return}var c=e.target.closest('.cel');
