@@ -797,7 +797,7 @@ document.querySelectorAll('.selo[data-dia]').forEach(function(e){if(e.dataset.di
 var n=0;document.querySelectorAll('.nov[data-dia]').forEach(function(e){if(e.dataset.dia!==h){e.parentNode.removeChild(e)}else{n++}});
 if(!n){['novidades','menunov'].forEach(function(i){var e=document.getElementById(i);if(e)e.parentNode.removeChild(e)})}
 else{var f=document.querySelector('.nov');if(f&&!f.classList.contains('prim')){f.classList.add('prim');var b=f.querySelector('.bolha');if(b&&!b.querySelector('.autor')){}}}})();
-if(/[?&]lista=/.test(location.search)){location.replace('catalogo.html'+location.search+location.hash)}
+if(/[?&]lista=/.test(location.search)){location.replace('/catalogo.html'+location.search+location.hash)}
 var NUM='5551984509505';
 function legDe(linha){var p=linha.querySelector('.leg').cloneNode(true);var h=p.querySelector('.hora');if(h)p.removeChild(h);return p.textContent.trim()}
 async function enviar(linhas){
