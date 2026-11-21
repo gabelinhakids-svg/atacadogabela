@@ -59,11 +59,14 @@ body.selecionando .enc{visibility:hidden}
 .novchip{background:#D6377D;color:#fff;font-weight:700}
 .zap{position:fixed;right:14px;bottom:72px;z-index:7;display:flex;align-items:center;gap:8px;background:#25D366;color:#fff;text-decoration:none;font-weight:700;font-size:16px;border-radius:999px;padding:8px 14px 8px 10px;box-shadow:0 3px 10px #0003}
 body.selecionando .zap{display:none}
-.album{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#fff}
-.album .cel{position:relative;aspect-ratio:1/1;overflow:hidden}
-.album.n2 .cel{aspect-ratio:3/4}
-.album.n3 .cel:first-child{grid-column:1/-1;aspect-ratio:4/3}
-.album img{width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+.album{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;background:#fff}
+.album .cel{position:relative;overflow:hidden;grid-column:span 3;aspect-ratio:1/1;background:#e9e4dc}
+.album .cel::before{content:"";position:absolute;inset:-12px;background:var(--bg) center/cover no-repeat;filter:blur(14px) brightness(.95);opacity:.85}
+.album .cel:first-child{grid-column:1/-1;aspect-ratio:auto}
+.album .cel:first-child img{height:auto;max-height:78vh;object-fit:contain}
+.album.n2 .cel+.cel{grid-column:1/-1;aspect-ratio:4/3}
+.album.n4 .cel+.cel{grid-column:span 2;aspect-ratio:3/4}
+.album img{position:relative;width:100%;height:100%;object-fit:contain;object-position:50% 50%;background:transparent!important}
 .mais{position:absolute;inset:0;background:#0007;color:#fff;font-size:40px;font-weight:500;display:grid;place-items:center}
 .cel{cursor:pointer}
 .ver{position:fixed;inset:0;z-index:20;background:#0b141a;display:none;flex-direction:column}
@@ -1091,4 +1094,5 @@ document.getElementById('mandar').addEventListener('click',async function(){
   var ok=await enviar(cs.map(srcDe));if(ok){cs.forEach(function(c){c.classList.toggle('marcada',false)});atualizar()}
 });
 </script>
+<script>/* fotos inteiras: fundo desfocado da propria foto */(function(){function f(){document.querySelectorAll('.album .cel').forEach(function(c){var i=c.querySelector('img');if(i&&!c.style.getPropertyValue('--bg'))c.style.setProperty('--bg','url("'+i.getAttribute('src')+'")')})}if(document.readyState!='loading')f();else document.addEventListener('DOMContentLoaded',f);window.addEventListener('load',f)})();</script>
 </body></html>
