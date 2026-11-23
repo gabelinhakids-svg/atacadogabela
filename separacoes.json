@@ -1,6 +1,26 @@
 {
  "_regra": "20/11 Gabi: no grupo, so juntar fotos num balao quando for EXATAMENTE o mesmo modelo mudando a cor. 'todas' = cada foto num balao; lista = grupos de indices das fotos.",
- "blusas-plus-modelos": [[0],[1],[2],[3],[4],[5,6],[7],[8]],
+ "blusas-plus-modelos": [
+  [
+   0
+  ],
+  [
+   1
+  ],
+  [
+   2
+  ],
+  [
+   3
+  ],
+  [
+   4,
+   5
+  ],
+  [
+   6
+  ]
+ ],
  "blusa-plus-estampada": "todas",
  "blusa-sobreleg-plus-fenda": "todas",
  "tshirts": "todas",
@@ -12,10 +32,76 @@
  "calca-resinada-flare": "todas",
  "short-jeans": "todas",
  "saia-jeans": "todas",
- "short-jeans-feminino": [[0,1],[2,3],[4,5],[6,7]],
+ "short-jeans-feminino": [
+  [
+   0,
+   1
+  ],
+  [
+   2,
+   3
+  ],
+  [
+   4,
+   5
+  ],
+  [
+   6,
+   7
+  ]
+ ],
  "camiseta-peruana": "todas",
- "tenis": [[0],[1,2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12],[13]],
- "papetes-beira-rio": [[0],[1,2]],
+ "tenis": [
+  [
+   0
+  ],
+  [
+   1,
+   2
+  ],
+  [
+   3
+  ],
+  [
+   4
+  ],
+  [
+   5
+  ],
+  [
+   6
+  ],
+  [
+   7
+  ],
+  [
+   8
+  ],
+  [
+   9
+  ],
+  [
+   10
+  ],
+  [
+   11
+  ],
+  [
+   12
+  ],
+  [
+   13
+  ]
+ ],
+ "papetes-beira-rio": [
+  [
+   0
+  ],
+  [
+   1,
+   2
+  ]
+ ],
  "bolsas-89": "todas",
  "bolsas-69": "todas"
 }
