@@ -71,7 +71,7 @@ button{font:inherit;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:t
 <script>
 var PECAS=[
  {nome:"Bermuda tactel com zíper nos bolsos",qtd:36,det:"",tam:"M, G, GG e G1 (verificar tamanho)",cores:"preta, cinza e azul-marinho (verificar cores)",valor:"",fotos:["img/duraveste-27-11-1-a.jpg"]},
- {nome:"Camisa polo",qtd:24,det:"",tam:"P, M, G, GG e G1 (verificar tamanho)",cores:"preta, grafite, azul-marinho, cinza, branca, verde e azul (verificar cores)",valor:"",fotos:["img/duraveste-27-11-2-a.jpg"]},
+ {nome:"Polo masculina",sub:"Microfibra com elastano",qtd:24,det:"",tam:"P, M, G, GG e G1 (verificar tamanho)",cores:"preta, grafite, azul-marinho, cinza, branca, verde e azul (verificar cores)",valor:"59,90",fotos:["img/duraveste-27-11-2-a.jpg"]},
  {nome:"Bermuda com elastano e bolsos",qtd:36,det:"reposição: já está no catálogo",tam:"P, M, G e GG (verificar tamanho)",cores:"cinza, preta, verde e azul-marinho (verificar cores)",valor:"39,90",fotos:["img/duraveste-27-11-3-a.jpg"]}
 ];
 var TOTAL=PECAS.reduce(function(t,p){return t+p.qtd},0);
@@ -96,7 +96,7 @@ PECAS.forEach(function(p,i){
  var a=document.createElement('article');a.className='post';
  a.innerHTML='<div class="faixa">'+(i+1)+') '+(p.qtd?'VEM '+p.qtd+' PEÇAS':'QUANTIDADE A CONFIRMAR')+' – '+(p.tam||'tamanho único')+(p.det?'<small>'+p.det+'</small>':'')+'</div>'+
  '<div class="foto">'+midia(p)+'</div>'+
- '<div class="corpo"><h2></h2><p><b>Tamanhos:</b> '+(p.tam||'tamanho único')+'</p>'+(p.cores?'<p><b>🎨 Cores:</b> '+p.cores+'</p>':'')+
+ '<div class="corpo"><h2></h2>'+(p.sub?'<p><b>'+p.sub+'</b></p>':'')+'<p><b>Tamanhos:</b> '+(p.tam||'tamanho único')+'</p>'+(p.cores?'<p><b>🎨 Cores:</b> '+p.cores+'</p>':'')+
  '<p class="valor"></p>'+
  '<button type="button" class="edb">✏️ Edição detalhes<small></small></button>'+
  '<div class="edd"><textarea placeholder="Ex.: o nome é Blusa Plus GG, veio só GG, veio azul em vez de preto"></textarea><button type="button" class="salvad">Salvar</button></div>'+
