@@ -75,9 +75,9 @@ var PECAS=[
  {nome:"Camisa polo piqué",qtd:40,det:"",tam:"P (5), M (5), G (15) e GG (15)",cores:"preta, branca, azul royal, verde escuro, vinho, vermelha e marinho (verificar cores)",valor:"29,90",fotos:[]},
  {nome:"Camisa polo piqué plus size",qtd:30,det:"",tam:"G1 e maiores (verificar tamanho)",cores:"cores médias e escuras, sem branca (verificar cores)",valor:"39,90",fotos:[]},
  {nome:"Bermuda tactel plus size",qtd:30,det:"",tam:"verificar tamanho",cores:"verificar cores",valor:"39,90",fotos:[]},
- {nome:"Papete Moleca original",qtd:24,det:"modelo com pedras douradas",tam:"verificar tamanho",cores:"preta",valor:"79,90",fotos:["img/jorge-27-11-6-a.jpg"]},
- {nome:"Papete Moleca original",qtd:24,det:"modelo com tiras douradas",tam:"verificar tamanho",cores:"branca",valor:"79,90",fotos:["img/jorge-27-11-7-a.jpg"]},
- {nome:"Papete Beira Rio com fivela",qtd:24,det:"reposição: já está no catálogo · vem só a preta",tam:"34 ao 39 (verificar tamanho)",cores:"preta",valor:"79,90",fotos:["img/jorge-27-11-8-a.jpg"]},
+ {nome:"Papete Moleca",sub:"(original, acompanha a caixa)",qtd:24,det:"modelo com pedras douradas",tam:"34 ao 39",cores:"preta",valor:"79,90",fotos:["img/jorge-27-11-6-a.jpg"]},
+ {nome:"Papete Moleca",sub:"(original, acompanha a caixa)",qtd:24,det:"modelo com tiras douradas",tam:"34 ao 39",cores:"branca",valor:"79,90",fotos:["img/jorge-27-11-7-a.jpg"]},
+ {nome:"Papete Beira Rio com fivela",sub:"(original, acompanha a caixa)",qtd:24,det:"reposição: já está no catálogo · vem só a preta",tam:"34 ao 39",cores:"preta",valor:"79,90",fotos:["img/jorge-27-11-8-a.jpg"]},
  {nome:"Bermuda de sarja",qtd:0,det:"pedida (6 de cada tamanho), mas NÃO está na cobrança do Jorge: ver se veio",tam:"42 ao 48",cores:"branca e vinho",valor:"",fotos:["img/jorge-27-11-9-a.jpg"]}
 ];
 var TOTAL=PECAS.reduce(function(t,p){return t+p.qtd},0);
@@ -109,7 +109,7 @@ PECAS.forEach(function(p,i){
  ''+
  '<div class="conf"><button type="button" class="sim">✅ OK · Catálogo</button><button type="button" class="nao">❌ Faltou</button></div>'+
  '<div class="falta"><span>Quantas faltaram?</span><input type="number" inputmode="numeric" min="0" placeholder="0"></div></div>';
- a.querySelector('h2').textContent=p.nome;
+ a.querySelector('h2').textContent=p.nome;if(p.sub){var sb=document.createElement('p');sb.style.cssText='margin:-4px 0 0;font-weight:700;color:var(--muted)';sb.textContent=p.sub;a.querySelector('h2').after(sb)}
  var sim=a.querySelector('.sim'),nao=a.querySelector('.nao'),f=a.querySelector('.falta'),inp=f.querySelector('input');
  function pintar(){var s=ler(k);sim.classList.toggle('on',temOk(s));nao.classList.toggle('on',temF(s));f.classList.toggle('on',temF(s));inp.value=ler(k+'-n')||'';resumo()}
  sim.onclick=function(){var s=ler(k);marca(k,!temOk(s),temF(s));pintar()};
